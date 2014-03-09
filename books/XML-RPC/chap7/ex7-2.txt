@@ -1,0 +1,49 @@
+<!--#include virtual="/jjohn/xmlrpc.asp"-->
+
+<%
+  ' Globals
+  Dim DB_SRC
+  DB_SRC = "Driver=Microsoft Access Driver (*.mdb); DBQ=C:\addresses.mdb"
+%>
+
+<%
+rpcserver
+
+Function dump_address_book(  )
+' Input:  
+'      None
+' Output: 
+'      An array of records represented in dictionaries
+'        Each dictionary will have the following fields:
+'      * lastname:  (string) last name of the person 
+'      * firstname: (string) first name of the person
+'         phone:       (string) their phone number
+'         email:       (string) their email address
+'      (* fields make up the primary key)
+ 
+  Dim rs, query
+  Set rs = Server.CreateObject("ADODB.RecordSet")
+  query  = "Select * from directory" 
+    
+  rs.Open query, DB_SRC
+
+  ' our return array and index
+  Dim ret(10), cnt
+
+  cnt = 0
+  Do While Not rs.Eof
+     Dim entry, i
+     Set entry = Server.CreateObject("Scripting.Dictionary")
+
+     For Each i In rs.Fields
+         entry.Add i.Name, i.Value
+     Next
+
+     Set ret(cnt) = entry
+     cnt = cnt + 1
+     rs.MoveNext
+  Loop
+
+  dump_address_book = ret 
+
+End Function

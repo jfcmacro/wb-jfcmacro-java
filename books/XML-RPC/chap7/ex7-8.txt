@@ -1,0 +1,105 @@
+#!/usr/bin/perl --
+use strict;
+
+use Frontier::Daemon;
+use Data::Dumper;
+use DBI;
+
+sub helloWorld {
+    return "Hello, $_[0]";
+}
+
+sub hash_test {
+    return {
+    first  => "joe",
+    second => "johnston",
+    };
+}
+
+sub arg_test {
+    return @_;
+}
+        
+sub init_db {
+  # return an initialize DBI object
+  return DBI->connect("dbi:mysql:addresses", "editor", "editor") || 
+    die "$DBI::errstr";
+}
+
+sub dump_address_book{
+  # return an array of recs
+  my $dbi = init_db(  );
+
+  my $sth = $dbi->prepare("Select * from directory");
+  $sth->execute || return $sth->errstr;
+
+  my @return;
+  while( my $hr = $sth->fetchrow_hashref ){
+    push @return, $hr;
+  }
+
+  $dbi->disconnect;
+  return \@return;
+}
+
+sub lookup {
+  my ($field, $sought) = @_;
+  print caller, Dumper( \@_ );
+  my $dbi = init_db(  );
+
+  my $sth = $dbi->prepare("select * from directory where $field = ?);
+  $sth->execute($sought) || return $sth->errstr;
+
+  my @return;
+  
+  while( my $hr = $sth->fetchrow_hashref ){
+    push @return, $hr;
+  }
+  $dbi->disconnect;
+  
+  return \@return;
+}
+
+sub add_address {
+  my $entry = shift;
+  print caller, Dumper( \$entry);
+  my $dbi = init_db(  );
+  
+  my $sth = $dbi->prepare("insert into directory "               .
+                  " (lastname, firstname, phone, email) ".
+                  "values (?, ?, ?, ?)");
+
+  my $rc = $sth->execute(@$entry{qw/lastname firstname phone email/});
+  $dbi->disconnect;
+  
+  return (defined $rc) ? 1 : 0;
+}
+
+sub remove_address {
+  my ($first, $last) = @_;
+  print caller, Dumper( \$first, \$last );
+
+  my $dbi = init_db(  );
+  
+  my $sth = $dbi->prepare("delete from directory where ".
+                          "lastname = ? and firstname = ?");
+
+  my $rc = $sth->execute( $last, $first );
+  $dbi->disconnect;
+
+  return (defined $rc) ? 1 : 0;
+}
+
+Frontier::Daemon->new( methods => {
+                   helloWorld => \&helloWorld,
+                   hash_test  => \&hash_test,
+                   arg_test   => \&arg_test,
+                   dump_address_book => \&dump_address_book,
+                   lookup            => \&lookup,
+                   add_address       => \&add_address,
+                   remove_address    => \&remove_address,
+                                  }, 
+                LocalPort => 80,
+                Reuse      => 1,
+                RPC_Debug => 1,
+             );

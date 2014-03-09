@@ -1,0 +1,115 @@
+%header {: // Generated from picojava.parser
+
+ package AST;
+:};
+%embed {: // Generated from picojava.parser
+
+  class Events extends Parser.Events {
+    public void syntaxError(Symbol token) {
+      StringBuffer s = new StringBuffer();
+      s.append(token.getLine(token.getStart()) + ", " + token.getColumn(token.getStart()) + "\n");
+      s.append("  *** Syntactic error: unexpected token " + Terminals.NAMES[token.getId()]);
+      throw new Error(s.toString());
+    }
+    public void scannerError(Scanner.Exception e) {
+      StringBuffer s = new StringBuffer();
+      s.append(e.line + ", " + e.column + "\n");
+      s.append("  *** Lexical error: " + e.getMessage());
+      throw new Error(s.toString());
+    }
+  }
+
+  { report = new Events(); } // Use error handler in parser
+:};
+%terminals WHILE;
+%terminals BOOLEAN_LITERAL;
+%terminals DOT;
+%terminals LBRACE;
+%terminals ASSIGN;
+%terminals SEMICOLON;
+%terminals LPAREN;
+%terminals RBRACE;
+%terminals IDENTIFIER;
+%terminals RPAREN;
+%terminals CLASS;
+%terminals EXTENDS;
+%typeof name = "Access";
+%typeof extends_opt = "Opt";
+%typeof block_stmt_list = "List";
+%typeof boolean_literal = "Exp";
+%typeof stmt = "Stmt";
+%typeof assign_stmt = "AssignStmt";
+%typeof exp = "Exp";
+%typeof block = "Block";
+%typeof block_stmt_list_opt = "List";
+%typeof while_stmt = "WhileStmt";
+%typeof block_stmt = "BlockStmt";
+%typeof class_decl = "ClassDecl";
+%typeof var_decl = "VarDecl";
+%typeof goal = "Program";
+%goal goal;
+goal =
+    block.block {:  return new Program(block); :}
+  ;
+
+block =
+    LBRACE.LBRACE block_stmt_list_opt.block_stmt_list_opt RBRACE.RBRACE {:  return new Block(block_stmt_list_opt); :}
+  ;
+
+block_stmt_list_opt =
+    {:  return new List(); :}
+
+  | block_stmt_list.block_stmt_list {:  return block_stmt_list; :}
+  ;
+
+block_stmt_list =
+    block_stmt.block_stmt {:  return new List().add(block_stmt); :}
+
+  | block_stmt_list.block_stmt_list block_stmt.block_stmt {:  return block_stmt_list.add(block_stmt); :}
+  ;
+
+block_stmt =
+    class_decl.class_decl 
+  | var_decl.var_decl 
+  | stmt.stmt   ;
+
+stmt =
+    assign_stmt.assign_stmt 
+  | while_stmt.while_stmt   ;
+
+class_decl =
+    CLASS.CLASS IDENTIFIER.IDENTIFIER extends_opt.extends_opt block.block {:  return new ClassDecl(((String)IDENTIFIER.value), extends_opt, block); :}
+  ;
+
+extends_opt =
+    {:  return new Opt(); :}
+
+  | EXTENDS.EXTENDS IDENTIFIER.IDENTIFIER {:  return new Opt(new Use(((String)IDENTIFIER.value))); :}
+  ;
+
+var_decl =
+    name.name IDENTIFIER.IDENTIFIER SEMICOLON.SEMICOLON {:  return new VarDecl(((String)IDENTIFIER.value), name); :}
+  ;
+
+assign_stmt =
+    name.name ASSIGN.ASSIGN exp.exp SEMICOLON.SEMICOLON {:  return new AssignStmt(name, exp); :}
+  ;
+
+while_stmt =
+    WHILE.WHILE LPAREN.LPAREN exp.exp RPAREN.RPAREN stmt.stmt {:  return new WhileStmt(exp, stmt); :}
+  ;
+
+exp =
+    name.name 
+  | boolean_literal.boolean_literal   ;
+
+name =
+    IDENTIFIER.IDENTIFIER {:  return new Use(((String)IDENTIFIER.value)); :}
+
+  | name.name DOT.DOT IDENTIFIER.IDENTIFIER {:  return new Dot(name, new Use(((String)IDENTIFIER.value))); :}
+  ;
+
+boolean_literal =
+    BOOLEAN_LITERAL.BOOLEAN_LITERAL {:  return new BooleanLiteral(((String)BOOLEAN_LITERAL.value)); :}
+  ;
+

@@ -1,0 +1,30 @@
+// sumarDosNumeros.jas
+//
+
+.main				// Inicio del programa
+
+.var				// Variables locales del programa principal
+a
+b
+total
+.end-var
+
+start:	IN                      // Lee un número
+	ISTORE a                // Lo almacena en la variable local
+	IN                      // Lee otro número
+	ISTORE b                // Lo almace en b
+	ILOAD  a                // Almacena a en la pila
+	OUT                     // Imprime a
+	BIPUSH 0x2B             // Caracter +
+	ILOAD  b                // Almacena a en la pila
+        BIPUSH 0x3D             // Caracter =
+	ILOAD  a                // Carga a
+	ILOAD  b                // Carga b
+	IADD                    // Suma a y b
+	ISTORE total            // Almacena el total
+        ILOAD  total            // Pone el total en la pila
+        OUT                     // Imprime el valor de la pila
+	GOTO start		// start over
+.end-main
+
+

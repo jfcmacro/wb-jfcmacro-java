@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=class\ Modelo
+comment1.params=args
+comment1.target=void\ main(String[])
+comment2.params=origen\ nroCarta\ destino
+comment2.target=boolean\ mover(int,int,int)
+comment3.target=valor
+comment4.params=origen
+comment4.target=ImagenCarta\ siguienteCarta(int)
+comment5.target=actual
+numComments=6

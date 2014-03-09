@@ -1,0 +1,16 @@
+! ** JCreator Workspace File (C)2000
+! ********** DO NOT EDIT *********
+
+VERSION := "1.00"
+LABEL := "ArchivoDirecto"
+
+! Start Project Structure
+#[BeginProject]SOURCE := "ArchivoDirecto.jcp" #[EndProject]
+
+! Start Last Document Structure
+#[BeginFile]SOURCE := "ArchivoDirectoEstudiante.java" #[EndFile]
+#[BeginFile]SOURCE := "Registro.java" #[EndFile]
+#[BeginFile]SOURCE := "RegistroEstudiante.java" #[EndFile]
+
+! Start Last Document Structure
+

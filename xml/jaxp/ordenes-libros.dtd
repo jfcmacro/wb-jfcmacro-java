@@ -1,0 +1,7 @@
+<!ELEMENT ordenes-libros (cliente, tienda, bienes)*>
+<!ELEMENT cliente (#PCDATA)>
+<!ELEMENT tienda (#PCDATA)>
+<!ELEMENT bienes (libros|revistas)*>
+<!ELEMENT libros (nombre)*>
+<!ELEMENT revistas (nombre)*>
+<!ELEMENT nombre (#PCDATA)>

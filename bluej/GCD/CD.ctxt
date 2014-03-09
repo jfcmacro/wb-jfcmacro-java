@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=class\ CD
+comment0.text=\nWrite\ a\ description\ of\ class\ CD\ here.\n\n@author\ (your\ name)\ \n@version\ (a\ version\ number\ or\ a\ date)\n\n
+comment1.params=
+comment1.target=String\ obtenerNombreGrupo()
+comment10.params=c
+comment10.target=boolean\ esMayor(Comparable)
+comment11.params=c
+comment11.target=boolean\ esIgual(Comparable)
+comment12.target=grupo
+comment2.target=a\uFFFDo
+comment3.target=titulo
+comment4.params=
+comment4.target=int\ obtenerA\uFFFDo()
+comment5.params=c
+comment5.target=boolean\ esMenorOIgual(Comparable)
+comment6.params=c
+comment6.target=boolean\ esMenor(Comparable)
+comment7.params=c
+comment7.target=boolean\ esMayorOIgual(Comparable)
+comment8.params=titulo\ grupo\ a\uFFFDo
+comment8.target=CD(String,String,int)
+comment9.params=
+comment9.target=String\ obtenerTitulo()
+numComments=13

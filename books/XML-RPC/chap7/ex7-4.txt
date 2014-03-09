@@ -1,0 +1,54 @@
+Function add_address( entry )
+' Input: 
+'      Expects a dictionary object with the fields:
+'      * lastname:  (string) last name of the person 
+'      * firstname: (string) first name of the person
+'         phone:       (string) their phone number
+'         email:       (string) their email address
+'      (* fields make up the primary key)
+' Output:
+'      Returns 1 for success, 0 for failure
+  Dim oconn, cm1, cm2
+
+  ' Setup a DB connection and SQL command object
+  Set oconn = Server.CreateObject("ADODB.Connection")
+  oconn.Open DB_SRC
+
+  Set cm1 = Server.CreateObject("ADODB.Command")
+  cm1.ActiveConnection = oconn
+
+  Set cm2 = Server.CreateObject("ADODB.Command")
+  cm2.ActiveConnection = oconn
+  
+  ' First, if a record exist with this key, abort
+  Dim rs, SQLstr
+  SQLstr = "select * from directory where lastname = " _
+       & "? and firstname = ?"
+
+  cm1.CommandText = SQLstr       
+  Set rs = cm1.Execute(, Array(entry.Item("lastname"), _
+                       entry.Item("firstname")) )
+
+  If Not rs.EOF Then
+     ' Any populated record is bad, n'ok?
+     If Not rs.Fields("lastname") = "" Then
+        add_address = 0
+        Exit Function
+     End If
+  End If
+
+  ' Ok to Insert, Setup placeholders
+  cm2.CommandText = "Insert into directory "                _
+              & "(lastname, firstname, phone, email) " _
+              & "Values (?, ?, ?, ?)"
+
+  Set rs = cm2.Execute( , Array( entry.Item("lastname"), _
+                          entry.Item("firstname"),_
+                          entry.Item("phone"),    _ 
+                          entry.Item("email")     _
+                        ) _
+                  )
+  add_address = 1
+
+End Function
+

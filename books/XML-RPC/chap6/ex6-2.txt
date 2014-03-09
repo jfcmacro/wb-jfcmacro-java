@@ -1,0 +1,190 @@
+# ora_server.py (based on xmlrpcserver.py)
+#
+# XML-RPC SERVER
+# $Id: ch06.xml,v 1.6 2001/08/10 18:20:31 becki Exp $
+#
+# a simple XML-RPC server for Python
+#
+# History:
+# 1999-02-01 fl  added to xmlrpclib distribution 
+# 2000-10-28 jjp modified for use in O'Reilly XML-RPC book
+#
+# written by Fredrik Lundh, January 1999.
+#
+# Copyright (c) 1999 by Secret Labs AB.
+# Copyright (c) 1999 by Fredrik Lundh.
+#
+# fredrik@pythonware.com
+# http://www.pythonware.com
+#
+# -------------------------------------------------------------
+# Permission to use, copy, modify, and distribute this software
+# and its associated documentation for any purpose and without
+# fee is hereby granted.  This software is provided as is.
+# -------------------------------------------------------------
+
+import SocketServer, BaseHTTPServer
+import xmlrpclib, sys
+
+class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+
+    def do_POST(self):
+        try:
+            # get arguments
+            data = self.rfile.read(
+              int(self.headers["content-length"])
+            )
+            params, method = xmlrpclib.loads(data)
+
+            # generate response
+            try:
+                response = self.call(method, params)
+                if type(response) != type((  )):
+                    response = (response,)
+
+            except xmlrpclib.Fault, faultobj:
+                # generated response was a Fault
+                response = xmlrpclib.dumps(faultobj)
+
+            except:
+                # report exception back to server
+                response = xmlrpclib.dumps(
+                  xmlrpclib.Fault(1,
+                  "%s:%s" % (sys.exc_type, sys.exc_value))
+                )
+            else:
+                # no exception occurred:
+                # send method's return value back to server
+                response = xmlrpclib.dumps(
+                    response,
+                    methodresponse=1
+                    )
+        except:
+            # internal error, report as HTTP server error
+            self.send_response(500)
+            self.end_headers(  )
+        else:
+            # no internal error: send back a "success" response
+            self.send_response(200)
+            self.send_header("Content-type", "text/xml")
+            self.send_header("Content-length", str(len(response)))
+            self.end_headers(  )
+            self.wfile.write(response)
+
+            # shut down the connection (from Skip Montanaro)
+            self.wfile.flush(  )
+            self.connection.shutdown(1)
+
+    # def call(self, method, params):
+    # override this method to implement RPC methods
+    # print "CALL", method, params
+    # return params
+
+    def call(self, meth_name, arg_tuple):
+        """
+        XML-RPC method dispatcher
+        """
+        myAPI = ("SetColor",  "Describe")
+        if meth_name in myAPI:
+            func_obj = eval("do_" + meth_name)
+            return apply(func_obj, arg_tuple)
+        else:
+            raise xmlrpclib.Fault(123, "Unknown method name")
+
+##### functions that implement XML-RPC API
+
+def do_SetColor(shape_type, shape_id, color_tuple):
+    """
+    implementation of "SetColor" method
+    """
+    message = (
+      "Modifying %s number %s:\n" % (shape_type, shape_id) +
+      ">> setting Red value to %d\n" % color_tuple[0] +
+      ">> setting Green value to %d\n" % color_tuple[1] +
+      ">> setting Blue value to %d" % color_tuple[2]
+    )
+    # do the work, then ...
+    return message
+
+def do_Describe(*one_or_more_args):
+    """
+    implementation of "Describe" method:
+    describe arguments, any number of them
+    """
+
+    from types import *
+
+    ##### "Describe" internal functions
+    def proc_list(arg):
+        """
+        process a list argument (called by do_Describe)
+        """
+        rtn = "* Array argument:\n"
+        for i in range(len(arg)):
+            rtn = rtn + "    " + "%d: %s\n" % (i, arg[i])
+        return rtn
+
+    def proc_dict(arg):
+        """
+        process a dictionary argument (called by do_Describe)
+        """
+        rtn = "* Dictionary argument:\n"
+        for pair in arg.items(  ):
+            rtn = rtn + "    " + "%s: %s\n" % pair
+        return rtn
+    ##### end of "Describe" internal functions
+
+    # title line
+    console_msg = ("Called RPC method 'Describe' with %d arguments"
+          % len(one_or_more_args))
+
+    # special case: empty argument list
+    if not one_or_more_args: return ""
+
+    # report summary of call to server console
+    print console_msg
+
+    # start accumulating return-value text
+    rtn = console_msg + ":\n\n"
+
+    # describe each parameter, distinguishing by datatype
+    for arg in one_or_more_args:
+        if type(arg) is IntType:
+            rtn = rtn + "* Integer argument: %d\n" % arg
+        elif type(arg) is StringType:
+            rtn = rtn + "* String argument: %s\n" % arg
+        elif type(arg) is ListType:
+            rtn = rtn + proc_list(arg)
+        elif type(arg) is DictionaryType:
+            rtn = rtn + proc_dict(arg)
+        elif type(arg) is FloatType:
+            rtn = rtn + "* Floating-point argument: %f\n" % arg
+        elif isinstance(arg, xmlrpclib.DateTime):
+            rtn = rtn + "* Date-time argument: %s\n" % arg.value
+        elif isinstance(arg, xmlrpclib.Binary):
+            rtn = rtn + "* Base64-text-encoded binary value\n"
+        elif isinstance(arg, xmlrpclib.Boolean):
+            if arg.value == 1:
+                bool = 'True'
+            else:
+                bool = 'False'
+            rtn = rtn + "* Boolean argument: %s\n" % bool
+        else:
+            rtn = rtn + "* Argument of type %s\n" % type(arg)
+
+    # return accumulated text as value of XML-RPC call
+    return rtn
+
+if __name__ == '__main_  _':
+    # set up and run XML-RPC server process (daemon)
+
+    # create server
+    port = 8000
+    server = SocketServer.TCPServer(('', port), RequestHandler)
+
+    # send startup message to console
+    print "XML-RPC server listening on port %s ..." % port
+
+    # start server
+    server.serve_forever(  ) 
+

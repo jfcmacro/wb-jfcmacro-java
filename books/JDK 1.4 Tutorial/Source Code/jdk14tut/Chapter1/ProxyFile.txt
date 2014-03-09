@@ -1,0 +1,2 @@
+5555 sigma.eafit.edu.co 80
+6666 proxy.eafit.edu.co 8080

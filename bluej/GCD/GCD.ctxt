@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=class\ GCD
+comment0.text=\nWrite\ a\ description\ of\ class\ GCD\ here.\n\n@author\ (your\ name)\ \n@version\ (a\ version\ number\ or\ a\ date)\n\n
+comment1.params=titulo\ grupo
+comment1.target=boolean\ borrarCD(String,String)
+comment2.params=
+comment2.target=GCD()
+comment3.target=totalCDs
+comment4.target=listaCDs
+comment5.params=a\uFFFDo
+comment5.target=CD[]\ buscarA\uFFFDo(int)
+comment6.params=nuevo
+comment6.target=void\ adicionarCD(CD)
+numComments=7

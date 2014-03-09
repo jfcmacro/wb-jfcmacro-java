@@ -1,0 +1,28 @@
+<project name="rexec" default="compile">
+<!-- Proyecto para la compilación y ejecución remota de programas  -->
+  <description>
+    Este proyecto esta basado en rmi
+  </description>
+
+  <property name="src"         location="src"/>
+  <property name="build"       location="bin"/>
+
+  <target name="init" >
+    <!-- Crea una marca de tiempo-->
+    <tstamp/>
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+	  description="compila el fuente">
+    <javac srcdir="${src}" destdir="${build}"/>
+    <rmic base="${build}" classname="rexec.impl.RExecImpl" debug="true"/>
+  </target>
+  <target name="clean"
+	  description="limpia todo">
+    <!-- Borra el árbol de directorios ${build} -->
+    <delete dir="${build}"/>
+  </target>
+
+
+</project>

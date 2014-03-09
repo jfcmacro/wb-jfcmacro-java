@@ -1,0 +1,19 @@
+<!-- DTD definido dentro del xml -->
+   <!-- Definicion de la informacion del paciente -->
+   <!ELEMENT paciente (nombre,edad,examen)>
+      <!-- Definicion de los campos de paciente -->
+      <!ELEMENT nombre (#PCDATA)>
+      <!ELEMENT edad (#PCDATA)>
+      <!-- Definicion de los examenes -->
+      <!ELEMENT examen (codigo,descripcion?,resultado*)>
+         <!-- Definicion de los campos del examen -->
+         <!ELEMENT codigo (#PCDATA)>
+         <!ELEMENT descripcion (#PCDATA)>
+         <!-- Definicion de los resultados -->
+         <!ELEMENT resultado (valor_minimo?,valor_maximo?,valor,analisis?)>
+            <!-- Definicion de los campos de resultado -->
+            <!ELEMENT valor_minimo (#PCDATA)>
+            <!ELEMENT valor_maximo (#PCDATA)>
+            <!ELEMENT valor (#PCDATA)>
+            <!ATTLIST valor unidad CDATA #IMPLIED>
+            <!ELEMENT analisis (#PCDATA)>

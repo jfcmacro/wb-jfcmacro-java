@@ -1,0 +1,16 @@
+public class GetSetHandler {
+    protected int value;
+
+    public GetSetHandler(int initialValue) {
+        value=initialValue;
+    }
+
+    public int getValue(String requester) {
+        return value;
+    }
+
+    public int setValue(String requester, int newValue) {
+        value=newValue;
+        return value;
+    }
+}

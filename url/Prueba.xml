@@ -1,0 +1,113 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META HTTP-EQUIV="refresh" CONTENT="60;url=main.htm">
+<TITLE> IB-20/21</TITLE>
+<STYLE type="text/css">
+<!--
+A{text-decoration:none;}
+-->
+</STYLE>
+</HEAD>
+<BODY BGCOLOR="#FBFBFB" TEXT="#537FB3" LINK="#000000" ALINK="#000000" VLINK="#000000">
+<FONT FACE="Arial, Helvetica, sans-serif">
+<BASEFONT SIZE="2">
+<FORM ACTION="./main.htm" method=get>
+<TABLE WIDTH="90%" HEIGHT="100%" ALIGN="center" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<TR><!-- LCD Space -->
+	<TH WIDTH="40%" ALIGN="left" NOWRAP>
+	<FONT SIZE="3" FACE="Arial, Helvetica, sans-serif"><STRONG>
+	Pantalla LCD de la impresora
+	</STRONG><BR></FONT></TH>
+	<TH WIDTH="5%" ROWSPAN="5"><BR></TH>
+	<TD ROWSPAN="5">
+	<TABLE WIDTH="100%" HEIGHT="100%" ALIGN="center" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+	<TR><TH ALIGN="right" NOWRAP WIDTH="40%"><FONT COLOR="#888888" FACE="Arial, Helvetica, sans-serif">
+		<SMALL>sysUpTime :</SMALL></FONT></TH>
+		<TD WIDTH="5%"><BR></TD>
+		<TH ALIGN="left" NOWRAP WIDTH="40%"><FONT COLOR="#000000" FACE="Arial, Helvetica, sans-serif">
+		<SMALL>0 días 4 horas 55 minutos</SMALL></FONT></TH>
+	</TR>
+	<TR><TH ALIGN="right" NOWRAP><FONT COLOR="#888888" FACE="Arial, Helvetica, sans-serif">
+		<SMALL>Dirección Ethernet :</SMALL></FONT></TH>
+		<TD><BR></TD>
+		<TH ALIGN="left" NOWRAP><FONT COLOR="#000000" FACE="Arial, Helvetica, sans-serif">
+		<SMALL>00:C0:EE:20:09:9B</SMALL></FONT></TH>
+	</TR>
+	<TR><TH ALIGN="right" NOWRAP><FONT COLOR="#888888" FACE="Arial, Helvetica, sans-serif">
+		<SMALL>Firmware del sistema :</SMALL></FONT></TH>
+		<TD><BR></TD>
+		<TH ALIGN="left" NOWRAP><FONT COLOR="#000000" FACE="Arial, Helvetica, sans-serif">
+		<SMALL>66.01</SMALL></FONT></TH>
+	</TR>
+	<TR><TH ALIGN="right" NOWRAP><FONT COLOR="#888888" FACE="Arial, Helvetica, sans-serif">
+		<SMALL>Firmware del motor :</SMALL></FONT></TH>
+		<TD><BR></TD>
+		<TH ALIGN="left" NOWRAP><FONT COLOR="#000000" FACE="Arial, Helvetica, sans-serif">
+		<SMALL>A004</SMALL></FONT></TH>
+	</TR>
+	<TR><TH ALIGN="right" NOWRAP><FONT COLOR="#888888" FACE="Arial, Helvetica, sans-serif">
+		<SMALL>Firmware de la red :</SMALL></FONT></TH>
+		<TD><BR></TD>
+		<TH ALIGN="left" NOWRAP><FONT COLOR="#000000" FACE="Arial, Helvetica, sans-serif">
+		<SMALL>1.1.0</SMALL></FONT></TH>
+	</TR>
+</TABLE></TD>
+</TR>
+<TR><TH HEIGHT="5"></TH></TR>
+<TR>
+	<TH ALIGN="left"><TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+<TR><TD BGCOLOR="#000000" NOWRAP>
+<FONT COLOR="#00FF00"><PRE>Sleeping        
+                </PRE></FONT></TD></TR></TABLE></TH>
+</TR>
+<TR><TH HEIGHT="5"></TH></TR>
+<TR><TH ALIGN="left" VALIGN="top"><INPUT TYPE="submit" VALUE="Regenerar"></TH></TR>
+<TR>
+	<TD COLSPAN="3" VALIGN="top">
+	<TABLE WIDTH="100%" HEIGHT="100%" ALIGN="center" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+	<TR><TD COLSPAN="7"><HR WIDTH="100%"></TD></TR>
+	<TR>
+		<TD WIDTH="100%" VALIGN="top" COLSPAN="7" ALIGN="left" NOWRAP><FONT SIZE="3" FACE="Arial, Helvetica, sans-serif">
+		<STRONG>Idioma</STRONG></FONT></TD>
+	</TR>
+	<TR>
+		<TD WIDTH="20%" ROWSPAN="4"><BR></TD>
+		<TD WIDTH="25%" ALIGN="left" COLSPAN="2"><B><SMALL><A HREF="../deu/index.htm" TARGET="_top"><IMG SRC="../img/deu.gif" BORDER="0"></A></SMALL></B></TD>
+		<TD WIDTH="15%" ROWSPAN="4"><BR></TD>
+		<TD WIDTH="40%" ALIGN="left" COLSPAN="3"><B><SMALL><A HREF="../ita/index.htm" TARGET="_top"><IMG SRC="../img/ita.gif" BORDER="0"></A></SMALL></B></TD>
+	</TR>
+	<TR>
+		<TD ALIGN="left"COLSPAN="2"><B><SMALL><A HREF="../eng/index.htm" TARGET="_top"><IMG SRC="../img/eng.gif" BORDER="0"></A></SMALL></B></TD>
+		<TD ALIGN="left"COLSPAN="3"><B><SMALL><A HREF="../por/index.htm" TARGET="_top"><IMG SRC="../img/por.gif" BORDER="0"></A></SMALL></B></TD>
+	</TR>
+	<TR>
+		<TD ALIGN="left"COLSPAN="2"><B><SMALL><A HREF="../spa/index.htm" TARGET="_top"><IMG SRC="../img/spa.gif" BORDER="0"></A></SMALL></B></TD>
+		<TD ALIGN="left"COLSPAN="3"><B><SMALL><A HREF="../jpn/index.htm" TARGET="_top"><IMG SRC="../img/jpn.gif" BORDER="0"></A></SMALL></B></TD>
+	</TR>
+	<TR>
+		<TD ALIGN="left"COLSPAN="2"><B><SMALL><A HREF="../fra/index.htm" TARGET="_top"><IMG SRC="../img/fra.gif" BORDER="0"></A></SMALL></B></TD>
+		<TD COLSPAN="3"><BR></TD>
+	</TR>
+	<TR><TD COLSPAN="7" WIDTH="100%"><HR></TD></TR>
+	<TR>
+		<TD VALIGN="top" COLSPAN="7" ALIGN="left" NOWRAP><FONT SIZE="3" FACE="Arial, Helvetica, sans-serif">
+		<STRONG>Kyocera Mita en la World Wide Web</STRONG></FONT></TD>
+	</TR>
+	<TR><TD HEIGHT="5" COLSPAN="7"></TD></TR>
+	<TR>
+		<TD WIDTH="20%" ROWSPAN="3"><BR></TD>
+		<TH COLSPAN="6" ALIGN="left" NOWRAP><FONT FACE="Arial, Helvetica, sans-serif"><SMALL>
+		<A HREF="http://www.kyocera.com/w2k/">Kyocera</A></SMALL></FONT></TH>
+	</TR>
+	<TR><TD HEIGHT="5" COLSPAN="6"></TD></TR>
+	<TR>
+		<TH COLSPAN="6" ALIGN="left" NOWRAP><FONT FACE="Arial, Helvetica, sans-serif"><SMALL>
+		<A HREF="http://www.kyoceramita.com/download/">Kyocera Mita</A></SMALL></FONT></TH>
+	</TR>
+	</TABLE>
+</TD></TR>
+</TABLE>
+</FORM>
+</BODY>
+</HTML>

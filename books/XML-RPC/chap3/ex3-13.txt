@@ -1,0 +1,60 @@
+import java.io.IOException;
+import java.net.*;
+import java.util.Vector;
+import helma.xmlrpc.XmlRpc;
+import helma.xmlrpc.XmlRpcClient;
+import helma.xmlrpc.XmlRpcException;
+
+public class GetSetClient {
+
+    public static void main(String args[]) {
+        if (args.length < 1) {
+            System.out.println(
+                "Usage: java GetSetClient [get | set] [value]");
+            System.exit(-1);
+        }
+
+      String getOrSet=new String(args[0]);
+
+      if (!((getOrSet.equals("get")) || (getOrSet.equals("set")))) {
+            System.out.println(
+                "First argument must be get or set");
+            System.exit(-1);
+        }
+
+        try {
+            // Create the client, identifying the server
+            XmlRpcClient client =
+                new XmlRpcClient("http://localhost:8899/");
+
+            //get local host IP address
+        InetAddress address=InetAddress.getLocalHost(  );
+        String ipAddress=address.toString(  );
+
+            // Create the request parameters using user input
+            Vector params = new Vector(  );
+            params.addElement(ipAddress);
+            if (getOrSet.equals("set")) {
+            Integer newValue=new Integer(args[1]);
+            params.addElement(newValue);
+        }
+
+            // Issue a request
+        Object result=null;
+            if (getOrSet.equals("set")) {
+                result = client.execute("getSet.setValue", params);
+        } else {
+               result =  client.execute("getSet.getValue", params);
+        }
+
+            // Report the results
+            System.out.println("The response was: " + result.toString(  ));
+
+        } catch (IOException e) {
+            System.out.println("IO Exception: " + e.getMessage(  ));
+        } catch (XmlRpcException e) {
+            System.out.println("Exception within XML-RPC: " + e.getMessage(  ));
+        }
+    }
+}
+

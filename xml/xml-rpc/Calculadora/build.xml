@@ -1,0 +1,84 @@
+<project name="xml-service" default="compilar">
+<!-- Este proyecto todavía falta muchas detalles que corregir -->
+  <description>
+    Proyecto para manejar un servicio XML-RPC.
+  </description>
+
+  <property name="src"                 location="src"/>
+  <property name="build"               location="bin"/>
+  <property name="dirpackage"          value="co/edu/eafit/dis/xmlcal/"/>
+  <property name="package"             value="co.edu.eafit.dis.xmlcal"/>
+  <property name="client.package"      value="co.edu.eafit.dis.xmlcal.client"/>
+  <property name="server.package"      value="co.edu.eafit.dis.xmlcal.server"/>
+  <property name="xmlrpc.lib.server"   value="/usr/share/java/xmlrpc3-server-3.0.jar"/>
+  <property name="xmlrpc.lib.client"   value="/usr/share/java/xmlrpc3-client-3.0.jar"/>
+  <property name="xmlrpc.lib.commons"  value="/usr/share/java/xmlrpc3-common-3.0.jar"/>
+  <property name="commons.logging"     value="/usr/share/java/apache-commons-logging.jar"/>
+  <property name="commons.util"        value="/usr/share/java/ws-commons-util.jar"/>
+  <property name="xerces"              value="/usr/share/java/xerces-j2.jar"/>
+
+  <path id="classpath">
+    <pathelement location="${xmlrpc.lib.server}"/>
+    <pathelement location="${xmlrpc.lib.client}"/>
+    <pathelement location="${xmlrpc.lib.commons}"/>
+    <pathelement location="${commons.logging}"/>
+    <pathelement location="${commons.util}"/>
+    <pathelement location="${xerces}"/>
+  </path>
+
+  <target name="init" >
+    <!-- Crea una marca de tiempo-->
+    <tstamp/>
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compilar" depends="init"
+	  description="compila los archivos fuentes">
+    <javac srcdir="${src}" destdir="${build}" classpathref="classpath"/>
+    <copy file="${src}/${dirpackage}/server/MyHandlers.properties"
+	  todir="${build}/${dirpackage}/server/"/>
+    <copy file="${src}/${dirpackage}/server/MyHandlers.properties"
+	  todir="${build}"/>
+  </target>
+
+  <target name="correrCliente" depends="compilar"
+	  description="Ejecuta el cliente de XML-RPC">
+    <echo message="*** Cliente ***"/>
+    <java classname="${client.package}.Cliente"
+          classpath="${build}">
+      <classpath>
+	<path refid="classpath"/>
+	<path location="${xmlrpc.lib.client}"/>
+	<path location="${xmlrpc.lib.common}"/>
+	<path location="${xerces}"/>
+      </classpath>
+      <arg value="3"/>
+      <arg value="4"/>
+    </java>
+  </target>
+
+  <target name="correrServidor" depends="compilar"
+	  description="Ejecuta el servidor basado en XML-RPC">
+    <echo message="*** Servidor ***"/>
+    <java classname="${server.package}.Servidor"
+          classpath="${build}">
+      <classpath>
+	<path refid="classpath"/>
+	<path location="${xmlrpc.lib.server}"/>
+	<path location="${xmlrpc.lib.common}"/>
+	<path location="${commons.logging}"/>
+	<path location="${commons.util}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="clean"
+	  description="limpia todo">
+    <!-- Borra el árbol de directorios ${build} -->
+    <delete dir="${build}"/>
+    <delete>
+      <fileset dir="." includes="**/*.java~"/>
+    </delete>
+  </target>
+
+</project>

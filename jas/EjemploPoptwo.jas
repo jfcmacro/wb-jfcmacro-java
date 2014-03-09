@@ -1,0 +1,28 @@
+// Definición de las constantes
+.constant
+one     1
+letra_a 0x41
+letra_z 0x57
+.end-constant
+
+// Código principal
+.main
+inicio:    LDC_W letra_a
+principal: DUP 
+           LDC_W one
+           IADD
+           DUP
+           LDC_W one
+           IADD
+           POPTWO
+           DUP
+           OUT
+           DUP
+           LDC_W letra_z
+           ISUB
+           IFLT principal
+           POP
+           goto inicio
+           HALT
+.end-main
+

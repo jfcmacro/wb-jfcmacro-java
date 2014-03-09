@@ -1,0 +1,124 @@
+<?php
+// $Id: ch05.xml,v 1.4 2001/08/09 19:33:33 becki Exp $
+// A basic comment server. Given an ID it will store
+// a list of names and comment texts against it.
+
+include("xmlrpc.inc");
+include("xmlrpcs.inc");
+
+// implement discuss.addComment
+
+$addcomment_sig=array(array($xmlrpcInt, $xmlrpcString,
+    $xmlrpcString, $xmlrpcString));
+
+$addcomment_doc='Adds a comment to an item. The first parameter
+is the item ID, the second the name of the commenter, and the third
+is the comment itself. Returns the number of comments against that
+ID.';
+
+function addcomment($m) {
+      global $xmlrpcerruser;
+      $err="";
+ 
+    // decode the three string parameters
+      $msgID=xmlrpc_decode($m->getParam(0));
+    $name=xmlrpc_decode($m->getParam(1));
+    $comment=xmlrpc_decode($m->getParam(2));
+    
+    // open up our comment store
+    // (adjust the path for your own machine)
+    $dbh=dba_open("/tmp/comments.db", "c", "db2");
+
+    if ($dbh) {
+        
+        // look for the number of messages against
+        // this ID
+        $countID="${msgID}_count";
+        if (dba_exists($countID, $dbh))
+            $count=dba_fetch($countID, $dbh);
+        else
+            $count=0;
+
+        // add the new comment in
+        dba_insert($msgID . "_comment_${count}", $comment, $dbh);
+        dba_insert($msgID . "_name_${count}", $name, $dbh);
+        $count++;
+        dba_replace($countID, $count, $dbh);
+        dba_close($dbh);
+    } else {
+        // set an error that will be returned
+        // as a fault
+        $err="Unable to open comments database.";
+    }
+
+  // if we generated an error, create an error return response
+  if ($err) {
+        return new xmlrpcresp(0, $xmlrpcerruser, $err);
+  } else {
+        // otherwise, we return the new number of total
+        // comments against the ID
+        return new xmlrpcresp(new xmlrpcval($count, "int"));
+  }
+}
+
+// implement discuss.getComments
+
+$getcomments_sig=array(array($xmlrpcArray, $xmlrpcString));
+
+$getcomments_doc='Returns an array of comments for a given ID, which
+is the sole argument. Each array item is a struct containing name
+and comment text.';
+
+function getcomments($m) {
+  global $xmlrpcerruser;
+  $err="";
+    $ra=array(  );
+
+    // get the ID for which comments are required
+    $msgID=xmlrpc_decode($m->getParam(0));
+
+    // open up the comments database
+    $dbh=dba_open("/tmp/comments.db", "r", "db2");
+
+    if ($dbh) {
+        // look for the number of comments for this ID
+        $countID="${msgID}_count";
+        if (dba_exists($countID, $dbh)) {
+            $count=dba_fetch($countID, $dbh);
+
+            // fetch each comment
+            for($i=0; $i<$count; $i++) {
+                $name=dba_fetch("${msgID}_name_${i}", $dbh);
+                $comment=dba_fetch("${msgID}_comment_${i}", $dbh);
+                
+                // bundle the name and comment into a struct
+                $ra[]=new xmlrpcval(array(
+                        "name" => new xmlrpcval($name),
+                        "comment" => new xmlrpcval($comment)
+                        ), "struct");
+            }
+        }
+    }
+
+    // if we generated an error, create an error return response
+  if ($err) {
+        return new xmlrpcresp(0, $xmlrpcerruser, $err);
+  } else {
+        // otherwise, return the list of comment structs
+        return new xmlrpcresp(new xmlrpcval($ra, "array"));
+  }
+}    
+
+// instantiate the server and get it to process the request
+$s=new xmlrpc_server( array( "discuss.addComment" => 
+                 array("function" => "addcomment",
+                    "signature" => $addcomment_sig,
+                    "docstring" => $addcomment_doc),
+               "discuss.getComments" => 
+                 array("function" => "getcomments",
+                    "signature" => $getcomments_sig,
+                    "docstring" => $getcomments_doc))
+            );
+?>
+
+

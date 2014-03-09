@@ -1,0 +1,1988 @@
+%!PS-Adobe-3.0
+%%Title: Accept.java, ChatClientApplet.java, ChatClient.java, FastChecksum.java, ListCharsets.java, ListNetworkInterfaces.java, MultiplexingChatServer.java, PollingChatServer.java, ReportByAddress.java, ReportByName.java
+%%For: Juan Francisco Cardona Mc'Cormick
+%%Creator: a2ps version 4.13
+%%CreationDate: Thu Dec 12 12:16:14 2002
+%%BoundingBox: 24 24 588 768
+%%DocumentData: Clean7Bit
+%%Orientation: Landscape
+%%Pages: 4
+%%PageOrder: Ascend
+%%DocumentMedia: Letter 612 792 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-BoldOblique
+%%+ font Courier-Oblique
+%%+ font Helvetica
+%%+ font Helvetica-Bold
+%%+ font Symbol
+%%+ font Times-Bold
+%%+ font Times-Roman
+%%DocumentProcessColors: Black 
+%%Requirements: Tumble Duplex 
+%%DocumentSuppliedResources: procset a2ps-a2ps-hdr
+%%+ procset a2ps-black+white-Prolog
+%%+ encoding ISO-8859-1Encoding
+%%EndComments
+/a2psdict 200 dict def
+a2psdict begin
+%%BeginProlog
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+
+% EPSF import as in the Red Book
+/BeginInclude {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack 
+  userdict begin
+    0 setgray 0 setlinecap
+    1 setlinewidth 0 setlinejoin
+    10 setmiterlimit [ ] 0 setdash newpath
+    gs_languagelevel 1 ne {
+      false setstrokeadjust false setoverprint 
+    } if
+} bind def
+
+/EndInclude {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+/BeginEPSF {
+  BeginInclude
+  /showpage { } def
+} bind def
+
+/EndEPSF {
+  EndInclude
+} bind def
+
+% Page prefeed
+/page_prefeed {         % bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} bind def
+
+/deffont {
+  findfont exch scalefont def
+} bind def
+
+/reencode_font {
+  findfont reencode 2 copy definefont pop def
+} bind def
+
+% Function c-show (str => -)
+% centers text only according to x axis.
+/c-show { 
+  dup stringwidth pop
+  2 div neg 0 rmoveto
+  show
+} bind def
+
+% Function l-show (str => -)
+% prints texts so that it ends at currentpoint
+/l-show {
+  dup stringwidth pop neg 
+  0 
+  rmoveto show
+} bind def
+
+% center-fit show (str w => -)
+% show centered, and scale currentfont so that the width is less than w
+/cfshow {
+  exch dup stringwidth pop
+  % If the title is too big, try to make it smaller
+  3 2 roll 2 copy
+  gt
+  { % if, i.e. too big
+    exch div
+    currentfont exch scalefont setfont
+  } { % ifelse
+    pop pop 
+  }
+  ifelse
+  c-show			% center title
+} bind def
+
+% Return the y size of the current font
+% - => fontsize
+/currentfontsize {
+  currentfont /FontType get 0 eq {
+    currentfont /FontMatrix get 3 get
+  }{
+    currentfont /FontMatrix get 3 get 1000 mul
+  } ifelse
+} bind def
+
+% reencode the font
+% <encoding-vector> <fontdict> -> <newfontdict>
+/reencode { %def
+  dup length 5 add dict begin
+    { %forall
+      1 index /FID ne 
+      { def }{ pop pop } ifelse
+    } forall
+    /Encoding exch def
+
+    % Use the font's bounding box to determine the ascent, descent,
+    % and overall height; don't forget that these values have to be
+    % transformed using the font's matrix.
+    % We use `load' because sometimes BBox is executable, sometimes not.
+    % Since we need 4 numbers an not an array avoid BBox from being executed
+    /FontBBox load aload pop
+    FontMatrix transform /Ascent exch def pop
+    FontMatrix transform /Descent exch def pop
+    /FontHeight Ascent Descent sub def
+
+    % Define these in case they're not in the FontInfo (also, here
+    % they're easier to get to.
+    /UnderlinePosition 1 def
+    /UnderlineThickness 1 def
+    
+    % Get the underline position and thickness if they're defined.
+    currentdict /FontInfo known {
+      FontInfo
+      
+      dup /UnderlinePosition known {
+	dup /UnderlinePosition get
+	0 exch FontMatrix transform exch pop
+	/UnderlinePosition exch def
+      } if
+      
+      dup /UnderlineThickness known {
+	/UnderlineThickness get
+	0 exch FontMatrix transform exch pop
+	/UnderlineThickness exch def
+      } if
+      
+    } if
+    currentdict 
+  end 
+} bind def
+
+% composite fonts for ASCII-EUC mixed string
+% Version 1.2 1/31/1990
+% Orignal Ken'ichi HANDA (handa@etl.go.jp)
+% Modified Norio Katayama (katayama@rd.nacsis.ac.jp),1998
+% Extend & Fix Koji Nakamaru (maru@on.cs.keio.ac.jp), 1999
+% Anyone can freely copy, modify, distribute this program.
+
+/copyfont {	% font-dic extra-entry-count  copyfont  font-dic
+	1 index maxlength add dict begin
+	{	1 index /FID ne 2 index /UniqueID ne and
+		{def} {pop pop} ifelse
+	} forall
+	currentdict
+	end
+} bind def
+
+/compositefont { % ASCIIFontName EUCFontName RomanScale RomanOffset Rot(T/F) compositefont font
+    /RomanRotation exch def
+    /RomanOffset exch def
+    /RomanScale exch def
+    userdict /fixeucfont_dict known not {
+	userdict begin
+	    /fixeucfont_dict 2 dict begin
+		/UpperByteEncoding [
+		    16#00 1 16#20 { pop 0 } for
+		    16#21 1 16#28 { 16#20 sub } for
+		    16#29 1 16#2F { pop 0 } for
+		    16#30 1 16#74 { 16#27 sub } for
+		    16#75 1 16#FF { pop 0 } for
+		] def
+	        /LowerByteEncoding [
+		    16#00 1 16#A0 { pop /.notdef } for
+		    16#A1 1 16#FE { 16#80 sub 16 2 string cvrs
+				    (cXX) dup 1 4 -1 roll
+				    putinterval cvn } for
+		    /.notdef
+		] def
+		currentdict
+	    end def
+	end
+    } if
+    findfont dup /FontType get 0 eq {
+	14 dict begin
+	    %
+	    % 7+8 bit EUC font
+	    %
+	    12 dict begin
+		/EUCFont exch def
+		/FontInfo (7+8 bit EUC font) readonly def
+		/PaintType 0 def
+		/FontType 0 def
+		/FontMatrix matrix def
+		% /FontName
+		/Encoding fixeucfont_dict /UpperByteEncoding get def
+		/FMapType 2 def
+		EUCFont /WMode known
+		{ EUCFont /WMode get /WMode exch def }
+		{ /WMode 0 def } ifelse
+		/FDepVector [
+		    EUCFont /FDepVector get 0 get
+		    [ 16#21 1 16#28 {} for 16#30 1 16#74 {} for ]
+		    {
+			13 dict begin
+			    /EUCFont EUCFont def
+			    /UpperByte exch 16#80 add def	
+			    % /FontName
+			    /FontInfo (EUC lower byte font) readonly def
+			    /PaintType 0 def
+			    /FontType 3 def
+			    /FontMatrix matrix def
+			    /FontBBox {0 0 0 0} def
+			    /Encoding
+				fixeucfont_dict /LowerByteEncoding get def
+			    % /UniqueID
+			    % /WMode
+			    /BuildChar {
+				gsave
+				exch dup /EUCFont get setfont
+				/UpperByte get
+				2 string
+				dup 0 4 -1 roll put
+				dup 1 4 -1 roll put
+				dup stringwidth setcharwidth
+				0 0 moveto show
+				grestore
+			    } bind def
+			    currentdict
+			end
+			/lowerbytefont exch definefont
+		    } forall
+		] def
+		currentdict
+	    end
+	    /eucfont exch definefont
+	    exch
+	    findfont 1 copyfont dup begin
+		RomanRotation {
+			/FontMatrix FontMatrix
+			[ 0 RomanScale neg RomanScale 0 RomanOffset neg 0 ]
+			matrix concatmatrix def
+		}{
+			/FontMatrix FontMatrix
+			[ RomanScale 0 0 RomanScale 0 RomanOffset ] matrix concatmatrix
+			def
+			/CDevProc
+			    {pop pop pop pop 0 exch -1000 exch 2 div 880} def
+		} ifelse
+	    end
+	    /asciifont exch definefont
+	    exch
+	    /FDepVector [ 4 2 roll ] def
+	    /FontType 0 def
+	    /WMode 0 def
+	    /FMapType 4 def
+	    /FontMatrix matrix def
+	    /Encoding [0 1] def
+	    /FontBBox {0 0 0 0} def
+%	    /FontHeight 1.0 def % XXXX
+	    /FontHeight RomanScale 1.0 ge { RomanScale }{ 1.0 } ifelse def
+	    /Descent -0.3 def   % XXXX
+	    currentdict
+	end
+	/tmpfont exch definefont
+	pop
+	/tmpfont findfont
+    }{
+	pop findfont 0 copyfont
+    } ifelse
+} def	
+
+/slantfont {	% FontName slant-degree  slantfont  font'
+    exch findfont 1 copyfont begin
+    [ 1 0 4 -1 roll 1 0 0 ] FontMatrix exch matrix concatmatrix
+    /FontMatrix exch def
+    currentdict
+    end
+} def
+
+% Function print line number (<string> # -)
+/# {
+  gsave
+    sx cw mul neg 2 div 0 rmoveto
+    f# setfont
+    c-show
+  grestore
+} bind def
+
+% -------- Some routines to enlight plain b/w printings ---------
+
+% Underline
+% width --
+/dounderline {
+  currentpoint
+  gsave
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    0 rlineto
+    stroke
+  grestore
+} bind def
+
+% Underline a string
+% string --
+/dounderlinestring {
+  stringwidth pop
+  dounderline
+} bind def
+
+/UL {
+  /ul exch store
+} bind def
+
+% Draw a box of WIDTH wrt current font
+% width --
+/dobox {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    stroke
+  grestore
+} bind def
+
+/BX {
+  /bx exch store
+} bind def
+
+% Box a string
+% string --
+/doboxstring {
+  stringwidth pop
+  dobox
+} bind def
+
+%
+% ------------- Color routines ---------------
+%
+/FG /setrgbcolor load def
+
+% Draw the background
+% width --
+/dobackground {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    bgcolor aload pop setrgbcolor
+    fill
+  grestore
+} bind def
+
+% Draw bg for a string
+% string --
+/dobackgroundstring {
+  stringwidth pop
+  dobackground
+} bind def
+
+
+/BG {
+  dup /bg exch store
+  { mark 4 1 roll ] /bgcolor exch store } if
+} bind def
+
+
+/Show {
+  bg { dup dobackgroundstring } if
+  ul { dup dounderlinestring } if
+  bx { dup doboxstring } if
+  show
+} bind def
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T {
+  cw mul x0 add
+  bg { dup currentpoint pop sub dobackground } if
+  ul { dup currentpoint pop sub dounderline } if
+  bx { dup currentpoint pop sub dobox } if
+  y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n {
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+/S {
+  Show
+} bind def
+
+%%BeginResource: procset a2ps-a2ps-hdr 2.0 2
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Function title: prints page header.
+% <ct> <rt> <lt> are passed as argument
+/title { 
+  % 1. Draw the background
+  x v get y v get moveto
+  gsave
+    0 th 2 div neg rmoveto 
+    th setlinewidth
+    0.95 setgray
+    pw 0 rlineto stroke
+  grestore
+  % 2. Border it
+  gsave
+    0.7 setlinewidth
+    pw 0 rlineto
+    0 th neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+  % stk: ct rt lt
+  x v get y v get th sub 1 add moveto
+%%IncludeResource: font Helvetica
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  % 3. The left title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    fnfs 0.8 mul hm rmoveto
+    show			% left title
+  grestore
+  exch
+  % stk: ct ltw rt
+  % 4. the right title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    dup
+    pw exch stringwidth pop fnfs 0.8 mul add sub
+    hm
+    rmoveto
+    show			% right title
+  grestore
+  % stk: ct ltw rtw
+  % 5. the center title
+  gsave
+    pw 3 1 roll
+    % stk: ct pw ltw rtw
+    3 copy 
+    % Move to the center of the left room
+    sub add 2 div hm rmoveto
+    % What is the available space in here?
+    add sub fnfs 0.8 mul sub fnfs 0.8 mul sub
+    % stk: ct space_left
+%%IncludeResource: font Helvetica-Bold
+  fHelvetica-Bold fnfs scalefont setfont
+    cfshow
+  grestore
+} bind def
+
+% Function border: prints virtual page border
+/border { %def
+  gsave				% print four sides
+    0 setgray
+    x v get y v get moveto
+    0.7 setlinewidth		% of the square
+    pw 0 rlineto
+    0 ph neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+} bind def
+
+% Function water: prints a water mark in background
+/water { %def
+  gsave
+    scx scy moveto rotate
+%%IncludeResource: font Times-Bold
+  fTimes-Bold 100 scalefont setfont
+    .97 setgray
+    dup stringwidth pop 2 div neg -50 rmoveto
+    show
+  grestore
+} bind def
+
+% Function rhead: prints the right header
+/rhead {  %def
+  lx ly moveto
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  l-show
+} bind def
+
+% Function footer (cf rf lf -> -)
+/footer {
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  dx dy moveto
+  show
+
+  snx sny moveto
+  l-show
+  
+  fnx fny moveto
+  c-show
+} bind def
+%%EndResource
+%%BeginResource: procset a2ps-black+white-Prolog 2.0 1
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T { 
+  cw mul x0 add y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n { %def
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+}  bind def
+
+/S {
+  Show
+} bind def
+
+/p {
+  false UL
+  false BX
+  fCourier bfs scalefont setfont
+  Show
+} bind def
+
+/sy {
+  false UL
+  false BX
+  fSymbol bfs scalefont setfont
+  Show
+} bind def
+
+/k {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/K {
+  false UL
+  false BX
+  fCourier-Bold bfs scalefont setfont
+  Show
+} bind def
+
+/c {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/C {
+  false UL
+  false BX
+  fCourier-BoldOblique bfs scalefont setfont
+  Show 
+} bind def
+
+/l {
+  false UL
+  false BX
+  fHelvetica bfs scalefont setfont
+  Show
+} bind def
+
+/L {
+  false UL
+  false BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show 
+} bind def
+
+/str{
+  false UL
+  false BX
+  fTimes-Roman bfs scalefont setfont
+  Show
+} bind def
+
+/e{
+  false UL
+  true BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show
+} bind def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier
+%%IncludeResource: font Courier-Oblique
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Times-Roman
+%%IncludeResource: font Symbol
+%%IncludeResource: font Courier-BoldOblique
+%%BeginResource: encoding ISO-8859-1Encoding
+/ISO-8859-1Encoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright 
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash 
+/zero /one /two /three /four /five /six /seven 
+/eight /nine /colon /semicolon /less /equal /greater /question 
+/at /A /B /C /D /E /F /G 
+/H /I /J /K /L /M /N /O 
+/P /Q /R /S /T /U /V /W 
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore 
+/quoteleft /a /b /c /d /e /f /g 
+/h /i /j /k /l /m /n /o 
+/p /q /r /s /t /u /v /w 
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section 
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron 
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /bullet 
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown 
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla 
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis 
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply 
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls 
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla 
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis 
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide 
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis 
+] def
+%%EndResource
+% Initialize page description variables.
+/sh 612 def
+/sw 792 def
+/llx 24 def
+/urx 768 def
+/ury 588 def
+/lly 24 def
+/#copies 1 def
+%% Pagedevice definitions:
+countdictstack
+% Push our own mark, since there can be several PS marks pushed depending
+% where the failure really occured.
+/a2ps_mark
+{
+%%BeginFeature: *Tumble False
+  (<<) cvx exec /Tumble (false) cvx exec (>>) cvx exec setpagedevice
+%%EndFeature
+%%BeginFeature: *Duplex True
+  (<<) cvx exec /Duplex (true) cvx exec (>>) cvx exec setpagedevice
+%%EndFeature
+} stopped
+% My cleartomark
+{ /a2ps_mark eq { exit } if } loop
+countdictstack exch sub dup 0 gt
+{
+  { end } repeat
+}{
+  pop
+} ifelse
+/th 15.000000 def
+/fnfs 11 def
+/bfs 4.995905 def
+/cw 2.997543 def
+
+% Dictionary for ISO-8859-1 support
+/iso1dict 8 dict begin
+  /fCourier ISO-8859-1Encoding /Courier reencode_font
+  /fCourier-Bold ISO-8859-1Encoding /Courier-Bold reencode_font
+  /fCourier-BoldOblique ISO-8859-1Encoding /Courier-BoldOblique reencode_font
+  /fCourier-Oblique ISO-8859-1Encoding /Courier-Oblique reencode_font
+  /fHelvetica ISO-8859-1Encoding /Helvetica reencode_font
+  /fHelvetica-Bold ISO-8859-1Encoding /Helvetica-Bold reencode_font
+  /fTimes-Bold ISO-8859-1Encoding /Times-Bold reencode_font
+  /fTimes-Roman ISO-8859-1Encoding /Times-Roman reencode_font
+currentdict end def
+/bgcolor [ 0 0 0 ] def
+/bg false def
+/ul false def
+/bx false def
+% The font for line numbering
+/f# /Helvetica findfont bfs .6 mul scalefont def
+/fSymbol /Symbol findfont def
+/hm fnfs 0.25 mul def
+/pw
+   cw 81.400000 mul
+def
+/ph
+   523.071245 th add
+def
+/pmw urx llx sub pw 3 mul sub 2 div def
+/pmh 0 def
+/v 0 def
+/x [
+  0
+  dup pmw add pw add
+  dup pmw add pw add
+] def
+/y [
+  pmh ph add 0 mul ph add
+  dup
+  dup
+] def
+/scx sw 2 div def
+/scy sh 2 div def
+/snx urx def
+/sny lly 2 add def
+/dx llx def
+/dy sny def
+/fnx scx def
+/fny dy def
+/lx snx def
+/ly ury fnfs 0.8 mul sub def
+/sx 0 def
+/tab 8 def
+/x0 0 def
+/y0 0 def
+%%EndSetup
+
+%%Page: (1,1,1) 1
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(import) K
+( java.net.*;) p n
+(import) K
+( java.util.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(Accept) L n
+({) p n
+(  ) S
+(static) K
+( ) p
+(private) K
+( InetAddress getAddress\( NetworkInterface ni \) {) p n
+(    Enumeration e = ni.getInetAddresses\(\);) N
+(    ) S
+(if) K
+( \(!e.hasMoreElements\(\)\)) p n
+(      ) S
+(return) K
+( ) p
+(null) k
+(;) p n
+(    InetAddress ia = \(InetAddress\)e.nextElement\(\);) N
+(    ) S
+(return) K
+( ia;) p n
+(  }) N
+() N
+(  ) S
+(static) K
+( ) p
+(public) K
+( ) p
+(void) k
+( main\( String args[] \) ) p
+(throws) K
+( Exception {) p n
+(    ) S
+(int) k
+( port = Integer.parseInt\( args[0] \);) p n
+(    String interf = args.length > 1 ? args[1] : ) S
+(null) k
+(;) p n
+() N
+(    ) S
+(if) K
+( \(interf != ) p
+(null) k
+(\) {) p n
+(      NetworkInterface ni = NetworkInterface.getByName\( interf \);) N
+(      InetAddress ia = getAddress\( ni \);) N
+(      ServerSocket ss = ) S
+(new) K
+( ServerSocket\( port, 20, ia \);) p n
+(      System.out.println\( ") S
+(Listening) str
+(" \);) p n
+(      Socket s = ss.accept\(\);) N
+(      System.out.println\( s \);) N
+(    } ) S
+(else) K
+( {) p n
+(      ServerSocket ss = ) S
+(new) K
+( ServerSocket\( port \);) p n
+(      System.out.println\( ") S
+(Listening) str
+(" \);) p n
+(      Socket s = ss.accept\(\);) N
+(      System.out.println\( s \);) N
+(    }) N
+(  }) N
+(}) N
+(Accept.java) (P\341gina 1/1) (07 ene 02 12:58) title
+border
+/v 1 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(// $Id$) c n
+() p n
+(import) K
+( java.applet.*;) p n
+(import) K
+( java.awt.*;) p n
+(import) K
+( java.io.*;) p n
+(import) K
+( java.net.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(ChatClientApplet) L
+( ) p
+(extends) K
+( Applet) p n
+({) N
+(  ) S
+(public) K
+( ) p
+(void) k
+( init\(\) {) p n
+(    String host = getParameter\( ") S
+(host) str
+(" \);) p n
+(    ) S
+(int) k
+( port = Integer.parseInt\( getParameter\( ") p
+(port) str
+(" \) \);) p n
+(    setLayout\( ) S
+(new) K
+( BorderLayout\(\) \);) p n
+(    add\( ") S
+(Center) str
+(", ) p
+(new) K
+( ChatClient\( host, port \) \);) p n
+(  }) N
+(}) N
+(ChatClientApplet.java) (P\341gina 1/1) (07 nov 01 13:01) title
+border
+/v 2 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(// $Id$) c n
+() p n
+(import) K
+( java.applet.*;) p n
+(import) K
+( java.awt.*;) p n
+(import) K
+( java.awt.event.*;) p n
+(import) K
+( java.io.*;) p n
+(import) K
+( java.net.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(ChatClient) L
+( ) p
+(extends) K
+( Panel ) p
+(implements) K
+( Runnable) p n
+({) N
+(  ) S
+(// Components for the visual display of the chat windows) c n
+(  ) p
+(private) K
+( TextField tf = ) p
+(new) K
+( TextField\(\);) p n
+(  ) S
+(private) K
+( TextArea ta = ) p
+(new) K
+( TextArea\(\);) p n
+() N
+(  ) S
+(// The socket connecting us to the server) c n
+(  ) p
+(private) K
+( Socket socket;) p n
+() N
+(  ) S
+(// The streams we communicate to the server; these come) c n
+(  ) p
+(// from the socket) c n
+(  ) p
+(private) K
+( OutputStream out;) p n
+(  ) S
+(private) K
+( InputStream in;) p n
+() N
+(  ) S
+(// Constructor) c n
+(  ) p
+(public) K
+( ChatClient\( String host, ) p
+(int) k
+( port \) {) p n
+() N
+(    ) S
+(// Set up the screen) c n
+(    setLayout\( ) p
+(new) K
+( BorderLayout\(\) \);) p n
+(    add\( ") S
+(North) str
+(", tf \);) p n
+(    add\( ") S
+(Center) str
+(", ta \);) p n
+() N
+(    ) S
+(// We want to receive messages when someone types a line) c n
+(    ) p
+(// and hits return, using an anonymous class as) c n
+(    ) p
+(// a callback) c n
+(    tf.addActionListener\( ) p
+(new) K
+( ActionListener\(\) {) p n
+(      ) S
+(public) K
+( ) p
+(void) k
+( actionPerformed\( ActionEvent e \) {) p n
+(        processMessage\( e.getActionCommand\(\) \);) N
+(      }) N
+(    } \);) N
+() N
+(    ) S
+(// Connect to the server) c n
+(    ) p
+(try) K
+( {) p n
+() N
+(      ) S
+(// Initiate the connection) c n
+(      socket = ) p
+(new) K
+( Socket\( host, port \);) p n
+() N
+(      ) S
+(// We got a connection!  Tell the world) c n
+(      System.out.println\( ") p
+(connected to ) str
+("+socket \);) p n
+() N
+(      ) S
+(// Let's grab the streams and create DataInput/Output streams) c n
+(      ) p
+(// from them) c n
+(      in = socket.getInputStream\(\);) p n
+(      out = socket.getOutputStream\(\);) N
+() N
+(      ) S
+(// Start a background thread for receiving messages) c n
+(      ) p
+(new) K
+( Thread\( ) p
+(this) k
+( \).start\(\);) p n
+(    } ) S
+(catch) K
+(\( IOException ie \) { System.out.println\( ie \); }) p n
+(  }) N
+() N
+(  ) S
+(// Gets called when the user types something) c n
+(  ) p
+(private) K
+( ) p
+(void) k
+( processMessage\( String message \) {) p n
+(    ) S
+(try) K
+( {) p n
+() N
+(      ) S
+(// Send it to the server) c n
+(      out.write\( message.getBytes\(\) \);) p n
+() N
+(      ) S
+(// Clear out text input field) c n
+(      tf.setText\( "" \);) p n
+(    } ) S
+(catch) K
+(\( IOException ie \) { System.out.println\( ie \); }) p n
+(  }) N
+() N
+(  ) S
+(// Background thread runs this: show messages from other window) c n
+(  ) p
+(public) K
+( ) p
+(void) k
+( run\(\) {) p n
+(    ) S
+(try) K
+( {) p n
+() N
+(      ) S
+(byte) k
+( buffer[] = ) p
+(new) K
+( ) p
+(byte) k
+([4096];) p n
+() N
+(      ) S
+(// Receive messages one-by-one, forever) c n
+(      ) p
+(while) K
+( \() p
+(true) k
+(\) {) p n
+() N
+(        ) S
+(// Get the next message) c n
+(        ) p
+(int) k
+( r = in.read\( buffer \);) p n
+(        String message = ) S
+(new) K
+( String\( buffer, 0, r \);) p n
+() N
+(        ) S
+(// Print it to our text window) c n
+(        ta.append\( message+") p
+(\\n) str
+(" \);) p n
+(      }) N
+(    } ) S
+(catch) K
+(\( IOException ie \) { System.out.println\( ie \); }) p n
+(  }) N
+(}) N
+(ChatClient.java) (P\341gina 1/1) (07 nov 01 13:11) title
+border
+grestore
+(Impreso por Juan Francisco Cardona Mc'Cormick) rhead
+(Accept.java, ChatClientApplet.java, ChatClient.java) (1/4) (jueves 12 diciembre 2002) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (1,1,1) 2
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(import) K
+( java.io.*;) p n
+(import) K
+( java.nio.*;) p n
+(import) K
+( java.nio.channels.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(FastChecksum) L n
+({) p n
+(  ) S
+(static) K
+( ) p
+(public) K
+( ) p
+(void) k
+( main\( String args[] \) ) p
+(throws) K
+( Exception {) p n
+(    ) S
+(if) K
+( \(args.length != 3\) {) p n
+(      System.err.println\( ") S
+(Usage: java FastChecksum ) str
+("+) p n
+(                          ") S
+(<filename> <start pos> <# bytes>) str
+(" \);) p n
+(      System.exit\( 1 \);) N
+(    }) N
+(    String filename = args[0];) N
+(    ) S
+(int) k
+( start = Integer.parseInt\( args[1] \);) p n
+(    ) S
+(int) k
+( length = Integer.parseInt\( args[2] \);) p n
+() N
+(    ) S
+(long) k
+( fileLength = ) p
+(new) K
+( File\( filename \).length\(\);) p n
+() N
+(    ) S
+(if) K
+( \(length < start\) {) p n
+(      ) S
+(throw) K
+( ) p
+(new) K
+( IllegalArgumentException\( ") p
+(length < start) str
+(" \);) p n
+(    }) N
+() N
+(    ) S
+(if) K
+( \(length < 0\) {) p n
+(      ) S
+(throw) K
+( ) p
+(new) K
+( IllegalArgumentException\( ") p
+(length < 0) str
+(" \);) p n
+(    }) N
+() N
+(    ) S
+(if) K
+( \(start+length > fileLength\) {) p n
+(      ) S
+(throw) K
+( ) p
+(new) K
+( IllegalArgumentException\( ") p
+(start+length > fileLength) str
+(" \);) p n
+(    }) N
+() N
+(    FileInputStream fin = ) S
+(new) K
+( FileInputStream\( filename \);) p n
+(    FileChannel finc = fin.getChannel\(\);) N
+(    MappedByteBuffer mbb =) N
+(      finc.map\( FileChannel.MapMode.READ_ONLY, start, length \);) N
+() N
+(    ) S
+(long) k
+( sum = 0;) p n
+(    ) S
+(for) K
+( \() p
+(int) k
+( i=0; i<length; ++i\) {) p n
+(      sum += mbb.get\( i \);) N
+(    }) N
+() N
+(    fin.close\(\);) N
+() N
+(    System.out.println\( ") S
+(Sum: ) str
+("+sum \);) p n
+(  }) N
+(}) N
+(FastChecksum.java) (P\341gina 1/1) (11 dic 01 14:57) title
+border
+/v 1 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(import) K
+( java.util.*;) p n
+(import) K
+( java.nio.charset.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(ListCharsets) L n
+({) p n
+(  ) S
+(static) K
+( ) p
+(public) K
+( ) p
+(void) k
+( main\( String args[] \) ) p
+(throws) K
+( Exception {) p n
+(    SortedMap charsets = Charset.availableCharsets\(\);) N
+(    Set names = charsets.keySet\(\);) N
+(    ) S
+(for) K
+( \(Iterator e=names.iterator\(\); e.hasNext\(\);\) {) p n
+(      String name = \(String\)e.next\(\);) N
+(      Charset charset = \(Charset\)charsets.get\( name \);) N
+(      System.out.println\( charset \);) N
+(      Set aliases = charset.aliases\(\);) N
+(      ) S
+(for) K
+( \(Iterator ee=aliases.iterator\(\); ee.hasNext\(\);\) {) p n
+(        System.out.println\( ") S
+(    ) str
+("+ee.next\(\) \);) p n
+(      }) N
+(    }) N
+(  }) N
+(}) N
+(ListCharsets.java) (P\341gina 1/1) (09 nov 01 13:35) title
+border
+/v 2 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(import) K
+( java.net.*;) p n
+(import) K
+( java.util.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(ListNetworkInterfaces) L n
+({) p n
+(  ) S
+(static) K
+( ) p
+(public) K
+( ) p
+(void) k
+( main\( String args[] \) ) p
+(throws) K
+( Exception {) p n
+(    Enumeration interfaces = NetworkInterface.getNetworkInterfaces\(\);) N
+(    ) S
+(while) K
+( \(interfaces.hasMoreElements\(\)\) {) p n
+(      NetworkInterface ni = \(NetworkInterface\)interfaces.nextElement\(\);) N
+(      System.out.println\( ni \);) N
+(    }) N
+(  }) N
+(}) N
+(ListNetworkInterfaces.java) (P\341gina 1/1) (18 oct 01 16:25) title
+border
+grestore
+(Impreso por Juan Francisco Cardona Mc'Cormick) rhead
+(FastChecksum.java, ListCharsets.java, ListNetworkInterfaces.java) (2/4) (jueves 12 diciembre 2002) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (1-2,1) 3
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(import) K
+( java.io.*;) p n
+(import) K
+( java.net.*;) p n
+(import) K
+( java.nio.*;) p n
+(import) K
+( java.nio.channels.*;) p n
+(import) K
+( java.util.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(MultiplexingChatServer) L
+( ) p
+(implements) K
+( Runnable) p n
+({) N
+(  ) S
+(private) K
+( ) p
+(int) k
+( port;) p n
+(  ) S
+(private) K
+( Vector sockets = ) p
+(new) K
+( Vector\(\);) p n
+(  ) S
+(private) K
+( Set closedSockets = ) p
+(new) K
+( HashSet\(\);) p n
+() N
+(  ) S
+(public) K
+( MultiplexingChatServer\( ) p
+(int) k
+( port \) {) p n
+(    this.port = port;) N
+(    Thread t = ) S
+(new) K
+( Thread\( ) p
+(this) k
+(, ") p
+(MultiplexingChatServer) str
+(" \);) p n
+(    t.start\(\);) N
+(  }) N
+() N
+(  ) S
+(public) K
+( ) p
+(void) k
+( run\(\) {) p n
+(    ) S
+(try) K
+( {) p n
+(      ServerSocketChannel ssc = ServerSocketChannel.open\(\);) N
+(      ssc.configureBlocking\( ) S
+(false) k
+( \);) p n
+(      ServerSocket ss = ssc.socket\(\);) N
+(      InetSocketAddress isa = ) S
+(new) K
+( InetSocketAddress\( port \);) p n
+(      ss.bind\( isa \);) N
+() N
+(      Selector selector = Selector.open\(\);) N
+(      ssc.register\( selector, SelectionKey.OP_ACCEPT \);) N
+(      System.out.println\( ") S
+(Listening on port ) str
+("+port \);) p n
+() N
+(      ByteBuffer buffer = ByteBuffer.allocate\( 4096 \);) N
+() N
+(      ) S
+(while) K
+( \() p
+(true) k
+(\) {) p n
+(        ) S
+(int) k
+( numKeys = selector.select\(\);) p n
+(        ) S
+(if) K
+( \(numKeys>0\) {) p n
+(          Set skeys = selector.selectedKeys\(\);) N
+(          Iterator it = skeys.iterator\(\);) N
+(          ) S
+(while) K
+( \(it.hasNext\(\)\) {) p n
+(            SelectionKey rsk = \(SelectionKey\)it.next\(\);) N
+(            ) S
+(int) k
+( rskOps = rsk.readyOps\(\);) p n
+(            ) S
+(if) K
+( \(\(rskOps & SelectionKey.OP_ACCEPT\) ==) p n
+(                SelectionKey.OP_ACCEPT\) {) N
+(              Socket socket = ss.accept\(\);) N
+(              System.out.println\( ") S
+(Connection from ) str
+("+socket \);) p n
+(              sockets.addElement\( socket \);) N
+(              SocketChannel sc = socket.getChannel\(\);) N
+(              sc.configureBlocking\( ) S
+(false) k
+( \);) p n
+(              sc.register\( selector, SelectionKey.OP_READ \);) N
+(              it.remove\(\);) N
+(            } ) S
+(else) K
+( ) p
+(if) K
+( \(\(rskOps & SelectionKey.OP_READ\) ==) p n
+(                       SelectionKey.OP_READ\) {) N
+(              SocketChannel ch = \(SocketChannel\)rsk.channel\(\);) N
+(              it.remove\(\);) N
+(              buffer.clear\(\);) N
+(              ch.read\( buffer \);) N
+(              buffer.flip\(\);) N
+(              System.out.println\( ") S
+(Read ) str
+("+buffer.limit\(\)+) p n
+(                                  ") S
+( bytes from ) str
+("+ch.socket\(\) \);) p n
+(              ) S
+(if) K
+( \(buffer.limit\(\)==0\) {) p n
+(                System.out.println\( ") S
+(closing on 0 read) str
+(" \);) p n
+(                rsk.cancel\(\);) N
+(                Socket socket = ch.socket\(\);) N
+(                close\( socket \);) N
+(              } ) S
+(else) K
+( {) p n
+(                sendToAll\( buffer \);) N
+(              }) N
+(            }) N
+(          }) N
+() N
+(          removeClosedSockets\(\);) N
+(        }) N
+(      }) N
+(    } ) S
+(catch) K
+(\( IOException ie \) {) p n
+(      ie.printStackTrace\(\);) N
+(    }) N
+(  }) N
+() N
+(  ) S
+(// This method is identical to) c n
+(  ) p
+(// PollingChatServer.sendToAll\(\)) c n
+(  ) p
+(private) K
+( ) p
+(void) k
+( sendToAll\( ByteBuffer bb \) {) p n
+(    ) S
+(for) K
+( \(Enumeration e=sockets.elements\(\);) p n
+(         e.hasMoreElements\(\);\) {) N
+(      Socket socket = ) S
+(null) k
+(;) p n
+(      ) S
+(try) K
+( {) p n
+(        socket = \(Socket\)e.nextElement\(\);) N
+(        SocketChannel sc = socket.getChannel\(\);) N
+(        bb.rewind\(\);) N
+(        ) S
+(while) K
+( \(bb.remaining\(\)>0\) {) p n
+(          sc.write\( bb \);) N
+(        }) N
+(      } ) S
+(catch) K
+(\( IOException ie \) {) p n
+(        closedSockets.add\( socket \);) N
+(      }) N
+(    }) N
+(  }) N
+() N
+(  ) S
+(private) K
+( ) p
+(void) k
+( close\( Socket socket \) {) p n
+(    closedSockets.add\( socket \);) N
+(  }) N
+() N
+(  ) S
+(// This method is identical to) c n
+(  ) p
+(// PollingChatServer.removeClosedSockets\(\)) c n
+(  ) p
+(private) K
+( ) p
+(void) k
+( removeClosedSockets\(\) {) p n
+(    ) S
+(for) K
+( \(Iterator it=closedSockets.iterator\(\); it.hasNext\(\);\) {) p n
+(MultiplexingChatServer.java) (P\341gina 1/2) (30 jul 02 10:31) title
+border
+/v 1 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(      Socket socket = \(Socket\)it.next\(\);) p n
+(      sockets.remove\( socket \);) N
+(      System.out.println\( ") S
+(Removed ) str
+("+socket \);) p n
+(    }) N
+(    closedSockets.clear\(\);) N
+(  }) N
+() N
+(  ) S
+(static) K
+( ) p
+(public) K
+( ) p
+(void) k
+( main\( String args[] \) ) p
+(throws) K
+( Exception {) p n
+(    ) S
+(int) k
+( port = Integer.parseInt\( args[0] \);) p n
+(    ) S
+(new) K
+( MultiplexingChatServer\( port \);) p n
+(  }) N
+(}) N
+(MultiplexingChatServer.java) (P\341gina 2/2) (30 jul 02 10:31) title
+border
+/v 2 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(import) K
+( java.io.*;) p n
+(import) K
+( java.net.*;) p n
+(import) K
+( java.nio.*;) p n
+(import) K
+( java.nio.channels.*;) p n
+(import) K
+( java.util.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(PollingChatServer) L
+( ) p
+(implements) K
+( Runnable) p n
+({) N
+(  ) S
+(static) K
+( ) p
+(private) K
+( ) p
+(final) K
+( ) p
+(int) k
+( sleepTime = 100; ) p
+(//SLEEP_TIME) c n
+(  ) p
+(private) K
+( ) p
+(int) k
+( port;) p n
+(  ) S
+(private) K
+( Vector sockets = ) p
+(new) K
+( Vector\(\);) p n
+(  ) S
+(private) K
+( Set closedSockets = ) p
+(new) K
+( HashSet\(\);) p n
+() N
+(  ) S
+(public) K
+( PollingChatServer\( ) p
+(int) k
+( port \) {) p n
+(    this.port = port;) N
+(    Thread t = ) S
+(new) K
+( Thread\( ) p
+(this) k
+(, ") p
+(PollingChatServer) str
+(" \);) p n
+(    t.start\(\);) N
+(  }) N
+() N
+(  ) S
+(public) K
+( ) p
+(void) k
+( run\(\) {) p n
+(    ) S
+(try) K
+( {) p n
+(      ServerSocketChannel ssc = ServerSocketChannel.open\(\);) N
+(      ssc.configureBlocking\( ) S
+(false) k
+( \);) p n
+(      ServerSocket ss = ssc.socket\(\);) N
+(      InetSocketAddress isa = ) S
+(new) K
+( InetSocketAddress\( port \);) p n
+(      ss.bind\( isa \);) N
+() N
+(      ByteBuffer buffer = ByteBuffer.allocate\( 4096 \);) N
+() N
+(      System.out.println\( ") S
+(Listening on port ) str
+("+port \);) p n
+() N
+(      ) S
+(while) K
+( \() p
+(true) k
+(\) {) p n
+(        SocketChannel sc = ssc.accept\(\);) N
+() N
+(        ) S
+(if) K
+( \(sc != ) p
+(null) k
+(\) {) p n
+(          Socket newSocket = sc.socket\(\);) N
+(          System.out.println\( ") S
+(Connection from ) str
+("+newSocket \);) p n
+(          newSocket.getChannel\(\).configureBlocking\( ) S
+(false) k
+( \);) p n
+(          sockets.addElement\( newSocket \);) N
+(        }) N
+() N
+(        ) S
+(for) K
+( \(Enumeration e = sockets.elements\(\);) p n
+(             e.hasMoreElements\(\);\) {) N
+(          Socket socket = ) S
+(null) k
+(;) p n
+(          ) S
+(try) K
+( {) p n
+(            socket = \(Socket\)e.nextElement\(\);) N
+(            SocketChannel sch = socket.getChannel\(\);) N
+(            buffer.clear\(\);) N
+(            sch.read\( buffer \);) N
+(            ) S
+(if) K
+( \(buffer.position\(\) > 0\) {) p n
+(              buffer.flip\(\);) N
+(              System.out.println\( ") S
+(Read ) str
+("+buffer.limit\(\)+) p n
+(                                  ") S
+( bytes from ) str
+("+sch.socket\(\) \);) p n
+(              sendToAll\( buffer \);) N
+(            }) N
+(          } ) S
+(catch) K
+(\( IOException ie \) {) p n
+(            closedSockets.add\( socket \);) N
+(          }) N
+(        }) N
+() N
+(        removeClosedSockets\(\);) N
+() N
+(        ) S
+(try) K
+( {) p n
+(          Thread.sleep\( sleepTime \);) N
+(        } ) S
+(catch) K
+(\( InterruptedException ie \) {}) p n
+(      }) N
+(    } ) S
+(catch) K
+(\( IOException ie \) {) p n
+(      ie.printStackTrace\(\);) N
+(    }) N
+(  }) N
+() N
+(  ) S
+(private) K
+( ) p
+(void) k
+( sendToAll\( ByteBuffer bb \) {) p n
+(    ) S
+(for) K
+( \(Enumeration e=sockets.elements\(\);) p n
+(         e.hasMoreElements\(\);\) {) N
+(      Socket socket = ) S
+(null) k
+(;) p n
+(      ) S
+(try) K
+( {) p n
+(        socket = \(Socket\)e.nextElement\(\);) N
+(        SocketChannel sc = socket.getChannel\(\);) N
+(        bb.rewind\(\);) N
+(        ) S
+(while) K
+( \(bb.remaining\(\)>0\) {) p n
+(          sc.write\( bb \);) N
+(        }) N
+(      } ) S
+(catch) K
+(\( IOException ie \) {) p n
+(        closedSockets.add\( socket \);) N
+(      }) N
+(    }) N
+(  }) N
+() N
+(  ) S
+(private) K
+( ) p
+(void) k
+( removeClosedSockets\(\) {) p n
+(    ) S
+(for) K
+( \(Iterator it=closedSockets.iterator\(\); it.hasNext\(\);\) {) p n
+(      Socket socket = \(Socket\)it.next\(\);) N
+(      sockets.remove\( socket \);) N
+(      System.out.println\( ") S
+(Removed ) str
+("+socket \);) p n
+(    }) N
+(    closedSockets.clear\(\);) N
+(  }) N
+() N
+(  ) S
+(static) K
+( ) p
+(public) K
+( ) p
+(void) k
+( main\( String args[] \) ) p
+(throws) K
+( Exception {) p n
+(    ) S
+(int) k
+( port = Integer.parseInt\( args[0] \);) p n
+(    ) S
+(new) K
+( PollingChatServer\( port \);) p n
+(  }) N
+(}) N
+(PollingChatServer.java) (P\341gina 1/1) (16 ene 02 12:17) title
+border
+grestore
+(Impreso por Juan Francisco Cardona Mc'Cormick) rhead
+(MultiplexingChatServer.java, PollingChatServer.java) (3/4) (jueves 12 diciembre 2002) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (1,1,1) 4
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(import) K
+( java.net.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(ReportByAddress) L n
+({) p n
+(  ) S
+(static) K
+( ) p
+(public) K
+( ) p
+(void) k
+( main\( String args[] \) ) p
+(throws) K
+( Exception {) p n
+(    InetAddress ia = InetAddress.getByName\( args[0] \);) N
+(    NetworkInterface ni = NetworkInterface.getByInetAddress\( ia \);) N
+(    System.out.println\( ni \);) N
+(  }) N
+(}) N
+(ReportByAddress.java) (P\341gina 1/1) (10 ene 02 16:06) title
+border
+/v 1 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(import) K
+( java.net.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(ReportByName) L n
+({) p n
+(  ) S
+(static) K
+( ) p
+(public) K
+( ) p
+(void) k
+( main\( String args[] \) ) p
+(throws) K
+( Exception {) p n
+(    NetworkInterface ni = NetworkInterface.getByName\( args[0] \);) N
+(    System.out.println\( ni \);) N
+(  }) N
+(}) N
+(ReportByName.java) (P\341gina 1/1) (18 oct 01 16:25) title
+border
+/v 2 store
+/x0 x v get 2.098280 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(import) K
+( java.io.*;) p n
+(import) K
+( java.nio.*;) p n
+(import) K
+( java.nio.channels.*;) p n
+(import) K
+( java.nio.charset.*;) p n
+() N
+(public) K
+( ) p
+(class) K
+( ) p
+(TranslateCharset) L n
+({) p n
+(  ) S
+(static) K
+( ) p
+(public) K
+( ) p
+(void) k
+( main\( String args[] \) ) p
+(throws) K
+( Exception {) p n
+(    ) S
+(if) K
+( \(args.length != 4\) {) p n
+(      System.err.println\() N
+(        ") S
+(Usage: java TranslateCharset <infile> <incharset> ) str
+("+) p n
+(        ") S
+(<outfile> <outcharset>) str
+(" \);) p n
+(      System.exit\( 1 \);) N
+(    }) N
+() N
+(    String inFilename = args[0];) N
+(    String inFileCharsetName = args[1];) N
+(    String outFilename = args[2];) N
+(    String outFileCharsetName = args[3];) N
+() N
+(    File infile = ) S
+(new) K
+( File\( inFilename \);) p n
+(    File outfile = ) S
+(new) K
+( File\( outFilename \);) p n
+() N
+(    RandomAccessFile inraf = ) S
+(new) K
+( RandomAccessFile\( infile, ") p
+(r) str
+(" \);) p n
+(    RandomAccessFile outraf = ) S
+(new) K
+( RandomAccessFile\( outfile, ") p
+(rw) str
+(" \);) p n
+() N
+(    FileChannel finc = inraf.getChannel\(\);) N
+(    FileChannel foutc = outraf.getChannel\(\);) N
+() N
+(    MappedByteBuffer inmbb =) N
+(      finc.map\( FileChannel.MapMode.READ_ONLY, 0, \() S
+(int) k
+(\)infile.length\(\) \);) p n
+() N
+(    Charset inCharset = Charset.forName\( inFileCharsetName \);) N
+(    Charset outCharset = Charset.forName\( outFileCharsetName \);) N
+() N
+(    CharsetDecoder inDecoder = inCharset.newDecoder\(\);) N
+(    CharsetEncoder outEncoder = outCharset.newEncoder\(\);) N
+() N
+(    CharBuffer cb = inDecoder.decode\( inmbb \);) N
+(    ByteBuffer outbb = outEncoder.encode\( cb \);) N
+() N
+(    foutc.write\( outbb \);) N
+() N
+(    inraf.close\(\);) N
+(    outraf.close\(\);) N
+(  }) N
+(}) N
+(TranslateCharset.java) (P\341gina 1/1) (11 dic 01 17:21) title
+border
+grestore
+(Impreso por Juan Francisco Cardona Mc'Cormick) rhead
+(ReportByAddress.java, ReportByName.java, TranslateCharset.java) (4/4) (jueves 12 diciembre 2002) footer
+end % of iso1dict
+pagesave restore
+showpage
+
+%%Trailer
+end
+%%EOF

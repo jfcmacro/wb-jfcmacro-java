@@ -1,0 +1,4868 @@
+[--this file contains all of the code from Programming Web Services with XML-RPC, including small untitled examples.  Numbered examples are also included in the folders labeled chap3-chap7.--]
+
+
+
+[--untitled example --]
+
+mass=getMass(objectID)
+
+
+
+[--untitled example --]
+
+<value><i4>n</i4></value>
+
+
+
+[--untitled example --]
+
+<value><int>n</int></value>
+
+
+
+[--untitled example --]
+
+<value><int>42</int></value>
+<value><i4>-32764</i4></value>
+<value><int>0</int></value>
+<value><int>+42</int></value>
+
+
+
+[--untitled example --]
+
+<value><double>n</double></value>
+
+
+
+[--untitled example --]
+
+<value><double>2.0</double></value>
+<value><double>-0.32653</double></value>
+<value><double>67234.45</double></value>
+
+
+
+[--untitled example --]
+
+<value><boolean>b</boolean></value>
+
+
+
+[--untitled example --]
+
+<value><boolean>1</boolean></value>
+<value><boolean>0</boolean></value>
+
+
+
+[--untitled example --]
+
+<value>Hello, World!</value>
+
+
+
+[--untitled example --]
+
+<value><string>Hello, World!</string></value>
+
+
+
+[--untitled example --]
+
+<value>Tom &amp; Jerry</value>
+<value><string>Once upon a time</string></value>
+<value><string>"Twelve apples please," she said.</string></value>
+<value><string>3 &lt; 5</string></value>
+
+
+
+[--untitled example --]
+
+<value><dateTime.iso8601>CCYYMMDDTHH:MM:SS</dateTime.iso8601>
+
+
+
+[--untitled example --]
+
+<value><dateTime.iso8601>19030223T00:30:00</dateTime.iso8601></value>
+
+
+
+[--untitled example --]
+
+<value><dateTime.iso8601>20001231T12:30:25</dateTime.iso8601></value>
+
+
+
+[--untitled example --]
+
+<value><base64>SGVsbG8sIFdvcmxkIQ==</base64></value>
+
+
+
+[--untitled example --]
+
+<value>
+  <array>
+    <data>
+      <value> an XML-RPC value </value>
+        ...
+      <value> an XML-RPC value </value>
+    </data>
+  </array>
+</value>
+
+
+
+[--untitled example --]
+
+<value>
+  <array>
+    <data>
+      <value><array><data>
+        <value><string>-</string></value>
+        <value><string>O</string></value>
+        <value><string>X</string></value>
+      </data></array></value>
+      <value><array><data>
+        <value><string>-</string></value>
+        <value><string>X</string></value>
+        <value><string>O</string></value>
+      </data></array></value>
+      <value><array><data>
+        <value><string>O</string></value>
+        <value><string>X</string></value>
+        <value><string>-</string></value>
+      </data></array></value>
+    </data>
+  </array>
+</value>
+
+
+
+[--untitled example --]
+
+-OX
+-XO
+OX-
+
+
+
+[--untitled example --]
+
+<value>
+  <struct>
+    <member>
+      <name>Name-1</name>
+      <value>Value-1</value>
+    </member>
+      ...
+    <member>
+      <name>Name-n</name>
+      <value>Value-n</value>
+    </member>
+  </struct>
+</value>
+
+
+
+[--untitled example --]
+
+<value>
+  <struct>
+    <member><name>age</name><value><int>45</int></value></member>
+    <member><name>name</name><value><string>Fred</string></value></member>
+    <member><name>smoker</name><value><boolean>0</boolean></value></member>
+    <member><name>children</name><value>
+      <array><data>
+        <value><string>Maisie</string></value>
+        <value><string>Jeremy</string></value>
+      </data></array>
+    </value></member>
+  </struct>
+</value>
+
+
+
+[--untitled example --]
+
+%fred = ( 'age' => 45, 
+          'name' => "Fred", 
+          'smoker' => 0,
+          'children' => [ "Maisie", "Jeremy" ] ); 
+
+
+
+[--Two equivalent structs --]
+
+<struct>
+  <member><name>a</name>
+    <value>
+      <string>A</string>
+    </value>
+  </member>
+  <member><name>b</name>
+    <value>
+      <string>B</string>
+    </value>
+  </member>
+</struct>
+
+
+
+[--untitled example --]
+
+<?xml version="1.0"?>
+<methodCall>
+  <methodName>print</methodName>
+  <params>
+    <param>
+      <value><string>Hello, World!</string></value>
+    </param>
+  </params>
+</methodCall>
+
+
+
+[--untitled example --]
+
+<?xml version="1.0"?>
+<methodCall>
+  <methodName>updateDetails</methodName>
+  <params>
+    <param>
+      <value><struct>
+         <member><name>name</name>
+           <value><string>Fred</string></value>
+         </member>
+         <member><name>age</name>
+           <value><int>43</int></value>
+         </member>
+      </struct></value>
+    </param>
+  </params>
+</methodCall>
+
+
+
+[--untitled example --]
+
+math.add
+math.subtract
+math.multiply
+
+
+
+[--untitled example --]
+
+POST /myservice.php HTTP/1.0 
+User-Agent: PHP XMLRPC 1.0 
+Host: xmlrpc.usefulinc.com 
+Content-Type: text/xml 
+Content-Length: 216 
+
+
+
+[--untitled example --]
+
+Host: betty.userland.com
+Host: xmlrpc.usefulinc.com
+
+
+
+[--untitled example --]
+
+<VirtualHost xmlrpc.example.com>
+ServerName xmlrpc.example.com
+ServerAdmin webmaster@example.com
+DocumentRoot /usr/local/etc/httpd/htdocs/xmlrpc
+</VirtualHost>
+
+
+
+[--untitled example --]
+
+User-Agent: PHP XMLRPC 1.0 (fred@example.com)
+User-Agent: Frontier/5.1.2 (WinNT) (webmaster@example.org)
+
+
+
+[--untitled example --]
+
+User-Agent: Acme XML-RPC (extensions; nil, gzip)
+
+
+
+[--untitled example --]
+
+POST /rpchandler HTTP/1.0 
+User-Agent: AcmeXMLRPC/1.0 
+Host: xmlrpc.example.com 
+Content-Type: text/xml 
+Content-Length: 165 
+
+<?xml version="1.0"?> 
+<methodCall>
+<methodName>getCapitalCity</methodName>
+<params>
+<param>
+<value><string>England</string></value>
+</param>
+</params>
+</methodCall>
+
+
+
+[--untitled example --]
+
+<?xml version="1.0"?>
+<methodResponse>
+  <params>
+    <param>
+      <value><string>London</string></value>
+    </param>
+  </params>
+</methodResponse>
+
+
+
+[--untitled example --]
+
+<?xml version="1.0"?>
+<methodResponse>
+  <fault>
+    <value>
+      <struct>
+        <member>
+          <name>faultCode</name>
+          <value><int>3</int></value>
+        </member>
+        <member>
+          <name>faultString</name>
+          <value><string>No such method.</string></value>
+        </member>
+      </struct>
+    </value>
+  </fault>
+</methodResponse> 
+
+
+
+[--untitled example --]
+
+<?xml version="1.0"?>
+<methodResponse>
+  <fault>
+    <value>
+      <struct>
+        <member>
+          <name>faultCode</name>
+          <value><int>802</int></value>
+        </member>
+        <member>
+          <name>faultString</name>
+          <value><string>Unknown country, 'Engand'.</string></value>
+        </member>
+      </struct>
+    </value>
+  </fault>
+</methodResponse> 
+
+
+
+[--untitled example --]
+
+HTTP/1.1 200 OK 
+Date: Sun, 29 Apr 2001 11:21:37 GMT 
+Server: Apache/1.3.12 (Unix) Debian/GNU PHP/4.0.2 
+Connection: close 
+Content-Type: text/xml 
+Content-Length: 818 
+
+
+
+[--untitled example --]
+
+HTTP/1.1 200 OK 
+Date: Sun, 29 Apr 2001 12:08:58 GMT 
+Server: Apache/1.3.12 (Unix) Debian/GNU PHP/4.0.2 
+Connection: close 
+Content-Type: text/xml 
+Content-length: 133
+
+<?xml version="1.0"?>
+<methodResponse>
+<params>
+<param>
+<value><string>Michigan</string></value>
+</param>
+</params>
+</methodResponse> 
+
+
+
+[--untitled example --]
+
+<value><nil/></value>
+
+
+
+[--untitled example --]
+
+<!ELEMENT i4 (#PCDATA)>
+<!ELEMENT int (#PCDATA)>
+<!ELEMENT boolean (#PCDATA)>
+<!ELEMENT string (#PCDATA)>
+<!ELEMENT double (#PCDATA)>
+<!ELEMENT dateTime.iso8601 (#PCDATA)>
+<!ELEMENT base64 (#PCDATA)>
+<!ELEMENT data (value*)>
+<!ELEMENT array (data)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT member (name, value)>
+<!ELEMENT struct (member*)>
+<!ELEMENT value ( i4 | int | boolean | string | dateTime.iso8601
+                 | double | base64 | struct | array )>
+
+<!ELEMENT param (value)>
+<!ELEMENT params (param*)>
+
+<!ELEMENT methodName (#PCDATA)>
+<!ELEMENT methodCall (methodName, params)>
+
+<!-- note that the content model for fault is underspecified here -->
+<!ELEMENT fault (value)>
+<!ELEMENT methodResponse (params|fault)>
+
+
+
+[--untitled example --]
+
+try {
+   // Use the Microstar AElfred parser for XML-RPC processing
+
+   XmlRpc.setDriver("com.microstar.xml.SAXDriver");
+} catch (ClassNotFoundException e) {
+   // If no AElfred, provide an intelligible error message
+
+   System.out.println("Could not locate AElfred.  Please check your 
+classpath for com.microstar.xml.SAXDriver.");
+}
+
+
+
+[--untitled example --]
+
+XmlRpc.setEncoding("UTF8");  //Java identifies UTF-8 as UTF8 without dash
+
+
+
+[--untitled example --]
+
+XmlRpc.setDebug(true);  //turn on verbose debugging output
+
+
+
+[--untitled example --]
+
+XmlRpc.setDebug(false);  //turn off verbose debugging output
+
+
+
+[--untitled example --]
+
+
+Attempting to start XML-RPC Server...
+Started successfully.
+Target object is class AreaHandler
+Registered AreaHandler class to area.
+Now accepting requests. (Halt program to stop.)
+POST / HTTP/1.0
+User-Agent: helma XML-RPC 1.0
+Host: localhost:8899
+Content-Type: text/xml
+Content-Length: 296
+
+startElement: methodCall
+startElement: methodName
+endElement: methodName
+startElement: params
+startElement: param
+startElement: value
+startElement: struct
+startElement: member
+startElement: name
+endElement: name
+startElement: value
+startElement: double
+endElement: double
+endElement: value
+endElement: member
+startElement: member
+startElement: name
+endElement: name
+startElement: value
+endElement: value
+endElement: member
+endElement: struct
+endElement: value
+endElement: param
+endElement: params
+endElement: methodCall
+Spent 211 millis parsing
+method name is area.anyArea
+inparams = [{radius=3.0, type=circle}]
+Searching for method: anyArea
+Parameter 0: class java.util.Hashtable = {radius=3.0, type=circle}
+outparam = 28.274333882308138
+Spent 231 millis in request
+
+
+
+[--untitled example --]
+
+i4
+
+
+
+[--untitled example --]
+
+int
+
+
+
+[--untitled example --]
+
+java.lang.Integer
+
+
+
+[--untitled example --]
+
+int
+
+
+
+[--untitled example --]
+
+int
+
+
+
+[--untitled example --]
+
+java.lang.Integer
+
+
+
+[--untitled example --]
+
+boolean
+
+
+
+[--untitled example --]
+
+boolean
+
+
+
+[--untitled example --]
+
+java.lang.Boolean
+
+
+
+[--untitled example --]
+
+string
+
+
+
+[--untitled example --]
+
+java.lang.String
+
+
+
+[--untitled example --]
+
+java.lang.String
+
+
+
+[--untitled example --]
+
+double
+
+
+
+[--untitled example --]
+
+double
+
+
+
+[--untitled example --]
+
+java.lang.Double
+
+
+
+[--untitled example --]
+
+dateTime.iso8601
+
+
+
+[--untitled example --]
+
+java.util.Date
+
+
+
+[--untitled example --]
+
+java.util.Date
+
+
+
+[--untitled example --]
+
+struct
+
+
+
+[--untitled example --]
+
+java.util.Hashtable
+
+
+
+[--untitled example --]
+
+java.util.Hashtable
+
+
+
+[--untitled example --]
+
+array
+
+
+
+[--untitled example --]
+
+java.util.Vector
+
+
+
+[--untitled example --]
+
+java.util.Vector
+
+
+
+[--untitled example --]
+
+base64
+
+
+
+[--untitled example --]
+
+byte[]
+
+
+
+[--untitled example --]
+
+byte[]
+
+
+
+[--untitled example --]
+
+nil (extension)
+
+
+
+[--untitled example --]
+
+null
+
+
+
+[--untitled example --]
+
+null
+
+
+
+[--untitled example --]
+
+try {
+    // Create the client, identifying the server
+    XmlRpcClient client =
+        new XmlRpcClient("http://192.168.126.42:8899/");
+
+    // Create the request parameters using user input
+    Vector params = new Vector(  );
+    params.addElement(new Double(args[0]));
+
+    // Issue a request
+    Object result =
+       client.execute("area.circleArea", params);
+
+} catch (IOException e) {
+    System.out.println("IO Exception: " + e.getMessage(  ));
+} catch (XmlRpcException e) {
+    System.out.println("Exception within XML-RPC: " + e.getMessage(  ));
+}
+//Continue processing using result object...
+    //result object will contain one of the XML-RPC data types
+
+
+
+[--untitled example --]
+
+try {
+    // Create the client, identifying the server
+    XmlRpcClient client =
+        new XmlRpcClient("http://192.168.126.42:8899/");
+
+             XmlRpcClient.setBasicAuthentication("myUsername", "myPassword");
+    // Create the request parameters using user input
+    Vector params = new Vector(  );
+    params.addElement(new Double(args[0]));
+
+    // Issue a request
+    Object result =
+        client.execute("area.circleArea", params);
+
+} catch (IOException e) {
+    System.out.println("IO Exception: " + e.getMessage(  ));
+} catch (XmlRpcException e) {
+    System.out.println("Exception within XML-RPC: " + e.getMessage(  ));
+}
+//Continue processing using result object...
+    //result object will contain one of the XML-RPC data types
+
+
+
+[--untitled example --]
+
+WebServer server = new WebServer(9876);
+
+
+
+[--untitled example --]
+
+WebServer server = new WebServer(9876);
+server.setParanoid(true);
+server.addClient("127.0.0.1");
+
+
+
+[--untitled example --]
+
+WebServer server = new WebServer(9876);
+server.setParanoid(true);
+server.addClient("192.168.137.*");
+server.denyClient("192.168.137.55");
+
+
+
+[--untitled example --]
+
+ServerInputStream sin = new ServerInputStream (input, contentLength);
+byte result[] = xmlrpc.execute (sin, user, password);
+output.write (httpversion.getBytes(  ));
+output.write (ok);
+output.write (server);
+output.write (conclose);
+output.write (ctype);
+output.write (clength);
+output.write (Integer.toString (result.length).getBytes(  ));
+output.write (doubleNewline);
+output.write (result);
+output.flush (  );
+
+
+
+[--untitled example --]
+
+public void doPost(HttpServletRequest req, HttpServletResponse res)
+                throws ServletException, IOException  {
+        byte[] result = xmlrpc.execute (req.getInputStream (  ));
+        res.setContentType("text/xml");
+        res.setContentLength (result.length);
+        OutputStream output = res.getOutputStream(  );
+        output.write (result);
+        output.flush (  );
+}
+
+
+
+[--untitled example --]
+
+public void doPost(HttpServletRequest req, HttpServletResponse res)
+                throws ServletException, IOException  {
+
+    //get authorization header from request
+    String auth=req.getHeader("Authorization");
+    if (!auth.toUpperCase(  ).startsWith("BASIC")) {
+        throw ServletException("wrong kind of authorization!");
+    }
+
+    //get encoded username and password    
+    String userPassEncoded=auth.substring(6);
+
+    //create a base64 decoder using Sun utility class
+    sun.misc.BASE64Decoder dec=new sun.misc.BASE64Decoder(  );
+    String userPassDecoded=new String(dec.decodeBuffer(userPassEncoded));
+
+    //split decoded username and password
+    StringTokenizer userAndPass=new StringTokenizer(userPassDecoded,":");
+    String username=userAndPass.nextToken(  );
+    String password=userAndPass.nextToken(  );
+
+    //send input stream, username, and password to xmlrpc.execute
+        String result = xmlrpc.execute (req.getInputStream (  ), username, password);
+        res.setContentType("text/xml");
+        res.setContentLength (result.length (  ));
+        PrintWriter writer = res.getWriter(  );
+        writer.write (result);
+        writer.flush (  );
+}
+
+
+
+[--untitled example --]
+
+public class testHandler {
+
+        public String nameTester(String first, String last) {
+                return "Reversed: " + last + ", " + first;
+        }
+}
+
+
+
+[--untitled example --]
+
+WebServer server = new WebServer(9876);
+server.addHandler("test", new testHandler(  ));
+
+
+
+[--untitled example --]
+
+server.removeHandler("test");
+
+
+
+[--Creating an XML-RPC handler --]
+
+import java.util.Vector;
+import helma.xmlrpc.XmlRpcHandler;
+
+public class testHandler implements XmlRpcHandler {
+
+        public Object execute(String methodName, Vector parameters) throws java.lang.
+Exception {
+                if (methodName=="nameTester") {
+                        String first=(String) parameters.elementAt(0);
+                        String last=(String) parameters.elementAt(1);
+                        return nameTester(first, last);
+                } else {
+                        throw new Exception("No such method!");
+                }
+        }
+
+        private String nameTester(String first, String last) {
+                return "Reversed: " + last + ", " + first;
+        }
+
+}
+
+
+
+[--Creating an XML-RPC handler with authentication --]
+
+import java.util.Vector;
+import helma.xmlrpc.*;
+
+public class testHandler implements AuthenticatedXmlRpcHandler {
+
+//authenticated execute
+        public Object execute(String methodName, Vector parameters, 
+                      String username, String password) throws Exception {
+                if (checkPassword(username, password)) {
+                        return execute(methodName, parameters);
+                } else {
+                        throw new Exception("Unauthorized user");
+                }
+        }
+//unauthenticated execute - called by authenticated
+        protected Object execute(String methodName, Vector parameters) 
+                         throws Exception {
+                if (methodName=="nameTester") {
+                        String first=(String) parameters.elementAt(0);
+                        String last=(String) parameters.elementAt(1);
+                        return nameTester(first, last);
+                } else {
+                        throw new Exception("No such method!");
+                }
+        }
+
+        private boolean checkPassword(String username, String password) {
+        //password checking logic should be more sophisticated!
+                if (username.equals(password)) {
+                        return true;
+                } else {
+                        return false;
+                }
+        }
+
+        private String nameTester(String first, String last) {
+                return "Reversed: " + last + ", " + first;
+        }
+}
+
+
+
+[--Library function implemented as XML-RPC handler --]
+
+public class AreaHandler {
+
+        public Double rectArea(double length, double width) {
+        return new Double(length*width);
+    }
+
+    public Double circleArea(double radius) {
+        double value=(radius*radius*Math.PI);
+        return new Double (value);
+    }
+
+}
+
+
+
+[--Hosting the area function --]
+
+import java.io.IOException;
+import helma.xmlrpc.WebServer;
+import helma.xmlrpc.XmlRpc;
+
+public class AreaServer {
+
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.println(
+                "Usage: java AreaServer [port]");
+            System.exit(-1);
+        }
+
+        try {
+
+            // Start the server, using built-in version
+            System.out.println("Attempting to start XML-RPC Server...");
+            WebServer server = new WebServer(Integer.parseInt(args[0]));
+
+            System.out.println("Started successfully.");
+
+            // Register our handler class as area
+            server.addHandler("area", new AreaHandler(  ));
+            System.out.println(
+                "Registered AreaHandler class to area.");
+
+            System.out.println("Now accepting requests. (Halt program to stop.)");
+
+        } catch (IOException e) {
+            System.out.println("Could not start server: " +
+                e.getMessage(  ));
+        }
+    }
+
+}
+
+
+
+[--untitled example --]
+
+D:\xmlrpc\example1a>java AreaServer 8899
+
+
+
+[--An XML-RPC client that calls the area function --]
+
+import java.io.IOException;
+import java.util.Vector;
+import helma.xmlrpc.XmlRpc;
+import helma.xmlrpc.XmlRpcClient;
+import helma.xmlrpc.XmlRpcException;
+
+public class AreaClient {
+
+    public static void main(String args[]) {
+        if (args.length < 1) {
+            System.out.println(
+                "Usage: java AreaClient [radius]");
+            System.exit(-1);
+        }
+
+        try {
+            // Create the client, identifying the server
+            XmlRpcClient client =
+                new XmlRpcClient("http://localhost:8899/");
+
+            // Create the request parameters using user input
+            Vector params = new Vector(  );
+            params.addElement(new Double(args[0]));
+
+            // Issue a request
+            Object result =
+               client.execute("area.circleArea", params);
+
+            // Report the results
+            System.out.println("The area of the circle would be: " + result.toString(  ));
+
+        } catch (IOException e) {
+            System.out.println("IO Exception: " + e.getMessage(  ));
+        } catch (XmlRpcException e) {
+            System.out.println("Exception within XML-RPC: " + e.getMessage(  ));
+        }
+    }
+
+}
+
+
+
+[--untitled example --]
+
+D:\xmlrpc\example1a>java AreaClient 3
+The area of the circle would be: 28.274333882308138
+
+
+
+[--A method for routing XML-RPC requests --]
+
+    public Double anyArea(Hashtable arguments) {
+        Double value;
+        value=new Double(0);
+        String requestType=(String) arguments.get("type");
+        if (requestType.equals("circle")) {
+            Double radius=(Double) (arguments.get("radius"));
+            value=circleArea(radius.doubleValue(  ));
+        }
+        if (requestType.equals("rectangle")) {
+            Double length=(Double) (arguments.get("length"));
+            Double width=(Double) (arguments.get("width"));
+            value=rectArea(length.doubleValue(), width.doubleValue(  ));
+        }
+
+        return value;
+    }
+
+
+
+[--A client that calls the router --]
+
+import java.io.IOException;
+import java.util.Vector;
+import java.util.Hashtable;
+import helma.xmlrpc.XmlRpc;
+import helma.xmlrpc.XmlRpcClient;
+import helma.xmlrpc.XmlRpcException;
+
+public class AreaClient {
+
+    public static void main(String args[]) {
+        if (args.length < 1) {
+            System.out.println(
+                "Usage: java AreaClient [radius]");
+            System.exit(-1);
+        }
+
+        try {
+            // Create the client, identifying the server
+            XmlRpcClient client =
+                new XmlRpcClient("http://localhost:8899/");
+
+            // Create a double from the user argument
+            Double radius=new Double(args[0]);
+
+            // Create a hashtable and add a circle request
+            Hashtable requestHash = new Hashtable(  );
+            requestHash.put("type", "circle");
+            requestHash.put("radius", radius);
+
+            // Create the request parameters using user input
+            Vector params = new Vector(  );
+            params.addElement(requestHash);
+
+            // Issue a request
+            Object result =
+               client.execute("area.anyArea", params);
+
+            // Report the results
+            System.out.println("The area of the circle would be: " + result.toString(  ));
+
+        } catch (IOException e) {
+            System.out.println("IO Exception: " + e.getMessage(  ));
+        } catch (XmlRpcException e) {
+            System.out.println("Exception within XML-RPC: " + e.getMessage(  ));
+        }
+    }
+
+}
+
+
+
+[--untitled example --]
+
+D:\xmlrpc\example1b>java AreaClient 5.6
+The area of the circle would be: 98.5203456165759
+
+
+
+[--Exception reporting XML-RPC client --]
+
+import java.io.IOException;
+import java.net.*;
+import java.util.Vector;
+import helma.xmlrpc.XmlRpc;
+import helma.xmlrpc.XmlRpcClient;
+import helma.xmlrpc.XmlRpcException;
+
+public class XLogClient {
+
+    public static void main(String args[]) {
+        try {
+            throw new Exception("help");
+        } catch (Exception e) {
+            report (e);
+        }
+    }
+
+    public static void report(Exception eReport) {
+        try {
+            // Create the client, identifying the server
+            XmlRpcClient client =
+                new XmlRpcClient("http://192.168.124.14:8899/");
+
+            //get local hostname and IP address
+            InetAddress address=InetAddress.getLocalHost(  );
+            String ipAddress=address.toString(  );
+
+            // Create the request parameters using user input
+            Vector params = new Vector(  );
+            params.addElement(ipAddress);
+            params.addElement(eReport.getMessage(  ));
+            // Issue a request
+            Object result =
+                client.execute("XLog.XLogReport", params);
+
+            // Report the results - this is just for the example
+            // In production, the 'ack' will be thrown away.
+            // Alternatively, the log system could be more interactive
+            // and the result might have meaning.
+            System.out.println("Reponse was: " + result.toString(  ));
+
+            //If we can't report to server, report locally
+        } catch (IOException e) {
+            System.out.println("IO Exception: " + e.getMessage(  ));
+        } catch (XmlRpcException e) {
+            System.out.println("Exception within XML-RPC: " + e.getMessage(  ));
+        }
+    }
+}
+
+
+
+[--A host for the logging handler --]
+
+import java.io.IOException;
+import helma.xmlrpc.WebServer;
+import helma.xmlrpc.XmlRpc;
+
+public class XLogServer {
+
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.println(
+                "Usage: java AreaServer [port]");
+            System.exit(-1);
+        }
+
+        try {
+            // Start the server, using built-in version
+            System.out.println("Attempting to start XML-RPC Server...");
+            WebServer server = new WebServer(Integer.parseInt(args[0]));
+
+            System.out.println("Started successfully.");
+
+            // Register our handler class as area
+            server.addHandler("XLog", new XLogHandler(  ));
+            System.out.println(
+                "Registered XLogHandler class to XLog.");
+
+            System.out.println("Now accepting requests. (Halt program to stop.)");
+
+        } catch (IOException e) {
+            System.out.println("Could not start server: " +
+                e.getMessage(  ));
+        }
+    }
+}
+
+
+
+[--A simple XML-RPC handler for reporting messages --]
+
+public class XLogHandler {
+    public String XLogReport(String address, String message) {
+        System.out.println("From: " + address);
+        System.out.println("Message: " + message);
+        return "ack";
+    }
+}
+
+
+
+[--untitled example --]
+
+D:\xmlrpc\example2>java XLogServer 8899
+Attempting to start XML-RPC Server...
+Started successfully.
+Registered XLogHandler class to XLog.
+Now accepting requests. (Halt program to stop.)
+From: javalab1/192.168.124.12
+Message: help
+From: javalab5/192.168.124.17
+Message: help
+From: javalab6/192.168.124.19
+Message: help
+From: javalab27/192.168.124.141
+Message: help
+
+
+
+[--An XML-RPC handler that manipulates a variable --]
+
+public class GetSetHandler {
+    protected int value;
+
+    public GetSetHandler(int initialValue) {
+        value=initialValue;
+    }
+
+    public int getValue(String requester) {
+        return value;
+    }
+
+    public int setValue(String requester, int newValue) {
+        value=newValue;
+        return value;
+    }
+}
+
+
+
+[--XML-RPC host for GetSetHandler --]
+
+import java.io.IOException;
+import helma.xmlrpc.WebServer;
+import helma.xmlrpc.XmlRpc;
+
+public class GetSetServer {
+
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.println(
+                "Usage: java GetSetServer [port]");
+            System.exit(-1);
+        }
+        try {
+            // Start the server, using built-in version
+            System.out.println("Attempting to start XML-RPC Server...");
+            WebServer server = new WebServer(Integer.parseInt(args[0]));
+
+            System.out.println("Started successfully.");
+
+            // Register our handler class as area
+            server.addHandler("getSet", new GetSetHandler(20));
+            System.out.println(
+                "Registered GetSetHandler class to getSet.");
+
+            System.out.println("Now accepting requests. (Halt program to stop.)");
+
+        } catch (IOException e) {
+            System.out.println("Could not start server: " +
+                e.getMessage(  ));
+        }
+    }
+}
+
+
+
+[--Client for manipulating values on the server --]
+
+import java.io.IOException;
+import java.net.*;
+import java.util.Vector;
+import helma.xmlrpc.XmlRpc;
+import helma.xmlrpc.XmlRpcClient;
+import helma.xmlrpc.XmlRpcException;
+
+public class GetSetClient {
+
+    public static void main(String args[]) {
+        if (args.length < 1) {
+            System.out.println(
+                "Usage: java GetSetClient [get | set] [value]");
+            System.exit(-1);
+        }
+
+      String getOrSet=new String(args[0]);
+
+      if (!((getOrSet.equals("get")) || (getOrSet.equals("set")))) {
+            System.out.println(
+                "First argument must be get or set");
+            System.exit(-1);
+        }
+
+        try {
+            // Create the client, identifying the server
+            XmlRpcClient client =
+                new XmlRpcClient("http://localhost:8899/");
+
+            //get local host IP address
+        InetAddress address=InetAddress.getLocalHost(  );
+        String ipAddress=address.toString(  );
+
+            // Create the request parameters using user input
+            Vector params = new Vector(  );
+            params.addElement(ipAddress);
+            if (getOrSet.equals("set")) {
+            Integer newValue=new Integer(args[1]);
+            params.addElement(newValue);
+        }
+
+            // Issue a request
+        Object result=null;
+            if (getOrSet.equals("set")) {
+                result = client.execute("getSet.setValue", params);
+        } else {
+               result =  client.execute("getSet.getValue", params);
+        }
+
+            // Report the results
+            System.out.println("The response was: " + result.toString(  ));
+
+        } catch (IOException e) {
+            System.out.println("IO Exception: " + e.getMessage(  ));
+        } catch (XmlRpcException e) {
+            System.out.println("Exception within XML-RPC: " + e.getMessage(  ));
+        }
+    }
+}
+
+
+
+[--untitled example --]
+
+D:\xmlrpc\example3>java GetSetClient get
+The response was: 20
+D:\xmlrpc\example3>java GetSetClient set 21
+The response was: 21
+D:\xmlrpc\example3>java GetSetClient get
+The response was: 21
+D:\xmlrpc\example3>java GetSetClient set 200
+The response was: 200
+D:\xmlrpc\example3>java GetSetClient get
+The response was: 200
+D:\xmlrpc\example3>java GetSetClient set 750
+The response was: 750
+D:\xmlrpc\example3>java GetSetClient get
+The response was: 750
+
+
+
+[--untitled example --]
+
+use Frontier::Client;
+my $client = Frontier::Client->new 
+           ( url => "http://example.com:1080");
+print "helloWorld('Bob') returned: ",
+           $client->call('helloWorld', 'Bob'), "\n";
+
+
+
+[--untitled example --]
+
+<param><value><double>2.718</double></value></param>
+
+
+
+[--untitled example --]
+
+<int> (or <i4>)
+
+
+
+[--untitled example --]
+
+Frontier::RPC2::Integer 
+
+
+
+[--untitled example --]
+
+<double>
+
+
+
+[--untitled example --]
+
+Frontier::RPC2::Double 
+
+
+
+[--untitled example --]
+
+<string>
+
+
+
+[--untitled example --]
+
+Frontier::RPC2::String 
+
+
+
+[--untitled example --]
+
+<boolean>
+
+
+
+[--untitled example --]
+
+Frontier::RPC2::Boolean
+
+
+
+[--untitled example --]
+
+<dateTime.iso8601>
+
+
+
+[--untitled example --]
+
+Frontier::RPC2::DateTime::ISO8601
+
+
+
+[--untitled example --]
+
+<base64>
+
+
+
+[--untitled example --]
+
+Frontier::RPC2::Base64
+
+
+
+[--untitled example --]
+
+<array>
+
+
+
+[--untitled example --]
+
+Array
+
+
+
+[--untitled example --]
+
+<struct>
+
+
+
+[--untitled example --]
+
+Hash
+
+
+
+[--untitled example --]
+
+rpc-call(... , 1776, ...)
+rpc-call(... , "1776", ...)
+
+
+
+[--untitled example --]
+
+<param><value><int>1776</int></value></param>
+
+
+
+[--untitled example --]
+
+$val = Frontier::RPC2::String->new("1776");
+rpc-call(... , $val, ...)
+
+
+
+[--untitled example --]
+
+rpc-call(... , Frontier::RPC2::String->new("1776"), ...)
+
+
+
+[--untitled example --]
+
+use POSIX "strftime";
+  ...
+$dt_string = strftime("%Y%m%dT%H:%M:%S", localtime(time(  )));
+
+
+
+[--untitled example --]
+
+$date_obj = Frontier::RPC2::DateTime::ISO8601->new($dt_string);
+
+
+
+[--untitled example --]
+
+rpc-call(... , $date_obj, ...)
+
+
+
+[--untitled example --]
+
+<param><value>
+<dateTime.iso8601>20001009T17:26:00</dateTime.iso8601>
+</value></param>
+
+
+
+[--untitled example --]
+
+use MIME::Base64;
+  ...
+open F, "mypicture.jpg" or die "Can't open file: $!";
+read F, $bin_string, 10000;
+$base64_string = encode_base64($bin_string);
+
+
+
+[--untitled example --]
+
+$bin_obj = Frontier::RPC2::Base64->new($base64_string);
+
+
+
+[--untitled example --]
+
+rpc-call(... , $bin_obj, ...)
+
+
+
+[--untitled example --]
+
+<param><value>
+<base64>/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAUDBAQE
+AwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQ=</base64>
+</value></param>
+
+
+
+[--untitled example --]
+
+$int_obj = $client->int(1776);
+
+
+
+[--untitled example --]
+
+eval { $int_obj = $client->int($value) };
+if ($@) {
+    # oops: $value wasn't really an integer
+} else {
+    $response = $client->call(... , $int_obj, ...);
+}
+
+
+
+[--untitled example --]
+
+$emp_name = "Mary Johnson";
+$emp_id   = "019";
+$emp_perm = Frontier::RPC2::Boolean->new(1);
+
+$ary_ref = [$emp_name, $emp_id, $emp_perm];
+
+
+
+[--untitled example --]
+
+rpc-call(... , $ary_ref, ...)
+
+
+
+[--untitled example --]
+
+<param><value>
+<array><data>
+<value><string>Mary Johnson</string></value>
+<value><int>019</int></value>
+<value><boolean>1</boolean></value>
+</data></array>
+</value></param>
+
+
+
+[--untitled example --]
+
+$response = rpc-call(...);
+
+
+
+[--untitled example --]
+
+$response->[3]           # item at position 3 in a response array
+$response->{"emp_name"}  # item with key emp_name in a response hash
+
+
+
+[--untitled example --]
+
+$response->value(  )    # value wrapped in a Frontier::RPC object
+
+
+
+[--untitled example --]
+
+ref $response
+
+
+
+[--untitled example --]
+
+ARRAY
+HASH
+Frontier::RPC2::Integer
+Frontier::RPC2::Double
+Frontier::RPC2::String
+Frontier::RPC2::Boolean
+Frontier::RPC2::DateTime::ISO8601
+Frontier::RPC2::Base64
+
+
+
+[--untitled example --]
+
+$response = rpc-call( ... );
+$objtype = ref $response;
+if (not $objtype) {
+    # response is a scalar value
+} elsif {$objtype eq "ARRAY") {
+    # response is an array
+} elsif ($objtype eq "HASH") {
+    # response is a hash
+} elsif ($objtype eq "Frontier::RPC2::Integer") {
+    # response in an Integer object
+} elsif ...
+
+
+
+
+[--untitled example --]
+
+use Frontier::Client;
+
+
+
+[--untitled example --]
+
+$client = Frontier::Client->new(url => "http://www.rpc_wizard.net");
+
+
+
+[--untitled example --]
+
+http://www.rpc_wizard.net:8888
+
+
+
+[--untitled example --]
+
+http://www.rpc_wizard.net/RPC2
+
+
+
+[--untitled example --]
+
+encoding => "ISO-8859-4"
+
+
+
+[--untitled example --]
+
+<?xml version="1.0" encoding="ISO-8859-4"?>
+
+
+
+[--untitled example --]
+
+$client = Frontier::Client->new(
+          url         => "http://www.rpc_wizard.net:8888",
+          use_objects => 1,
+          debug       => 0,
+          proxy       => "http://mylocalproxy.org");
+
+
+
+[--untitled example --]
+
+$response = $client->call(method, parameter, ... );
+
+
+
+[--untitled example --]
+
+$client->call("hello_world");
+
+
+
+[--untitled example --]
+
+$response = $client->call( ... );
+
+
+
+[--untitled example --]
+
+$@->{"faultCode"}
+$@->{"faultString"}
+
+
+
+[--untitled example --]
+
+500 Can't connect to www.boomer.com:8889 (Unknown error)
+
+
+
+[--Punch-clock client --]
+
+#!/usr/bin/perl --
+# XML-RPC client for the punch-clock application
+
+use strict;
+use Frontier::Client;
+use Time::Local;
+use POSIX;
+
+use constant SAT_MAY_5_2001_9AM => timelocal(0,0,9,5,4,101);
+use constant SAT_MAY_5_2001_5PM => timelocal(0,0,17,5,4,101);
+use constant XMLRPC_SERVER => 
+                 'http://marian.daisypark.net:8080/RPC2';
+
+# create client object
+my $client = Frontier::Client->new( url   => XMLRPC_SERVER,
+                                    debug => 0,
+                                  );
+
+# jjohn starts working on the project
+print 
+  "Punching in 'jjohn': ", 
+  status( $client->call('punch_in', 'jjohn') ),
+  "\n";
+
+# bob stops working on the project
+print
+  "Punching out 'bob': ",
+  status( $client->call('punch_out', 'bob') ),
+  "\n";
+
+# output the total time spent on the project
+printf
+  "Total time spent on this project by everyone: %s:%s:%s\n",
+  @{$client->call('project_total_time')};
+
+# output bob's time on the project
+printf
+  "Time 'bob' has spent on this project: %s:%s:%s\n",
+  @{$client->call('emp_total_time', 'bob')};
+ 
+
+# set up date-time values
+my $iso8601_start = strftime("%Y%m%dT%H:%M:%S", 
+                       localtime(SAT_MAY_5_2001_9AM)); 
+
+my $iso8601_end   = strftime("%Y%m%dT%H:%M:%S", 
+                       localtime(SAT_MAY_5_2001_5PM));
+
+my $encoder = Frontier::RPC2->new;
+
+my $start = $encoder->date_time($iso8601_start);
+my $end   = $encoder->date_time($iso8601_end);
+
+# log overtime hours for bob 
+print 
+  "Log weekend work for 'bob': ",
+  status( $client->call('add_entry', 'bob', $start, $end) ),
+  "\n";
+
+sub status {
+  return $_[0] ? 'succeeded' : 'failed';
+}
+
+
+
+[--untitled example --]
+
+my $client = Frontier::Client->new( url   => XMLRPC_SERVER,
+                                    debug => 0,
+                                  );
+
+
+
+[--untitled example --]
+
+print 
+  "Punching in 'jjohn': ", 
+  status( $client->call('punch_in', 'jjohn') ),
+  "\n";
+
+
+
+[--untitled example --]
+
+printf
+  "Total time spent on this project by everyone: %s:%s:%s\n",
+  @{$client->call('project_total_time')};
+
+
+
+[--untitled example --]
+
+use constant SAT_MAY_5_2001_9AM => timelocal(0,0,9,5,4,101);
+
+
+
+[--untitled example --]
+
+my $iso8601_start = strftime("%Y%m%dT%H:%M:%S", 
+                      localtime(SAT_MAY_5_2001_9AM)); 
+
+
+
+[--untitled example --]
+
+$client->call('add_entry', 'bob', $start, $end) )
+
+
+
+[--untitled example --]
+
+use Frontier::Daemon;
+Frontier::Daemon->new( LocalPort => 8080,
+                       method => {
+                                 helloWorld => 
+                                   sub {return "Hello, $_[0]"}
+                                 },
+                      );
+
+
+
+[--Punch-clock server --]
+
+#!/usr/bin/perl --
+# XML-RPC server for the punch-clock application
+
+use strict;
+use Frontier::Daemon;
+use DBI;
+
+# create database handle
+my $Dbh = DBI->connect('dbi:mysql:punch_clock', 'editor', 'editor') ||
+          die "ERROR: Can't connect to the database";
+
+END { $Dbh->disconnect; }
+
+# initialize XML-RPC server
+Frontier::Daemon->new(
+                       methods   => {
+                              punch_in            => \&punch_clock,
+                              punch_out           => \&punch_clock,
+                              project_total_time  => \&total_time,
+                              emp_total_time      => \&total_time,
+                              add_entry           => \&add_entry,,
+                                     },
+                       LocalPort => 8080,
+                     );
+
+# punch_clock API function
+sub punch_clock {
+  my ($user) = @_ or die "ERROR: No user given";
+
+  $Dbh->do("Lock Tables punch_clock WRITE") 
+      or die "ERROR: Couldn't lock tables";
+
+  if( is_punched_in($user) ){
+    my $sth = $Dbh->prepare(<<EOT);
+update punch_clock set end=NOW(  ) where username = ? 
+and (end = "" or end is NULL)
+EOT
+    $sth->execute($user) || die "ERROR: SQL execute failed";
+
+  }else{
+    my $sth = $Dbh->prepare(<<EOT);
+insert into punch_clock (username, begin) values (?, NOW(  ))
+EOT
+    $sth->execute($user) || die "ERROR: SQL execute failed";
+
+  }
+
+  $Dbh->do("Unlock Tables");
+
+  my $encoder = Frontier::RPC2->new;
+  return $encoder->boolean(1);
+}
+
+# total_time API function
+sub total_time {
+  my ($user) = @_;
+
+  my $sth; 
+  if( $user ){
+    $sth = $Dbh->prepare(<<EOT);
+Select SEC_TO_TIME(SUM(UNIX_TIMESTAMP(end) - UNIX_TIMESTAMP(begin))) 
+from punch_clock where username = ?
+EOT
+  $sth->execute($user) || die "ERROR: SQL execute failed";
+
+  }else{
+    $sth = $Dbh->prepare(<<EOT);
+Select SEC_TO_TIME(SUM(UNIX_TIMESTAMP(end) - UNIX_TIMESTAMP(begin))) 
+from punch_clock
+EOT
+    $sth->execute || die "ERROR: SQL execute failed";
+  }
+
+  my $total = $sth->fetchall_arrayref;
+  # return an hour, minute, second list
+  if( $total && $total->[0] ){
+    return [ split ':', $total->[0]->[0], 3 ];
+  }else{ 
+    die "ERROR: Couldn't retrieve any data"
+  } 
+}
+
+# add_entry API function
+sub add_entry {
+  my ($user, $start, $end) = @_;
+
+  if( !($user && $start && $end) ){
+    die "ERROR: Need username and start and end dates";
+  }
+
+  my $sth = $Dbh->prepare(<<EOT);
+insert into punch_clock (username, begin, end) values (?,?,?)
+EOT
+ 
+  unless( $sth->execute($user, 
+                  iso2mysql($start->value), 
+                  iso2mysql($end->value))   ){
+    die "ERROR: SQL execute failed";
+  }
+
+  my $encoder = Frontier::RPC2->new;
+  return $encoder->boolean(1);
+  
+}
+
+# helper functions
+
+sub is_punched_in {
+  my ($user) = @_;
+  
+  my $sth = $Dbh->prepare(<<EOT);
+select begin from punch_clock where username = ? 
+and (end = "" or end is NULL)
+EOT
+
+  $sth->execute($user) || die "ERROR: SQL execute failed";
+  my $result = $sth->fetchall_arrayref;
+  if( $result && $result->[0]){
+    if( $result->[0]->[0] ){
+      return 1;
+    }
+  }
+  return;
+}
+
+sub iso2mysql {
+  my ($iso) = @_;
+  
+  $iso =~ s/T/ /;
+  $iso =~ s/^(.{4})(.{2})(.{2})/$1-$2-$3/;
+  return $iso;
+}
+
+
+
+[--untitled example --]
+
+my $Dbh = DBI->connect('dbi:mysql:punch_clock', 'editor', 'editor') ||
+          die "ERROR: Can't connect to the database";
+
+
+
+[--untitled example --]
+
+END { $Dbh->disconnect; }
+
+
+
+[--untitled example --]
+
+Frontier::Daemon->new(
+                       methods   => {
+                              punch_in            => \&punch_clock,
+                              punch_out           => \&punch_clock,
+                              project_total_time  => \&total_time,
+                              emp_total_time      => \&total_time,
+                              add_entry           => \&add_entry,,
+                                     },
+                       LocalPort => 8080,
+                     );
+
+
+
+[--untitled example --]
+
+create table users (
+  username  varchar(12) auto_increment not null primary key,
+  firstname varchar(25),
+  lastname  varchar(25)
+);
+
+
+
+[--untitled example --]
+
+create table punch_clock (
+  username varchar(12) not null,
+  begin   datetime not null,
+  end     datetime,
+  primary key (username, begin)
+);
+
+
+
+[--untitled example --]
+
+my $encoder = Frontier::RPC2->new;
+return $encoder->boolean(1);
+
+
+
+[--untitled example --]
+
+    $sth = $Dbh->prepare(<<EOT);
+Select SEC_TO_TIME(SUM(UNIX_TIMESTAMP(end) - 
+                       UNIX_TIMESTAMP(begin))) 
+from punch_clock where username = ?
+EOT
+
+
+
+[--untitled example --]
+
+return [ split ':', $total->[0]->[0], 3 ];
+
+
+
+[--untitled example --]
+
+$map = (
+         punch_in           => \&punch_clock,
+         punch_out          => \&punch_clock,
+         project_total_time => \&total_time,
+         emp_total_time     => \&total_time,
+         add_entry          => \&add_entry,
+        );
+
+
+
+[--untitled example --]
+
+use Frontier::Responder;
+
+# process the call, using Responder object to 
+# translate to/from XML
+my $response = Frontier::Responder->new( methods => $map );
+print $response->answer;
+
+
+
+[--untitled example --]
+
+$client = Frontier::Client->new(
+          url => "http://somewhere.com/cgi-bin/xmlrpc.pl");
+
+
+
+[--Using UserLand's state name server --]
+
+include("xmlrpc.inc");
+
+$thestate=32;
+
+$c=new xmlrpc_client("/RPC2", "betty.userland.com", 80);
+$f=new xmlrpcmsg('examples.getStateName',
+                 array(new xmlrpcval($thestate, "int")));
+$r=$c->send($f);
+$v=$r->value(  );
+
+if (!$r->faultCode(  )) {
+    print "State number ". $thestate . " is " .
+          $v->scalarval(  ) . "<br />";
+          print "<hr />I got this value back<br /><pre>" .
+          htmlentities($r->serialize(  )). "</pre><hr />\n";
+} else {
+    print "Fault: ";
+    print "Code: " . $r->faultCode(  ) . 
+    " Reason '" .$r->faultString(  )."'<br />";
+}
+
+
+
+[--untitled example --]
+
+$xstr=new xmlrpcval("Hello, World!")
+$xstr=new xmlrpcval("Hello, World!", "string")     // more verbosely
+
+
+
+[--untitled example --]
+
+$xint=new xmlrpcval(34, "int");          // an integer, 34
+$xfloat=new xmlrpcval(23.435, "double"); // a floating-point value, 23.435
+$xbool=new xmlrpcval(1, "boolean");      // a boolean true value
+
+
+
+[--untitled example --]
+
+$xdate=new xmlrpcval("2000-11-18T20:30:05", "dateTime.iso8601");
+
+
+
+[--untitled example --]
+
+$xdate=new xmlrpcval(iso801_encode(time(  )));     // local time
+$xdate=new xmlrpcval(iso801_encode(time(  ), 1));  //specifies GMT
+
+
+
+[--untitled example --]
+
+$xbinary=new xmlrpcval($binaryData, "base64");
+
+
+
+[--untitled example --]
+
+$xarr=new xmlrpcval(array(
+    new xmlrpcval(1, "int"),
+    new xmlrpcval(2, "int"),
+    new xmlrpcval(3, "int")), "array");
+
+
+
+[--untitled example --]
+
+$xstruct=new xmlrpcval(array(
+    "one"   => new xmlrpcval(1, "int"),
+    "two"   => new xmlrpcval(2, "int"),
+    "three" => new xmlrpcval(3, "int")), "struct");
+
+
+
+[--untitled example --]
+
+$xmlrpcI4       = "i4"; 
+$xmlrpcInt      = "int";
+$xmlrpcBoolean  = "boolean";
+$xmlrpcDouble   = "double";
+$xmlrpcString   = "string";
+$xmlrpcDateTime = "dateTime.iso8601";
+$xmlrpcBase64   = "base64";
+$xmlrpcArray    = "array";
+$xmlrpcStruct   = "struct"; 
+
+
+
+[--untitled example --]
+
+// $xv is an XML-RPC value
+if ($xv->kindOf=="scalar") {
+    print "I got a scalar, value " . $xv->scalarval(  ) .
+          ", of type " . $xv->scalartyp(  ) . "<br />\n";
+}
+
+
+
+[--untitled example --]
+
+// $xv is an array of integers
+for($a=0; $a<$xv->arraysize(  ); $a++) {
+    $v=$xv->arraymem($a);
+    print "Got this number: " . $v->scalarval(  ) . "<br />\n";
+}
+
+
+
+[--untitled example --]
+
+// $p is a struct representing someone's personal details
+$age=$p->structmem("age");
+$name=$p->structmem("name");
+print $name->scalarval() . " is " . $age->scalarval(  ) . 
+    " years old.<br />\n";
+
+
+
+[--untitled example --]
+
+// $xs is an example struct
+$xs->structreset(  );
+while(list($key, $xval)=$xs->structeach(  )) {
+    print "Member '${key}' ";
+    switch($xval->kindOf(  )) {
+    case "scalar":
+        print "is a scalar, type: " . 
+           $xval->scalartyp(  ) . "<br />\n";
+        break;
+    default:
+        print "is complex, type: " . 
+           $xval->kindOf(  ) . "<br />\n";
+    }
+}
+
+
+
+[--untitled example --]
+
+// integers
+$xa=new xmlrpcval(23, "int");
+$xa=xmlrpc_encode(23);
+
+// doubles
+$xb=new xmlrpcval(56.234, "double");
+$xb=xmlrpc_encode(56.234);
+
+// strings
+$xc=new xmlrpval("Fred Smith");
+$xc=xmlrpc_encode("Fred Smith");
+
+
+
+[--untitled example --]
+
+// verbose construction
+$person=new xmlrpcval(array(
+            "name"   => new xmlrpcval("Fred Smith"),
+            "age"    => new xmlrpcval(45, "int"),
+            "height" => new xmlrpcval(1.84, "double")), "struct");
+
+// shortcut construction
+$person=xmlrpc_encode(array(
+            "name"   => "Fred Smith",
+            "age"    => 45,
+            "height" => 1.84));
+
+
+
+[--untitled example --]
+
+// $xv is an xmlrpcval struct
+$s=xmlrpc_decode($xv);
+reset($s);
+while(list($key, $val)=each($s)) {
+    print "${key} is ${val}<br />\n";
+}
+
+
+
+[--untitled example --]
+
+$client=new xmlrpc_client($server_path, $server_hostname, $server_port);
+
+
+
+[--untitled example --]
+
+$client=new xmlrpc_client("/demo/server.php", "xmlrpc.usefulinc.com", 80);
+
+
+
+[--untitled example --]
+
+$client->setDebug(1);
+
+
+
+[--untitled example --]
+
+$client->setCredentials($username, $password);
+
+
+
+[--untitled example --]
+
+$msg=new xmlrpcmsg($methodName, array($p1, $p2 ... ));
+
+
+
+[--untitled example --]
+
+$msg=new xmlrpcmsg($methodName);
+
+
+
+[--untitled example --]
+
+$msg=new xmlrpcmsg("examples.getStateName",
+                   array(new xmlrpcval(23, "int")));
+print "<pre>" . htmlentities($msg->serialize(  )) . "</pre>";
+
+
+
+[--untitled example --]
+
+<?xml version="1.0"?>
+<methodCall>
+<methodName>examples.getStateName</methodName>
+<params>
+<param>
+<value><int>23</int></value>
+</param>
+</params>
+</methodCall>
+
+
+
+[--untitled example --]
+
+$result=$client->send($msg);
+
+
+
+[--untitled example --]
+
+$result=$client->send($msg, 60); // timeout after 60 seconds
+
+
+
+[--untitled example --]
+
+$result=$client->send($msg);
+if (!$result) { // a low-level error has occurred
+    print "Help! A low-level error occurred. Error # " . 
+          $client->errno . ": " . $client->errstr . "<br />\n";
+    exit(0); // stop the script executing
+}
+
+
+
+[--untitled example --]
+
+$result=$client->send($msg);
+if ($result) { // no low-level error has occurred
+    if ($result->value(  )) { // no error has occurred
+        // use a shortcut function to lazily decode a scalar
+        $val=xmlrpc_decode($result->value(  ));
+        print "Got this result: ${val}<br />\n";
+    } else {
+        // deal with XML-RPC level error
+    }
+} else {
+    // deal with low-level error
+}
+
+
+
+[--untitled example --]
+
+$result=$client->send($msg);
+if ($result) {
+    if (!$result->value(  )) { // a fault has occurred
+        print "A fault occurred, code number: " .
+              $result->faultCode(  ) . ", explanation: " . 
+              $result->faultString(  ) . "<br />\n";
+    }
+}
+
+
+
+[--untitled example --]
+
+function myMethod($xmlrpcMessage) {
+    $errorHappened=0;
+    $param0=$xmlrpcMessage->getParam(0);
+    $param1=$xmlrpcMessage->getParam(1);
+    // .. computation
+    if ($errorHappened) {
+        $r=new xmlrpcresp(0, $errno, $errmsg);
+    } else {
+        $r=new xmlrpcresp(new xmlrpcval("Return value"));
+    }
+    return $r;
+}
+
+
+
+[--untitled example --]
+
+$findstate_sig=array(array($xmlrpcString, $xmlrpcInt));
+
+$findstate_doc='When passed an integer between 1 and 51 returns the
+name of a US state, where the integer is the index of that state name
+in an alphabetic order.';
+
+$echoback_sig=array(array($xmlrpcString, $xmlrpcString));
+
+$echoback_doc='When passed a string, returns the same string.';
+
+$disp_map=array(     "examples.getStateName" => 
+                           array("function" => "findstate",
+                           "signature" => $findstate_sig,
+                           "docstring" => $findstate_doc),
+                     "examples.echoString" =>
+                           array("function" => "echoback",
+                           "signature" => $echoback_sig,
+                           "docstring" => $echoback_doc));
+
+
+
+[--untitled example --]
+
+include("xmlrpc.inc");
+include("xmlrpc.inc");
+
+// definition of functions
+
+// definition of dispatch map
+
+$s=new xmlrpc_server($dispatchMap);
+
+
+
+[--untitled example --]
+
+$s=new xmlrpc_server($dispatchMap, 0);
+
+// computation
+
+$s->service(  );
+
+
+
+[--Discussion server --]
+
+<?php
+// $Id: ch05.xml,v 1.4 2001/08/09 19:33:33 becki Exp $
+// A basic comment server. Given an ID it will store
+// a list of names and comment texts against it.
+
+include("xmlrpc.inc");
+include("xmlrpcs.inc");
+
+// implement discuss.addComment
+
+$addcomment_sig=array(array($xmlrpcInt, $xmlrpcString,
+    $xmlrpcString, $xmlrpcString));
+
+$addcomment_doc='Adds a comment to an item. The first parameter
+is the item ID, the second the name of the commenter, and the third
+is the comment itself. Returns the number of comments against that
+ID.';
+
+function addcomment($m) {
+      global $xmlrpcerruser;
+      $err="";
+ 
+    // decode the three string parameters
+      $msgID=xmlrpc_decode($m->getParam(0));
+    $name=xmlrpc_decode($m->getParam(1));
+    $comment=xmlrpc_decode($m->getParam(2));
+    
+    // open up our comment store
+    // (adjust the path for your own machine)
+    $dbh=dba_open("/tmp/comments.db", "c", "db2");
+
+    if ($dbh) {
+        
+        // look for the number of messages against
+        // this ID
+        $countID="${msgID}_count";
+        if (dba_exists($countID, $dbh))
+            $count=dba_fetch($countID, $dbh);
+        else
+            $count=0;
+
+        // add the new comment in
+        dba_insert($msgID . "_comment_${count}", $comment, $dbh);
+        dba_insert($msgID . "_name_${count}", $name, $dbh);
+        $count++;
+        dba_replace($countID, $count, $dbh);
+        dba_close($dbh);
+    } else {
+        // set an error that will be returned
+        // as a fault
+        $err="Unable to open comments database.";
+    }
+
+  // if we generated an error, create an error return response
+  if ($err) {
+        return new xmlrpcresp(0, $xmlrpcerruser, $err);
+  } else {
+        // otherwise, we return the new number of total
+        // comments against the ID
+        return new xmlrpcresp(new xmlrpcval($count, "int"));
+  }
+}
+
+// implement discuss.getComments
+
+$getcomments_sig=array(array($xmlrpcArray, $xmlrpcString));
+
+$getcomments_doc='Returns an array of comments for a given ID, which
+is the sole argument. Each array item is a struct containing name
+and comment text.';
+
+function getcomments($m) {
+  global $xmlrpcerruser;
+  $err="";
+    $ra=array(  );
+
+    // get the ID for which comments are required
+    $msgID=xmlrpc_decode($m->getParam(0));
+
+    // open up the comments database
+    $dbh=dba_open("/tmp/comments.db", "r", "db2");
+
+    if ($dbh) {
+        // look for the number of comments for this ID
+        $countID="${msgID}_count";
+        if (dba_exists($countID, $dbh)) {
+            $count=dba_fetch($countID, $dbh);
+
+            // fetch each comment
+            for($i=0; $i<$count; $i++) {
+                $name=dba_fetch("${msgID}_name_${i}", $dbh);
+                $comment=dba_fetch("${msgID}_comment_${i}", $dbh);
+                
+                // bundle the name and comment into a struct
+                $ra[]=new xmlrpcval(array(
+                        "name" => new xmlrpcval($name),
+                        "comment" => new xmlrpcval($comment)
+                        ), "struct");
+            }
+        }
+    }
+
+    // if we generated an error, create an error return response
+  if ($err) {
+        return new xmlrpcresp(0, $xmlrpcerruser, $err);
+  } else {
+        // otherwise, return the list of comment structs
+        return new xmlrpcresp(new xmlrpcval($ra, "array"));
+  }
+}    
+
+// instantiate the server and get it to process the request
+$s=new xmlrpc_server( array( "discuss.addComment" => 
+                 array("function" => "addcomment",
+                    "signature" => $addcomment_sig,
+                    "docstring" => $addcomment_doc),
+               "discuss.getComments" => 
+                 array("function" => "getcomments",
+                    "signature" => $getcomments_sig,
+                    "docstring" => $getcomments_doc))
+            );
+?>
+
+
+
+
+
+[--Meerkat discussion application --]
+
+<?php
+// $Id: ch05.xml,v 1.4 2001/08/09 19:33:33 becki Exp $
+// A program that browses Meerkat's story store and allows
+// users to append spontaneous discussions to the story
+// in question.
+
+include("xmlrpc.inc");
+
+$mydir="/demo";
+
+// bomb(  ) just finishes off the page before quitting
+function bomb() { print "</body></html>"; exit(  ); }
+
+// dispatch(  ) ensures error handling for XML-RPC calls
+function dispatch($client, $method, $args) {
+    $msg=new xmlrpcmsg($method, $args);
+    $resp=$client->send($msg);
+    if (!$resp) { print "<p>IO error: ".$client->errstr ."</p>"; bomb(  ); }
+    if ($resp->faultCode(  )) {
+        print "<p>There was an error: " . $resp->faultCode(  ) . " " .
+            $resp->faultString(  ) . "</p>";
+        bomb(  );
+    } 
+    return xmlrpc_decode($resp->value(  ));    
+}
+
+// create client for discussion server
+$dclient=new xmlrpc_client("${mydir}/discuss.php",
+                     "xmlrpc.usefulinc.com", 80);
+
+// check if we're posting a comment, and send it if so
+$storyid=$HTTP_POST_VARS["storyid"];
+if ($storyid) {
+    // send the comment to the comment server
+    $res=dispatch($dclient, "discuss.addComment", 
+            array(new xmlrpcval($storyid),
+                new xmlrpcval(stripslashes
+                    ($HTTP_POST_VARS["name"])),
+                new xmlrpcval(stripslashes
+                    ($HTTP_POST_VARS["commenttext"]))));
+
+    // send the browser back to the originating page
+    Header("Location: ${mydir}/comment.php?catid=" .
+                 $HTTP_POST_VARS["catid"] . "&chanid=" .
+                 $HTTP_POST_VARS["chanid"] . "&oc=" .
+                 $HTTP_POST_VARS["catid"]);
+    exit(0);
+}
+
+?><html><head><title>meerkat browser</title></head>
+<body bgcolor="#ffffff">
+<h2>Meerkat integration</h2>
+<?php
+// handle incoming parameters
+$catid=$HTTP_GET_VARS["catid"];
+if ($HTTP_GET_VARS["oc"]==$catid)
+    $chanid=$HTTP_GET_VARS["chanid"];
+else 
+    $chanid=0;
+
+// create the Meerkat client
+$client=new xmlrpc_client("/meerkat/xml-rpc/server.php",
+                          "www.oreillynet.com", 80);
+
+if ($HTTP_GET_VARS["comment"]) {
+    // we're making a comment on a story,
+    // so display a comment form.
+    // TODO: retrieve the story headline & abstract
+?>
+<h3>Make a comment on the story</h3>
+<form method="post">
+<p>Your name:<br /><input type="text" size="30" name="name" /></p>
+<p>Your comment:<br /><textarea rows="5" cols="60"
+   name="commenttext"></textarea></p>
+<input type="submit" value="Send comment" />
+<input type="hidden" name="storyid" 
+   value="<?php echo $HTTP_GET_VARS["comment"];?>" />
+<input type="hidden" name="chanid" 
+   value="<?php echo $chanid; ?>" />
+<input type="hidden" name="catid" 
+   value="<?php echo $catid; ?>" />
+
+</form>
+<?php
+} else {
+    // we're exploring the story store
+    // first, get the list of top-level categories
+    $categories=dispatch($client, "meerkat.getCategories", array(  ));
+
+    // if we've chosen a category, get list of
+    // web sites in that category
+    if ($catid)
+        $sources = dispatch($client, "meerkat.getChannelsByCategory", 
+
+     array(new xmlrpcval($catid, "int")));
+
+    // if we've chosen a web site, get list of
+    // most recent 5 stories from that web site
+    if ($chanid) {
+        $stories = dispatch($client, "meerkat.getItems",
+            array(new xmlrpcval(
+                array(
+                    "channel" => new xmlrpcval($chanid, "int"),
+                    "ids" => new xmlrpcval(1, "int"),
+                    "descriptions" => new xmlrpcval(200, "int"),
+                    "num_items" => new xmlrpcval(5, "int"),
+                    "dates" => new xmlrpcval(0, "int")
+                    ), "struct")));
+    }
+    // data is fetched, now render the page
+?>
+<form>
+<p>Subject area:<br />
+<select name="catid">
+<?php
+     // category chooser
+      if (!$catid)
+            print "<option value=\"0\">Choose a category</option>\n";
+      while(list($k,$v) = each($categories)) {
+            print "<option value=\"" . $v['id'] ."\"";
+            if ($v['id']==$catid) print " selected=\"selected\"";
+            print ">". $v['title'] . "</option>\n"; 
+        }
+?>
+</select></p>
+<?php 
+    if ($catid) { 
+?>
+<p>News source:<br />
+<select name="chanid">
+<?php
+     // web site chooser
+     if (!$chanid)
+           print "<option value=\"0\">Choose a source</option>\n";
+     while(list($k,$v) = each($sources)) {
+            print "<option value=\"" . $v['id'] ."\"";
+            if ($v['id']==$chanid) print "\" selected=\"selected\"";
+            print ">". $v['title'] . "</option>\n"; 
+        }
+?>
+</select>
+</p>
+
+<?php 
+    } // end if ($catid)
+?>
+
+<p><input type="submit" value="Update" /></p>
+<input type="hidden" name="oc" value="<?php echo $catid; ?>" />
+</form>
+
+<?php 
+     if ($chanid) { 
+?>
+
+<h2>Stories available</h2>
+<table>
+<?php
+     // story chooser
+     while(list($k,$v) = each($stories)) {
+         print "<tr>";
+         print "<td><b>" . $v['title'] . "</b><br />";
+         print $v['description'] . "<br />";
+         print "<em><a target=\"_blank\" href=\"" . 
+             $v['link'] . "\">Read full story</a> ";
+         print "<a href=\"comment.php?catid=${catid}&chanid=${chanid}&" .
+             "oc=${oc}&comment=" . $v['id'] . "\">Comment on this story</a>";
+         print "</em>";
+         print "</td>";
+         print "</tr>\n";
+         
+         // now look for existing comments that the
+         // comment server knows about.
+         $res=dispatch($dclient, "discuss.getComments", 
+                array(new xmlrpcval($v['id'])));
+
+         if (sizeof($res)>0) {
+             // $res is an array of associative arrays
+             // -- the result of an xmlrpc_decode(  ) call
+
+             print "<tr><td bgcolor=\"#dddddd\"><p><b><i>" .
+                 "Comments on this story:</i></b></p>";
+             for($i=0; $i<sizeof($res); $i++) {
+                 $s=$res[$i];
+                 print "<p><b>From:</b> " . 
+                        htmlentities($s['name']) . "<br />";
+                 print "<b>Comment:</b> " . 
+                        htmlentities($s['comment']) . "</p>";
+             }
+             print "</td></tr>\n";
+         }
+         print "<tr><td><hr /></td></tr>\n";
+     }
+?>
+</table>
+
+<?php 
+        } // end if ($chanid) 
+} // end if ($HTTP_GET_VARS["comment"])
+?>
+
+<!-- page footer -->
+<hr />
+<p>
+<a href="http://meerkat.oreillynet.com"><img align="right" 
+    src="http://meerkat.oreillynet.com/icons/meerkat-powered.jpg"
+    height="31" width="88" alt="Meerkat powered, yeah!"
+    border="0" hspace="8" /></a>
+<em>$Id: ch05.xml,v 1.4 2001/08/09 19:33:33 becki Exp $</em></p>
+</body>
+</html>
+
+
+
+[--untitled example --]
+
+import xmlrpclib
+client = xmlrpclib.Server("http://betty.userland.com")
+print "The second state listed on betty is " +  \
+       client.examples.getStateName(2)
+
+
+
+[--untitled example --]
+
+<int> (or <i4>)
+
+
+
+[--untitled example --]
+
+int
+
+
+
+[--untitled example --]
+
+-
+
+
+
+[--untitled example --]
+
+<double>
+
+
+
+[--untitled example --]
+
+float
+
+
+
+[--untitled example --]
+
+-
+
+
+
+[--untitled example --]
+
+<string>
+
+
+
+[--untitled example --]
+
+string
+
+
+
+[--untitled example --]
+
+-
+
+
+
+[--untitled example --]
+
+<boolean>
+
+
+
+[--untitled example --]
+
+-
+
+
+
+[--untitled example --]
+
+Boolean
+
+
+
+[--untitled example --]
+
+<dateTime.iso8601>
+
+
+
+[--untitled example --]
+
+-
+
+
+
+[--untitled example --]
+
+DateTime
+
+
+
+[--untitled example --]
+
+<base64>
+
+
+
+[--untitled example --]
+
+-
+
+
+
+[--untitled example --]
+
+Binary
+
+
+
+[--untitled example --]
+
+<array>
+
+
+
+[--untitled example --]
+
+list or tuple
+
+
+
+[--untitled example --]
+
+-
+
+
+
+[--untitled example --]
+
+<struct>
+
+
+
+[--untitled example --]
+
+dictionary or class instance
+
+
+
+[--untitled example --]
+
+-
+
+
+
+[--untitled example --]
+
+rpc-call("complete", xmlrpclib.True)      # argument
+return xmlrpclib.False                    # return value
+
+
+
+[--untitled example --]
+
+response = client.isPrime(7)
+if response.value == 1:
+    print "7 is a prime number"
+else:
+    print "7 is not a prime number"
+
+
+
+[--untitled example --]
+
+if "": ...               # condition is false
+xmlrpclib.Boolean("")    # creates a True object
+
+
+
+[--untitled example --]
+
+timestamp = xmlrpclib.DateTime( ... )
+rpc-call("update_complete", timestamp)
+
+
+
+[--untitled example --]
+
+timestamp = xmlrpclib.DateTime("20001023T10:48:26")
+
+
+
+[--untitled example --]
+
+timestamp = xmlrpclib.DateTime((2000, 10, 23, 10, 48, 26, 0, 297, 1))
+
+
+
+[--untitled example --]
+
+import time
+...
+timestamp = xmlrpclib.DateTime(time.time(  ))
+
+
+
+[--untitled example --]
+
+timestamp = code-that-extracts-DateTime-argument-from-arg-list
+year = timestamp.value[0:4]
+month = timestamp.value[4:6]
+day = timestamp.value[6:8]
+
+
+
+[--untitled example --]
+
+b64_obj = xmlrpclib.Binary( ... )
+rpc-call(b64_obj)
+
+
+
+[--untitled example --]
+
+binary_string = open( filename ).read(  )
+b64_obj = xmlrpclib.Binary(binary_string)
+rpc-call(b64_obj)
+
+
+
+[--untitled example --]
+
+response = rpc-call( ... )
+binary_string = response.data
+f = open("myicon.gif", "w")
+f.write(binary_string)
+f.close(  )
+
+
+
+[--untitled example --]
+
+import xmlrpc, time
+client = xmlrpclib.Server("http://i.writethesongs.com:1080")
+ts = xmlrpclib.DateTime( time.time(  ) + 60 * 60 * 24 * 30 )
+resp = client.getTickets(4, ts)
+if resp.value :
+    print "We're on for Manilow!"
+else:
+    print "Shucks! No Barry for us!"
+
+
+
+[--untitled example --]
+
+try:
+    response = rpc-call( ... )
+except xmlrpclib.Fault, faultobj:
+    # exception caused by <fault> response from server
+    print "XML-RPC fault code:", faultobj.faultCode
+    print ">>> %s <<<" % faultobj.faultString
+except:
+    # exception caused other problem,
+    # including failure to contact server at all
+    print "Problem of type:", sys.exc_type
+    print ">>> %s <<<" % sys.exc_value
+else:
+    # call succeeded, interpret "response"
+
+
+
+[--Python XML-RPC client script --]
+
+# ora_client.py
+
+"""
+ora_client: test Python client for XML-RPC
+"""
+
+import sys, xmlrpclib
+
+##### create xmlrpclib.Server object
+
+# XML-RPC server host might be specified on command line
+if len(sys.argv) > 1:
+    host = sys.argv[1]
+else:
+    host = "http://localhost:8000"
+
+# create object representing connection to server host
+conn = xmlrpclib.Server(host)
+
+###### prepare arguments
+
+i1 = 37         # integer datatype
+s1 = "37"       # string that looks like a number
+s2 = "hi, mom"  # string that looks like a string
+f1 = 3.1416     # floating-point number
+s3 = "3.1416"   # string that looks like a floating-point number
+
+a1 = range(3)   # list
+a2 = (0, 1, 2)  # tuple
+d1 = {'alpha':1, 'beta':2}  # dictionary
+
+# user-defined object
+class MyClass:
+    """
+    simple class, with some instance attributes
+    """
+    def __init_  _(self):
+        """
+        initialize instance data attributes
+        """
+        self.alpha = 1
+        self.beta = 2
+
+o1 = MyClass(  )   # must use object (instance), not class itself
+
+### special XML-RPC datatypes
+
+# boolean data
+obj_bool = xmlrpclib.False
+
+# date-time data: current time
+import time
+obj_dtime = xmlrpclib.DateTime(time.time(  ))
+
+# base64 data
+# Binary object constructor takes a stream of binary data
+binary_file = r'0.gif'
+obj_bin = xmlrpclib.Binary(open(binary_file).read(  ))
+
+##### call the remote procedures
+
+try:
+    ### 1st call
+    print "\n*** Calling SetColor(  ) ..."
+
+    rgb = (255, 255, 0)
+
+    # use hard-coded method name
+    response = conn.SetColor("rectangle", 14, rgb)
+    print response
+
+    ### 2nd call
+    print "\n*** Calling Describe(  ) ..."
+
+    strings = (s1, s2, s3)
+    numbers = (i1, f1)
+    arrays = (a1, a2)
+    dicts = (d1, o1)
+    specials = (obj_bool, obj_dtime, obj_bin)
+    groups = {
+        "grp1": strings,
+        "grp2": numbers,
+        "grp3": arrays,
+        "grp4": dicts,
+        "grp5": specials
+    } # alternative: submit all values in a single structure
+
+    response = conn.Describe(strings, numbers, arrays,
+                             dicts, specials)
+    print response
+
+    ### 3rd call
+    # expecting a Fault response this time
+    print "\n*** Calling ThisMethodDoesNotExist(  ) ..."
+    response = conn.ThisMethodDoesNotExist(  )
+    print "NOT!"
+
+except xmlrpclib.Fault, faultobj:
+    print "Server error:", faultobj.faultCode
+    print ">>> %s <<<" % faultobj.faultString
+
+except:
+    print "Client error: '%s/%s'" % (sys.exc_type, sys.exc_value)
+
+# bye
+sys.exit(0)
+
+
+
+
+
+[--untitled example --]
+
+server = SocketServer.TCPServer(('', 8000), RequestHandler)
+
+
+
+[--untitled example --]
+
+self.call("ChangeSetting", ("priority_level", 5))
+
+
+
+[--untitled example --]
+
+def call(self, meth_name, arg_tuple):
+    ...
+    if meth_name == "go":
+        return do_go(arg_tuple)
+    elif meth_name == "pause":
+        return do_pause(arg_tuple)
+    elif meth_name == "stop":
+        return do_stop(arg_tuple)
+
+
+
+[--untitled example --]
+
+def call(self, meth_name, arg_tuple):
+    ...
+    func_obj = eval("do_" + meth_name)
+    return apply(func_obj, arg_tuple)
+
+
+
+[--untitled example --]
+
+color           # describes all the color.XXX methods
+color.setRGB    # specifies a new color
+color.getRGB    # reports the current color
+
+
+
+[--untitled example --]
+
+def call(self, meth_name, arg_tuple):
+    # no "." in name, call "summary" function
+    if string.count(meth_name, '.') == 0:
+        category, func_name = meth_name, "summary"
+
+    # one "." in name, get the two pieces
+    elif string.count(meth_name, '.') == 1:
+        category, func_name = string.split(meth_name, '.')
+
+    # lookup the dispatch function and invoke it
+    func_obj = double_lookup(category, func_name)
+    return apply(func_obj, arg_tuple)
+
+
+
+[--untitled example --]
+
+color_dict = {
+  "summary" : do_color_summary,
+  "setRGB"  : do_color_setRGB,
+  "getRGB"  : do_color_getRGB
+}
+
+
+
+[--untitled example --]
+
+def do_ChangeSetting(arg_tuple):
+    # unpack argument-list tuple
+    setting_name, setting_value = arg_tuple
+    ...
+
+
+
+[--untitled example --]
+
+def do_ChangeSetting(setting_name, setting_value):
+...
+
+
+
+[--untitled example --]
+
+
+def do_ChangeSetting(arg_tuple):
+    # assign arguments to individual variables
+    which_setting, new_value = arg_tuple
+
+    # work with the data
+    print "Changing the %s setting" % which_setting
+    make_the_change( ..., new_value, ... )
+
+
+
+[--untitled example --]
+
+
+def do_DateStamp(arg_tuple):
+    # extract ISO8601 string from first item on argument list
+    dstring = arg_tuple[0].value
+
+    # analyze the ISO8601 string
+    year = int(dstring[0:4])
+    month = int(dstring[4:6])
+    day = int(dstring[6:8])
+    ...
+
+
+
+[--untitled example --]
+
+def call(self, meth_name, arg_tuple):
+    ...
+    if meth_name == "DateStamp":
+        return do_DateStamp(arg_tuple)
+
+
+
+[--untitled example --]
+
+def do_VerifyCompletion(arg_tuple):
+# process argument list; perform computations
+...
+# return a Boolean
+if completed_flag:
+return xmlrpclib.True
+else:
+return xmlrpclib.False
+
+
+
+[--untitled example --]
+
+def do_GetEmployeeInfo(arg_tuple):
+# process argument list
+...
+# perform computations
+emp_name = string-valued computation
+emp_number = integer-valued computation
+emp_photo = load-binary-data-into-Python-string
+
+# return 3-item list
+return [emp_name, emp_number,
+xmlrpclib.Binary(emp_photo)]
+
+
+
+[--untitled example --]
+
+raise xmlrpclib.Fault(13, "Invalid setting")     # rightt
+return xmlrpclib.Fault(13, "Invalid setting")    # wrong
+
+
+
+[--untitled example --]
+
+% python myserver.py &
+
+
+
+[--untitled example --]
+
+C:\> start python myserver.py
+
+
+
+[--untitled example --]
+
+server = SocketServer.TCPServer(('', port), RequestHandler)
+server.serve_forever(  )
+
+
+
+[--Python XML-RPC server script --]
+
+# ora_server.py (based on xmlrpcserver.py)
+#
+# XML-RPC SERVER
+# $Id: ch06.xml,v 1.6 2001/08/10 18:20:31 becki Exp $
+#
+# a simple XML-RPC server for Python
+#
+# History:
+# 1999-02-01 fl  added to xmlrpclib distribution 
+# 2000-10-28 jjp modified for use in O'Reilly XML-RPC book
+#
+# written by Fredrik Lundh, January 1999.
+#
+# Copyright (c) 1999 by Secret Labs AB.
+# Copyright (c) 1999 by Fredrik Lundh.
+#
+# fredrik@pythonware.com
+# http://www.pythonware.com
+#
+# -------------------------------------------------------------
+# Permission to use, copy, modify, and distribute this software
+# and its associated documentation for any purpose and without
+# fee is hereby granted.  This software is provided as is.
+# -------------------------------------------------------------
+
+import SocketServer, BaseHTTPServer
+import xmlrpclib, sys
+
+class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+
+    def do_POST(self):
+        try:
+            # get arguments
+            data = self.rfile.read(
+              int(self.headers["content-length"])
+            )
+            params, method = xmlrpclib.loads(data)
+
+            # generate response
+            try:
+                response = self.call(method, params)
+                if type(response) != type((  )):
+                    response = (response,)
+
+            except xmlrpclib.Fault, faultobj:
+                # generated response was a Fault
+                response = xmlrpclib.dumps(faultobj)
+
+            except:
+                # report exception back to server
+                response = xmlrpclib.dumps(
+                  xmlrpclib.Fault(1,
+                  "%s:%s" % (sys.exc_type, sys.exc_value))
+                )
+            else:
+                # no exception occurred:
+                # send method's return value back to server
+                response = xmlrpclib.dumps(
+                    response,
+                    methodresponse=1
+                    )
+        except:
+            # internal error, report as HTTP server error
+            self.send_response(500)
+            self.end_headers(  )
+        else:
+            # no internal error: send back a "success" response
+            self.send_response(200)
+            self.send_header("Content-type", "text/xml")
+            self.send_header("Content-length", str(len(response)))
+            self.end_headers(  )
+            self.wfile.write(response)
+
+            # shut down the connection (from Skip Montanaro)
+            self.wfile.flush(  )
+            self.connection.shutdown(1)
+
+    # def call(self, method, params):
+    # override this method to implement RPC methods
+    # print "CALL", method, params
+    # return params
+
+    def call(self, meth_name, arg_tuple):
+        """
+        XML-RPC method dispatcher
+        """
+        myAPI = ("SetColor",  "Describe")
+        if meth_name in myAPI:
+            func_obj = eval("do_" + meth_name)
+            return apply(func_obj, arg_tuple)
+        else:
+            raise xmlrpclib.Fault(123, "Unknown method name")
+
+##### functions that implement XML-RPC API
+
+def do_SetColor(shape_type, shape_id, color_tuple):
+    """
+    implementation of "SetColor" method
+    """
+    message = (
+      "Modifying %s number %s:\n" % (shape_type, shape_id) +
+      ">> setting Red value to %d\n" % color_tuple[0] +
+      ">> setting Green value to %d\n" % color_tuple[1] +
+      ">> setting Blue value to %d" % color_tuple[2]
+    )
+    # do the work, then ...
+    return message
+
+def do_Describe(*one_or_more_args):
+    """
+    implementation of "Describe" method:
+    describe arguments, any number of them
+    """
+
+    from types import *
+
+    ##### "Describe" internal functions
+    def proc_list(arg):
+        """
+        process a list argument (called by do_Describe)
+        """
+        rtn = "* Array argument:\n"
+        for i in range(len(arg)):
+            rtn = rtn + "    " + "%d: %s\n" % (i, arg[i])
+        return rtn
+
+    def proc_dict(arg):
+        """
+        process a dictionary argument (called by do_Describe)
+        """
+        rtn = "* Dictionary argument:\n"
+        for pair in arg.items(  ):
+            rtn = rtn + "    " + "%s: %s\n" % pair
+        return rtn
+    ##### end of "Describe" internal functions
+
+    # title line
+    console_msg = ("Called RPC method 'Describe' with %d arguments"
+          % len(one_or_more_args))
+
+    # special case: empty argument list
+    if not one_or_more_args: return ""
+
+    # report summary of call to server console
+    print console_msg
+
+    # start accumulating return-value text
+    rtn = console_msg + ":\n\n"
+
+    # describe each parameter, distinguishing by datatype
+    for arg in one_or_more_args:
+        if type(arg) is IntType:
+            rtn = rtn + "* Integer argument: %d\n" % arg
+        elif type(arg) is StringType:
+            rtn = rtn + "* String argument: %s\n" % arg
+        elif type(arg) is ListType:
+            rtn = rtn + proc_list(arg)
+        elif type(arg) is DictionaryType:
+            rtn = rtn + proc_dict(arg)
+        elif type(arg) is FloatType:
+            rtn = rtn + "* Floating-point argument: %f\n" % arg
+        elif isinstance(arg, xmlrpclib.DateTime):
+            rtn = rtn + "* Date-time argument: %s\n" % arg.value
+        elif isinstance(arg, xmlrpclib.Binary):
+            rtn = rtn + "* Base64-text-encoded binary value\n"
+        elif isinstance(arg, xmlrpclib.Boolean):
+            if arg.value == 1:
+                bool = 'True'
+            else:
+                bool = 'False'
+            rtn = rtn + "* Boolean argument: %s\n" % bool
+        else:
+            rtn = rtn + "* Argument of type %s\n" % type(arg)
+
+    # return accumulated text as value of XML-RPC call
+    return rtn
+
+if __name__ == '__main_  _':
+    # set up and run XML-RPC server process (daemon)
+
+    # create server
+    port = 8000
+    server = SocketServer.TCPServer(('', port), RequestHandler)
+
+    # send startup message to console
+    print "XML-RPC server listening on port %s ..." % port
+
+    # start server
+    server.serve_forever(  ) 
+
+
+
+
+
+[--Python CGI script that implements an XML-RPC server --]
+
+# xmlrpc_cgi.py
+
+import xmlrpclib
+import os, sys, string
+
+#### HTTP message templates
+
+success_msg = """
+HTTP/1.1 200 OK
+Content-type: text/xml
+Content-length: %d
+
+%s
+""" 
+
+failure_msg = """
+HTTP/1.1 500 Internal Server Error
+
+"""
+
+#### functions that implement XML-RPC API
+
+def do_SetColor(shape_type, shape_id, color_tuple):
+  return "hello from do_SetColor"
+
+def do_Describe(*one_or_more_args):
+  return "hello from do_Describe"
+
+def call(meth_name, arg_tuple):
+    """
+    XML-RPC method dispatcher
+    """
+    myAPI = ("SetColor", "Bounce", "Describe")
+    if meth_name in myAPI:
+        func_obj = eval("do_" + meth_name)
+        return apply(func_obj, arg_tuple)
+    else:
+        raise xmlrpclib.Fault(123, "Unknown method name")
+
+##### main program
+
+if __name__ == "__main_  _":
+
+    try:
+        # get arguments
+        data = sys.stdin.read(  )
+        params, method = xmlrpclib.loads(data)
+
+        # generate response
+        try:
+            response = call(method, params)
+            if type(response) != type((  )):
+                response = (response,)
+
+        except xmlrpclib.Fault, faultobj:
+            # generated response was a Fault
+            response = xmlrpclib.dumps(faultobj)
+
+        except:
+            # report exception back to server
+            response = xmlrpclib.dumps(
+              xmlrpclib.Fault(1,
+              "%s:%s" % (sys.exc_type, sys.exc_value))
+            )
+        else:
+            # no exception occurred:
+            # send method's return value back to server
+            response = xmlrpclib.dumps(
+                response,
+                methodresponse=1
+                )
+    except:
+        # internal error, report as HTTP server error
+        print failure_msg
+    else:
+        # no internal error: send back a "success" response
+        print success_msg % (len(XML_response), XML_response) 
+
+
+
+[--untitled example --]
+
+cn = xmlrpclib.<Server("http://Zope-host/.../myRPC")
+cn.Describe( arg-list )
+
+
+
+[--An ASP XML-RPC listener used to add two integers --]
+
+<!--#include virtual="/jjohn/xmlrpc.asp" -->
+<%
+rpcserver
+
+Function add_em( a, b )
+  add_em = a + b
+End Function
+%>
+
+
+
+[--An ASP client used to query the listener --]
+
+<!--#include virtual="/jjohn/xmlrpc.asp"-->
+<h1>Computing 3 + 5</h1>
+<%
+   Dim args(2), Answer
+   args(0) = 3
+   args(1) = 5
+   Answer = XMLrpc("http://durgan.daisypark.net/jjohn/rpc_sum.asp", _
+                   "add_em", args)
+%>
+<P>The answer is <%= Answer %>
+
+
+
+[--untitled example --]
+
+<i4>
+
+
+
+[--untitled example --]
+
+VbInteger
+
+
+
+[--untitled example --]
+
+<double>
+
+
+
+[--untitled example --]
+
+VbDouble
+
+
+
+[--untitled example --]
+
+<dateTime.iso8601>
+
+
+
+[--untitled example --]
+
+VbDate
+
+
+
+[--untitled example --]
+
+<string>
+
+
+
+[--untitled example --]
+
+VbString
+
+
+
+[--untitled example --]
+
+<boolean>
+
+
+
+[--untitled example --]
+
+VbBoolean
+
+
+
+[--untitled example --]
+
+<array>
+
+
+
+[--untitled example --]
+
+VbArray
+
+
+
+[--untitled example --]
+
+<struct>
+
+
+
+[--untitled example --]
+
+Dictionary
+
+
+
+[--untitled example --]
+
+<base64>
+
+
+
+[--Implementing dump_address_book(  )  --]
+
+<!--#include virtual="/jjohn/xmlrpc.asp"-->
+
+<%
+  ' Globals
+  Dim DB_SRC
+  DB_SRC = "Driver=Microsoft Access Driver (*.mdb); DBQ=C:\addresses.mdb"
+%>
+
+<%
+rpcserver
+
+Function dump_address_book(  )
+' Input:  
+'      None
+' Output: 
+'      An array of records represented in dictionaries
+'        Each dictionary will have the following fields:
+'      * lastname:  (string) last name of the person 
+'      * firstname: (string) first name of the person
+'         phone:       (string) their phone number
+'         email:       (string) their email address
+'      (* fields make up the primary key)
+ 
+  Dim rs, query
+  Set rs = Server.CreateObject("ADODB.RecordSet")
+  query  = "Select * from directory" 
+    
+  rs.Open query, DB_SRC
+
+  ' our return array and index
+  Dim ret(10), cnt
+
+  cnt = 0
+  Do While Not rs.Eof
+     Dim entry, i
+     Set entry = Server.CreateObject("Scripting.Dictionary")
+
+     For Each i In rs.Fields
+         entry.Add i.Name, i.Value
+     Next
+
+     Set ret(cnt) = entry
+     cnt = cnt + 1
+     rs.MoveNext
+  Loop
+
+  dump_address_book = ret 
+
+End Function
+
+
+
+[--untitled example --]
+
+"Driver=Microsoft Access Driver (*.mdb); DBQ=C:\addresses.mdb"
+
+
+
+[--Implementation of lookup(  ) --]
+
+Function lookup( field, sought )
+' Input: 
+'      Expects two strings:
+'      field:  (string) Fieldname to search in table
+'         sought: (string) Value to look for
+' Output:
+'         An array of records stored in dictionaries 
+'      that match search.
+'      * lastname:  (string) last name of the person 
+'      * firstname: (string) first name of the person
+'         phone:       (string) their phone number
+'         email:       (string) their email address
+'      (* fields make up the primary key)
+
+  Dim rs, query
+  Set rs = Server.CreateObject("ADODB.RecordSet")
+  
+  query = "Select * from directory where " _
+      & field                          _
+      & " like "                          _
+      & "'" & sought & "'"
+
+  rs.Open query, DB_SRC
+    
+  Dim ret(10), cnt
+
+  cnt = 0
+  Do While Not rs.Eof
+     Dim entry, i
+     Set entry = Server.CreateObject("Scripting.Dictionary")
+
+     For Each i In rs.Fields
+         entry.Add i.Name, i.Value    
+     Next    
+
+     ' store this record in the return array
+     Set ret(cnt) = entry 
+     cnt = cnt + 1 
+     rs.MoveNext
+  Loop
+
+  lookup = ret
+
+End Function
+
+
+
+[--Implementing add_address(  )--]
+
+Function add_address( entry )
+' Input: 
+'      Expects a dictionary object with the fields:
+'      * lastname:  (string) last name of the person 
+'      * firstname: (string) first name of the person
+'         phone:       (string) their phone number
+'         email:       (string) their email address
+'      (* fields make up the primary key)
+' Output:
+'      Returns 1 for success, 0 for failure
+  Dim oconn, cm1, cm2
+
+  ' Setup a DB connection and SQL command object
+  Set oconn = Server.CreateObject("ADODB.Connection")
+  oconn.Open DB_SRC
+
+  Set cm1 = Server.CreateObject("ADODB.Command")
+  cm1.ActiveConnection = oconn
+
+  Set cm2 = Server.CreateObject("ADODB.Command")
+  cm2.ActiveConnection = oconn
+  
+  ' First, if a record exist with this key, abort
+  Dim rs, SQLstr
+  SQLstr = "select * from directory where lastname = " _
+       & "? and firstname = ?"
+
+  cm1.CommandText = SQLstr       
+  Set rs = cm1.Execute(, Array(entry.Item("lastname"), _
+                       entry.Item("firstname")) )
+
+  If Not rs.EOF Then
+     ' Any populated record is bad, n'ok?
+     If Not rs.Fields("lastname") = "" Then
+        add_address = 0
+        Exit Function
+     End If
+  End If
+
+  ' Ok to Insert, Setup placeholders
+  cm2.CommandText = "Insert into directory "                _
+              & "(lastname, firstname, phone, email) " _
+              & "Values (?, ?, ?, ?)"
+
+  Set rs = cm2.Execute( , Array( entry.Item("lastname"), _
+                          entry.Item("firstname"),_
+                          entry.Item("phone"),    _ 
+                          entry.Item("email")     _
+                        ) _
+                  )
+  add_address = 1
+
+End Function
+
+
+
+[--Implementing remove_address(  ) --]
+
+Function remove_address( firstname, lastname )
+' Input:
+'      Expects two strings:
+'      firstname: (string) First name of the record to delete
+'      lastname:  (string) last name of the record to delete
+' Output:
+'       Returns 1 for success, 0 for failure
+  Dim oconn, cm1, cm2
+
+  ' Setup a DB connection and SQL command object
+  Set oconn = Server.CreateObject("ADODB.Connection")
+  oconn.Open DB_SRC
+
+  Set cm1 = Server.CreateObject("ADODB.Command")
+  cm1.ActiveConnection = oconn
+
+  Set cm2 = Server.CreateObject("ADODB.Command")
+  cm2.ActiveConnection = oconn
+  
+  ' If a record exist with this key, abort
+  Dim rs, SQLstr
+  SQLstr = "select * from directory where lastname = " _
+       & "? and firstname = ?"
+
+  cm1.CommandText = SQLstr       
+  Set rs = cm1.Execute(, Array(lastname, firstname) )
+
+  If Not rs.EOF Then
+     ' Record must exist to delete
+     If rs.Fields("lastname") = "" Then
+        remove_address = 0
+        Exit Function
+     End If
+  End If
+
+  ' Ok to Insert, Setup placeholders
+  cm2.CommandText = "Delete from directory where lastname = " _
+               & "? and firstname = ?"
+
+  Set rs = cm2.Execute(, Array(lastname, firstname) )
+  
+  remove_address = 1 
+
+End Function
+
+
+
+[--Perl test script for XML-RPC listener --]
+
+#!/usr/bin/perl --
+
+use strict;
+use Frontier::Client;
+use Data::Dumper;
+
+my $rps = Frontier::Client->new(
+          url => "http://durgan.daisypark.net/jjohn/rpc_addresses.asp",
+          debug => 1,
+                );
+
+print "\ntesting dump_address_book\n";
+eval { my $hr = $rps->call(qw/dump_address_book/);
+       print Dumper($hr);
+     };
+
+print "\ntesting lookup\n";
+eval { my $hr = $rps->call(qw/lookup lastname %ra%/);
+       print Dumper($hr);
+     };
+
+print "\ntesting add_address\n";
+eval { my $hr = { lastname  => "Bush", 
+          firstname => "George",
+          phone     => "999 666 8008",
+          email     => "pres\@whitehouse.gov",
+        };
+        print $rps->call("add_address", $hr);
+     };
+
+print "\ntesting remove_address\n";
+eval {
+       print $rps->call("remove_address", "George", "Bush");
+     };
+
+
+
+[--An ASP XML-RPC address book client --]
+
+<BODY BGCOLOR="#FFFFFF">
+<h1>Testing the Perl Server on Marian</h1>
+
+<!--#include virtual="/jjohn/xmlrpc.asp"-->
+<%
+  ' Globals
+  Dim RPC_URL
+  RPC_URL = "http://marian.daisypark.net/RPC2"
+
+  ' Helper functions
+Sub display_record( entry )
+   Dim l
+   Response.Write "<PRE>"
+   For Each l in entry.Keys 
+    Response.Write l & ": " & entry.Item(l) & "<BR>"
+   Next
+   Response.Write "</PRE>"
+End Sub
+%>
+
+<%
+   ' We may have been asked to do something.
+   Dim rc, args(2), action
+   If     Not "" = Request.Form("action") Then 
+         action = Request.Form("action")
+   Elseif Not "" = Request.QueryString("action") Then
+      action = Request.QueryString("action")
+   Else 
+      action = "no action requested"
+   End If
+
+   Select Case action
+
+    Case "add"
+
+       Response.Write "Attempting 'add'</BR>"
+       Dim E
+       Set E = Server.CreateObject("Scripting.Dictionary")
+
+       E.Add "firstname", Request.Form("firstname")
+       E.Add "lastname",  Request.Form("lastname")
+       E.Add "phone",     Request.Form("phone")
+       E.Add "email",     Request.Form("email")
+
+       Call display_record( E )
+
+       Set args(1) = E
+       rc = xmlRPC(RPC_URL, "add_address", args)
+
+       If rc = 1 Then
+            Response.Write " Succeed<BR>"
+       Else
+              Response.Write " Failed<BR>"
+       End If
+
+    Case "view"
+
+       Response.Write "Attempting 'view'</BR>"
+       args(1) = "lastname"
+       If Not "" = Request.Form("lastname") Then
+        args(2) = Request.Form("lastname")
+       Else
+        args(2) = Request.QueryString("lastname")
+       End If
+
+       rc = xmlRPC(RPC_URL, "lookup", args)
+
+       Dim i
+       For i=0 to UBound(rc) - 1
+        Call display_record( rc(i) )
+       Next
+
+    Case "remove"
+
+       Response.Write "Attempting 'remove'</BR>"
+       args(1) = Request.QueryString("firstname")
+       args(2) = Request.QueryString("lastname")
+       rc = xmlRPC( RPC_URL, "remove_address", args)
+        
+       If 1 = rc Then
+         Response.Write "Remove succeeded<BR>"
+       Else
+         Response.Write "Remove failed<BR>"
+       End If
+
+    Case "no action requested"
+       ' Just fall though
+
+    Case Else
+      Response.Write "<font color=red>Don't know how to '" _
+             & action & "'</font><BR>"
+    
+   End Select
+%>
+
+<P>There are this many records in the address table: 
+<%
+   Dim null_list(0), ret2
+
+   ret2 = xmlRPC(RPC_URL, "dump_address_book", null_list)
+
+   Response.Write Ubound(ret2) & "<BR>"
+
+   ' Make links to delete this records
+   Response.Write "Modify the address book?<BR><UL>"
+   Dim j
+   For j = 0 to Ubound(ret2) - 1 
+    Dim l, f
+    l = ret2(j).Item("lastname")
+        f = ret2(j).Item("firstname")
+    Response.Write "<LI>" & f & " " & l & " " &_
+               "<A HREF='http:client.asp?action=view&lastname=" & l _
+            & "&firstname=" & f & "'>"                           _
+                & "<small>view</small></a> | "                       _
+               & "<A HREF='http:client.asp?action=remove&lastname=" _
+            & l                                                  _
+            & "&firstname=" & f & "'>"                           _
+            & "<small>delete</small></a>"            
+   Next
+
+   Response.Write "</UL>"
+%>
+
+<P>Want to add another Address?
+<HR>
+<P>Add a record:
+<FORM method=Post Action=client.asp>
+<Input Type=Hidden Name=action Value=add>
+<PRE>
+last name:  <input type=text name=lastname>
+first name: <input type=text name=firstname>
+phone:      <input type=text name=phone>
+email:      <input type=text name=email>
+</PRE>
+<P><INPUT TYPE=SUBMIT>
+</FORM>
+</HR>
+</BODY>
+
+
+
+[--Perl listener script --]
+
+#!/usr/bin/perl --
+use strict;
+
+use Frontier::Daemon;
+use Data::Dumper;
+use DBI;
+
+sub helloWorld {
+    return "Hello, $_[0]";
+}
+
+sub hash_test {
+    return {
+    first  => "joe",
+    second => "johnston",
+    };
+}
+
+sub arg_test {
+    return @_;
+}
+        
+sub init_db {
+  # return an initialize DBI object
+  return DBI->connect("dbi:mysql:addresses", "editor", "editor") || 
+    die "$DBI::errstr";
+}
+
+sub dump_address_book{
+  # return an array of recs
+  my $dbi = init_db(  );
+
+  my $sth = $dbi->prepare("Select * from directory");
+  $sth->execute || return $sth->errstr;
+
+  my @return;
+  while( my $hr = $sth->fetchrow_hashref ){
+    push @return, $hr;
+  }
+
+  $dbi->disconnect;
+  return \@return;
+}
+
+sub lookup {
+  my ($field, $sought) = @_;
+  print caller, Dumper( \@_ );
+  my $dbi = init_db(  );
+
+  my $sth = $dbi->prepare("select * from directory where $field = ?);
+  $sth->execute($sought) || return $sth->errstr;
+
+  my @return;
+  
+  while( my $hr = $sth->fetchrow_hashref ){
+    push @return, $hr;
+  }
+  $dbi->disconnect;
+  
+  return \@return;
+}
+
+sub add_address {
+  my $entry = shift;
+  print caller, Dumper( \$entry);
+  my $dbi = init_db(  );
+  
+  my $sth = $dbi->prepare("insert into directory "               .
+                  " (lastname, firstname, phone, email) ".
+                  "values (?, ?, ?, ?)");
+
+  my $rc = $sth->execute(@$entry{qw/lastname firstname phone email/});
+  $dbi->disconnect;
+  
+  return (defined $rc) ? 1 : 0;
+}
+
+sub remove_address {
+  my ($first, $last) = @_;
+  print caller, Dumper( \$first, \$last );
+
+  my $dbi = init_db(  );
+  
+  my $sth = $dbi->prepare("delete from directory where ".
+                          "lastname = ? and firstname = ?");
+
+  my $rc = $sth->execute( $last, $first );
+  $dbi->disconnect;
+
+  return (defined $rc) ? 1 : 0;
+}
+
+Frontier::Daemon->new( methods => {
+                   helloWorld => \&helloWorld,
+                   hash_test  => \&hash_test,
+                   arg_test   => \&arg_test,
+                   dump_address_book => \&dump_address_book,
+                   lookup            => \&lookup,
+                   add_address       => \&add_address,
+                   remove_address    => \&remove_address,
+                                  }, 
+                LocalPort => 80,
+                Reuse      => 1,
+                RPC_Debug => 1,
+             );
+
+
+
+[--untitled example --]
+
+<?xml version="1.0" encoding="us-ascii"?>
+<authors>
+    <person id="edd">
+        <name>Edd Dumbill</name>
+        <nationality>British</nationality>
+    </person>
+    <person id="simonstl">
+        <name>Simon St.Laurent</name>
+        <nationality>American</nationality>
+    </person>
+    <person id="mysteryman"/>
+</authors>
+
+
+
+[--untitled example --]
+
+<animal name="dog" legs="4"/>
+<animal legs="4" name="dog"/>
+
+
+
+[--untitled example --]
+
+<animal><name>dog</name><legs>4</legs></animal>
+<animal><legs>4</legs><name>dog</name></animal>
+
+
+
+[--untitled example --]
+
+<person id="mysteryman"></person>
+
+
+
+[--untitled example --]
+
+<foo>
+  <bar>
+  </foo>
+</bar>
+
+
+
+[--untitled example --]
+
+<foo>
+  <bar>
+</foo>
+
+
+
+[--untitled example --]
+
+<foo baz>
+</foo>
+
+
+
+[--untitled example --]
+
+<foo baz=23>
+</foo>
+
+
+
+[--untitled example --]
+
+<badDoc>
+  <para>
+    I'd really like to use the < character
+  </para>
+  <note title="On the proper 'use' of the " character"/>
+</badDoc>
+
+
+
+[--untitled example --]
+
+<
+
+
+
+[--untitled example --]
+
+&lt;
+
+
+
+[--untitled example --]
+
+>
+
+
+
+[--untitled example --]
+
+&gt;
+
+
+
+[--untitled example --]
+
+'
+
+
+
+[--untitled example --]
+
+&apos;
+
+
+
+[--untitled example --]
+
+"
+
+
+
+[--untitled example --]
+
+&quot;
+
+
+
+[--untitled example --]
+
+&
+
+
+
+[--untitled example --]
+
+&amp;
+
+
+
+[--untitled example --]
+
+<badDoc>
+  <para>
+    I'd really like to use the &lt; character
+  </para>
+  <note title="On the proper &apos;use&apos; of the &quot;character"/>
+</badDoc>
+
+
+
+[--untitled example --]
+
+1
+
+
+
+[--untitled example --]
+
+&#48;
+
+
+
+[--untitled example --]
+
+A
+
+
+
+[--untitled example --]
+
+&#65;
+
+
+
+[--untitled example --]
+
+Ñ
+
+
+
+[--untitled example --]
+
+&#xD1;
+
+
+
+[--untitled example --]
+
+®
+
+
+
+[--untitled example --]
+
+&#xAE;
+
+
+
+[--untitled example --]
+
+<phonebook>
+  <person>
+    <name>Albert Smith</name>
+    <number>123-456-7890</number>
+  </person>
+  <person>
+    <name>Bertrand Jones</name>
+    <number>456-123-9876</number>
+  </person>
+</phonebook>
+
+
+
+[--untitled example --]
+
+<phonebook>
+  <person>
+    <name>Melanie Green</name>
+    <phone>123-456-7893</phone>
+  </person>
+</phonebook>
+
+
+
+[--untitled example --]
+
+<!ELEMENT element-name contentspec>
+
+
+
+[--untitled example --]
+
+<!ELEMENT e (#PCDATA)>
+
+
+
+[--untitled example --]
+
+<!ELEMENT e EMPTY>
+
+
+
+[--untitled example --]
+
+<!ELEMENT e ANY>
+
+
+
+[--untitled example --]
+
+<!ELEMENT e (a,b*,c)>
+
+
+
+[--untitled example --]
+
+<!ELEMENT e (b|#PCDATA)>
+
+
+
+[--untitled example --]
+
+<!ELEMENT e (a|b|c)*>
+
+
+
+[--untitled example --]
+
+<!ATTLIST element-name attribute-definitions>
+
+
+
+[--untitled example --]
+
+attrname CDATA #REQUIRED
+
+
+
+[--untitled example --]
+
+attrname CDATA #IMPLIED
+
+
+
+[--untitled example --]
+
+attrname (scissors|paper|stone) "stone"
+
+
+
+[--untitled example --]
+
+attrname CDATA #FIXED "purple"
+
+
+
+[--untitled example --]
+
+<!ATTLIST animal name CDATA #REQUIRED legs (two|four) "four" 
+                 notes CDATA #IMPLIED>
+
+
+
+[--untitled example --]
+
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT nationality (#PCDATA)>
+<!ELEMENT person (name,nationality)*>
+<!ATTLIST person id CDATA #REQUIRED>
+<!ELEMENT authors (person)*>
+
+
+
+[--untitled example --]
+
+<?xml version="1.0" encoding="us-ascii"?>
+<!DOCTYPE authors SYSTEM "http://example.com/authors.dtd">
+<authors>
+    <person id="edd">
+        <name>Edd Dumbill</name>
+        <nationality>British</nationality>
+    </person>
+    <person id="simonstl">
+        <name>Simon St.Laurent</name>
+        <nationality>American</nationality>
+    </person>
+    <person id="mysteryman"/>
+</authors>
+
+
+
+[--untitled example --]
+
+GET /docs/mydoc.html
+
+
+
+[--untitled example --]
+
+GET docs/mydoc.html HTTP/1.0
+User-Agent: Mozilla/4.7 [en] (WinNT; I)
+Host: www.simonstl.com
+Accept: */*
+
+
+
+[--untitled example --]
+
+HTTP/1.0 200 OK
+Date: Sun, 29-Apr-01 12:27:43 GMT
+MIME-version: 1.0
+Content-type: text/html
+
+<html>
+<head><title>My Document</title></head>
+<body><h1>My Document</h1></body>
+</html>
+
+
+
+[--untitled example --]
+
+import java.net.*;
+import java.io.*;
+
+public class test 
+  {
+  public static void main(String[] asArgs)
+    {
+    try
+      {
+      ServerSocket ss=new ServerSocket(1234);
+      Socket s=ss.accept(  );
+      InputStream is=s.getInputStream(  );
+
+      while(true)
+        {
+        int i=is.read(  );
+        if(i==-1) break;
+        System.out.write(i);
+        }
+
+      System.out.println("\n\nConnection closed");
+      }
+    catch(IOException ioe)
+      {
+      System.err.println("Exception:");
+      ioe.printStackTrace(  );
+      }   
+    }
+  }
+
+
+
+[--untitled example --]
+
+<html>
+<head><title>Testing POST - form information</title></head>
+<body>
+<form method="POST" action="http://192.168.124.14:1234">
+<p>Given name:<input name="given" type="text" maxlength="20"></p>
+<p>Family name:<input name="last" type="text" maxlength="30"></p>
+<p>Other information:</p>
+<textarea name="other" cols="20" rows="5" ></textarea>
+<input name="Post it" type="submit">
+</form>
+</body></html>
+
+
+
+[--untitled example --]
+
+POST / HTTP/1.0
+Connection: Keep-Alive
+User-Agent: Mozilla/4.7 [en] (Win95; I)
+Host: 192.168.124.14:1234
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*
+Accept-Encoding: gzip
+Accept-Language: en
+Accept-Charset: iso-8859-1,*,utf-8
+Content-type: application/x-www-form-urlencoded
+Content-length: 100
+
+given=Simon&last=St.Laurent&other=This+is+a+test%0D%0Awith%0D%0Amultiple+lines.
+&Post+it=Submit+Query
+
+
+Connection closed
+
+
+
+[--untitled example --]
+
+<html>
+<head><title>Testing POST - form information</title></head>
+<body>
+<form method="POST" action="http://192.168.124.14:1234" 
+      enctype="multipart/form-data">
+<p>Given name:<input name="given" type="text" maxlength="20"></p>
+<p>Family name:<input name="last" type="text" maxlength="30"></p>
+<p>Other information:</p>
+<textarea name="other" cols="20" rows="5" ></textarea>
+<input name="Post it" type="submit">
+</form>
+</body></html>
+
+
+
+[--untitled example --]
+
+POST / HTTP/1.0
+Connection: Keep-Alive
+User-Agent: Mozilla/4.7 [en] (Win95; I)
+Host: 192.168.124.14:1234
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*
+Accept-Encoding: gzip
+Accept-Language: en
+Accept-Charset: iso-8859-1,*,utf-8
+Content-type: multipart/form-data; boundary=-------------------------365478912630
+Content-Length: 482
+
+---------------------------365478912630
+Content-Disposition: form-data; name="given"
+
+Simon
+---------------------------365478912630
+Content-Disposition: form-data; name="last"
+
+St.Laurent
+---------------------------365478912630
+Content-Disposition: form-data; name="other"
+
+This is a test
+with
+multiple lines.
+---------------------------365478912630
+Content-Disposition: form-data; name="Post it"
+
+Submit Query
+---------------------------365478912630--
+
+
+
+[--untitled example --]
+
+ ---------------------------365478912630  
+
+
+
+[--untitled example --]
+
+<html>
+<head><title>Testing POST - files</title></head>
+<body>
+<form method="POST" action="http://192.168.124.14:1234" 
+      enctype="multipart/form-data">
+<input name="the file" type="file"><br>
+<input name="post it" type="submit">
+</form>
+</body></html>
+
+
+
+[--untitled example --]
+
+<test>This is a test, only a test.</test>
+
+
+
+[--untitled example --]
+
+POST / HTTP/1.0
+Connection: Keep-Alive
+User-Agent: Mozilla/4.7 [en] (Win95; I)
+Host: 192.168.124.14:1234
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*
+Accept-Encoding: gzip
+Accept-Language: en
+Accept-Charset: iso-8859-1,*,utf-8
+Content-type: multipart/form-data; boundary=-----------------------224083090527703
+Content-Length: 350
+
+-------------------------224083090527703
+Content-Disposition: form-data; name="the file"; filename="C:\tester.xml"
+Content-Type: text/xml
+
+<test>This is a test, only a test.</test>
+
+-------------------------224083090527703
+Content-Disposition: form-data; name="post it"
+
+Submit Query
+-------------------------224083090527703--
+
+
+
+[--untitled example --]
+
+POST /RPC HTTP/1.0
+User-Agent: MyCustomXMLRPCtool
+Host: www.example.com
+Content-type: text/xml
+Content-length: 111
+
+<?xml version="1.0" encoding="UTF-8"?>
+<methodCall>
+  <methodName>example.getServerName</methodName>
+</methodCall>
+
+
+
+[--untitled example --]
+
+HTTP/1.0 200 OK
+Server: MyCustomXMLRPCserver
+Date: Fri, 27 Apr 2001 04:23:01 GMT
+Content-Type: text/xml
+Content-Length: 177
+
+<?xml version="1.0" encoding="UTF-8"?>
+<methodResponse>
+  <params>
+    <param>
+      <value><string>My Custom XML-RPC Server</string></value>
+    </param>
+  </params>
+</methodResponse>

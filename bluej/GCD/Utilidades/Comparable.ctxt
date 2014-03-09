@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=interface\ Comparable
+comment1.params=c
+comment1.target=boolean\ esMayor(Comparable)
+comment2.params=c
+comment2.target=boolean\ esMenorOIgual(Comparable)
+comment3.params=c
+comment3.target=boolean\ esMayorOIgual(Comparable)
+comment4.params=c
+comment4.target=boolean\ esIgual(Comparable)
+comment5.params=c
+comment5.target=boolean\ esMenor(Comparable)
+numComments=6

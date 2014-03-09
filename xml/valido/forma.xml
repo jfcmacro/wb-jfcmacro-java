@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FORMA SYSTEM "http://www.dis.eafit.edu.co/cursos/st059/dtd/forma.dtd">
+<FORMA METODO="POST" ACCION="http://www.dis.eafit.co/cgi-bin/prueba">
+<NOMBRE>Forma 1</NOMBRE>
+<FILAS>
+	<FILA>
+		<CAMPO NOMCAMPO="Campo1" LONGITUD="10" TIPO="ENTERO"/>
+		<CAMPO NOMCAMPO="Campo2" LONGITUD="20" TIPO="FLOTANTE"/>
+	</FILA>
+	<FILA>
+		<CAMPO NOMCAMPO="Campo1" LONGITUD="10" TIPO="ENTERO"/>
+		<CAMPO NOMCAMPO="Campo1" LONGITUD="10" TIPO="ENTERO"/>
+	</FILA>
+</FILAS>
+</FORMA>

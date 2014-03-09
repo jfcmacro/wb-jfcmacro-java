@@ -1,0 +1,25 @@
+<!--#include virtual="/jjohn/xmlrpc.asp" -->
+<%
+rpcserver
+
+Function add_em( a, b )
+  add_em = a + b
+End Function
+%>
+
+
+[--An ASP client used to query the listener --]
+
+
+
+
+<!--#include virtual="/jjohn/xmlrpc.asp"-->
+<h1>Computing 3 + 5</h1>
+<%
+   Dim args(2), Answer
+   args(0) = 3
+   args(1) = 5
+   Answer = XMLrpc("http://durgan.daisypark.net/jjohn/rpc_sum.asp", _
+                   "add_em", args)
+%>
+<P>The answer is <%= Answer %>

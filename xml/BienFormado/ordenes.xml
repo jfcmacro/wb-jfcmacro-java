@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ordenes-libros SYSTEM "ordenes-libros.dtd">
+<ordenes-libros>
+<cliente>Duckman</cliente>
+<tienda>Libreria el mal libro</tienda>
+<bienes>
+<libros>
+<nombre>Como tumbar a su mejor amigo</nombre>
+</libros>
+<revistas>
+<nombre>Playboy</nombre>
+<nombre>Penthouse</nombre>
+</revistas>
+</bienes>
+<cliente>Corflake</cliente>
+<tienda>Libreria el buen libro</tienda>
+<bienes>
+<libros>
+<nombre>Como ayudar a su tumbador amigo</nombre>
+</libros>
+</bienes>
+</ordenes-libros>

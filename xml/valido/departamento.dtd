@@ -1,0 +1,7 @@
+<!ELEMENT departamento (empleado)*>
+<!ELEMENT empleado (nombre, (email | url))>
+<!ATTLIST empleado id CDATA #REQUIRED>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT url EMPTY>
+<!ATTLIST url href CDATA #REQUIRED>

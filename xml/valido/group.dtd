@@ -1,0 +1,18 @@
+<!ELEMENT grupo (nombre,url,miembro,miembro?,(mainclasses|haskellexecs)*)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT miembro (nombre,codigo,email)>
+<!ELEMENT mainclasses ((mainclass)+)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT codigo (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT mainclass (EMPTY)>
+<!ELEMENT haskellexecs (cabalfile,haskellexec)>
+<!ELEMENT cabalfile (EMPTY)>
+<!ELEMENT haskellexec (EMPTY)>
+<!ATTLIST mainclass classpath CDATA ".">
+<!ATTLIST mainclass package   CDATA ".">
+<!ATTLIST mainclass clase     CDATA #REQUIRED>
+<!ATTLIST cabalfile cabal CDATA #REQUIRED>
+<!ATTLIST haskellexec name CDATA #REQUIRED>
+<!ATTLIST haskellexec path CDATA "">

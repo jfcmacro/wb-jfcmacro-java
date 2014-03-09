@@ -1,0 +1,60 @@
+import java.io.*;
+
+class Aplicacion1
+{
+	int tamano;
+	RegistroEstudiante re;
+	ArchivoDirectoEstudiante data;
+	
+	public Aplicacion1(int tamano)
+	{
+		this.tamano=tamano;
+		ArchivoDirectoEstudiante ade = new ArchivoDirectoEstudiante("archivo.txt", tamano);
+		re = null;	
+	}
+	
+	public String generarNombre()
+	{
+		char letras[]= {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+		String Nombre="";
+		
+		for(int i=0; i<Math.random()*36; i++)
+		{
+			Nombre=Nombre+letras[(int)(Math.random()*26)];
+		}
+		return Nombre;
+	}
+	
+	public String buscar(int clave)
+	{
+		RegistroEstudiante e;
+		for(int i=0;i<=tamano;i++)
+		{
+			if(e.cedula_)	
+		}			
+	}
+	
+	
+	/*
+	public void adicionar()
+	{
+		for(int i=0;i<=tamano;i++)
+		{	
+			try
+			{
+				Integer clave = new Integer(i);
+				re=new RegistroEstudiante(clave.toString(i),generarNombre());
+				data.escribirUnRegistro(re);
+				data.cerrar();	
+			}
+			
+			catch(IOException e)
+			{
+			e.printStackTrace();
+			}
+		
+		} 
+	}	
+	*/	
+		
+}

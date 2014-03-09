@@ -1,0 +1,108 @@
+# ora_client.py
+
+"""
+ora_client: test Python client for XML-RPC
+"""
+
+import sys, xmlrpclib
+
+##### create xmlrpclib.Server object
+
+# XML-RPC server host might be specified on command line
+if len(sys.argv) > 1:
+    host = sys.argv[1]
+else:
+    host = "http://localhost:8000"
+
+# create object representing connection to server host
+conn = xmlrpclib.Server(host)
+
+###### prepare arguments
+
+i1 = 37         # integer datatype
+s1 = "37"       # string that looks like a number
+s2 = "hi, mom"  # string that looks like a string
+f1 = 3.1416     # floating-point number
+s3 = "3.1416"   # string that looks like a floating-point number
+
+a1 = range(3)   # list
+a2 = (0, 1, 2)  # tuple
+d1 = {'alpha':1, 'beta':2}  # dictionary
+
+# user-defined object
+class MyClass:
+    """
+    simple class, with some instance attributes
+    """
+    def __init_  _(self):
+        """
+        initialize instance data attributes
+        """
+        self.alpha = 1
+        self.beta = 2
+
+o1 = MyClass(  )   # must use object (instance), not class itself
+
+### special XML-RPC datatypes
+
+# boolean data
+obj_bool = xmlrpclib.False
+
+# date-time data: current time
+import time
+obj_dtime = xmlrpclib.DateTime(time.time(  ))
+
+# base64 data
+# Binary object constructor takes a stream of binary data
+binary_file = r'0.gif'
+obj_bin = xmlrpclib.Binary(open(binary_file).read(  ))
+
+##### call the remote procedures
+
+try:
+    ### 1st call
+    print "\n*** Calling SetColor(  ) ..."
+
+    rgb = (255, 255, 0)
+
+    # use hard-coded method name
+    response = conn.SetColor("rectangle", 14, rgb)
+    print response
+
+    ### 2nd call
+    print "\n*** Calling Describe(  ) ..."
+
+    strings = (s1, s2, s3)
+    numbers = (i1, f1)
+    arrays = (a1, a2)
+    dicts = (d1, o1)
+    specials = (obj_bool, obj_dtime, obj_bin)
+    groups = {
+        "grp1": strings,
+        "grp2": numbers,
+        "grp3": arrays,
+        "grp4": dicts,
+        "grp5": specials
+    } # alternative: submit all values in a single structure
+
+    response = conn.Describe(strings, numbers, arrays,
+                             dicts, specials)
+    print response
+
+    ### 3rd call
+    # expecting a Fault response this time
+    print "\n*** Calling ThisMethodDoesNotExist(  ) ..."
+    response = conn.ThisMethodDoesNotExist(  )
+    print "NOT!"
+
+except xmlrpclib.Fault, faultobj:
+    print "Server error:", faultobj.faultCode
+    print ">>> %s <<<" % faultobj.faultString
+
+except:
+    print "Client error: '%s/%s'" % (sys.exc_type, sys.exc_value)
+
+# bye
+sys.exit(0)
+
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE paciente SYSTEM "http://www.eafit.edu.co/~fcardona/PR/dtd/paciente.dtd">
+<paciente>
+   <nombre>Duckman</nombre>
+   <edad>40</edad>
+   <examen>
+      <codigo>C041</codigo>
+      <descripcion>Serologia</descripcion>
+      <resultado>
+         <valor unidad="ml">5.0</valor>
+      </resultado>
+   </examen>
+</paciente>

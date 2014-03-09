@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+     10/11/2006 13:58:14                                                        
+
+	 co.edu.eafit.dis.intentos.intento_20061109_2                   
+     fcardona                                                                
+     ====================================================================== -->
+<project name="Servicio" default="compileAll">
+    <description>
+    Se compila los programas de Servicio para un cliente y un servidor       
+    </description>
+
+    <target name="ejecutarServidor">
+    	<java classname="ServicioServer">
+    		<arg value="-Djava.rmi.server.codebase=file:///home/fcardona/programas/java/rmi/Servicio"/>
+    		<classpath>
+    			<pathelement path="."/>
+    		</classpath>
+    	</java>
+    </target>
+    <target name="compileAll" depends="compileInterfaz,compileServidor,compileCliente,generacionStubs" description="Genera la compilación">
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="compileInterfaz">
+    	<javac srcdir="." classpath="."></javac>
+    </target>
+	
+	<target name="compileServidor">
+		<javac srcdir="." classpath="."></javac>
+	</target>
+	
+	<target name="compileCliente">
+		<javac srcdir="." classpath="."></javac>
+	</target>
+	
+	<target name="generacionStubs" depends="compileServidor">
+		<rmic base="" classname="ServicioImpl"></rmic>
+	</target>	
+
+</project>

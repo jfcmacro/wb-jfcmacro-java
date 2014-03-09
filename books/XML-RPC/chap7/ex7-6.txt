@@ -1,0 +1,35 @@
+#!/usr/bin/perl --
+
+use strict;
+use Frontier::Client;
+use Data::Dumper;
+
+my $rps = Frontier::Client->new(
+          url => "http://durgan.daisypark.net/jjohn/rpc_addresses.asp",
+          debug => 1,
+                );
+
+print "\ntesting dump_address_book\n";
+eval { my $hr = $rps->call(qw/dump_address_book/);
+       print Dumper($hr);
+     };
+
+print "\ntesting lookup\n";
+eval { my $hr = $rps->call(qw/lookup lastname %ra%/);
+       print Dumper($hr);
+     };
+
+print "\ntesting add_address\n";
+eval { my $hr = { lastname  => "Bush", 
+          firstname => "George",
+          phone     => "999 666 8008",
+          email     => "pres\@whitehouse.gov",
+        };
+        print $rps->call("add_address", $hr);
+     };
+
+print "\ntesting remove_address\n";
+eval {
+       print $rps->call("remove_address", "George", "Bush");
+     };
+

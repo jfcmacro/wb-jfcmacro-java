@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE pacientes SYSTEM "file:./paciente2.dtd">
+<pacientes>
+   <paciente>
+      <nombre>Duckman</nombre>
+      <edad>40</edad>
+      <examen>
+         <codigo>C041</codigo>
+         <descripcion>Serologia</descripcion>
+         <resultado>
+            <valor unidad="ml">5.0</valor>
+         </resultado>
+      </examen>
+   </paciente>
+   <paciente>
+      <nombre>Homer Simpson</nombre>
+      <edad>45</edad>
+      <examen>
+         <codigo>T042</codigo>
+         <descripcion>Trigliserios</descripcion>
+         <resultado>
+            <valor_minimo>6077</valor_minimo>
+            <valor_maximo>9000</valor_maximo>
+            <valor unidad="ppm">15000</valor>
+         </resultado>
+      </examen>
+   </paciente>
+</pacientes>

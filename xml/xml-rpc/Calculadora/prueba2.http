@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<methodCall>
+<methodName>Servidor1.suma</methodName>
+<params>
+<param>
+<value><i4>10</i4><value>
+</param>
+<param>
+<value><i4>20</i4><value>
+</param>
+</param>
+</methodCall>

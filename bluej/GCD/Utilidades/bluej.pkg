@@ -1,0 +1,26 @@
+#BlueJ package file
+dependency1.from=Lista
+dependency1.to=Comparable
+dependency1.type=UsesDependency
+package.editor.height=571
+package.editor.width=893
+package.editor.x=0
+package.editor.y=0
+package.numDependencies=1
+package.numTargets=2
+package.showExtends=true
+package.showUses=true
+target1.height=50
+target1.name=Lista
+target1.showInterface=false
+target1.type=ClassTarget
+target1.width=80
+target1.x=210
+target1.y=70
+target2.height=50
+target2.name=Comparable
+target2.showInterface=true
+target2.type=InterfaceTarget
+target2.width=100
+target2.x=90
+target2.y=200

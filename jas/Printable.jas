@@ -1,0 +1,23 @@
+// Definición de las constantes
+.constant
+one     1
+start   32
+stop    126
+.end-constant
+
+// Código principal
+.main
+        LDC_W start
+next:   DUP
+        OUT             // Salida del caracter
+        DUP
+        LDC_W stop
+        ISUB
+        IFEQ done       // Terminamos si alcanzamos el final
+        LDC_W one
+        IADD
+        GOTO next       // Incrementamos y hacemos el siguiente
+done:   POP
+        HALT     
+.end-main
+

@@ -1,0 +1,41 @@
+
+import java.util.Vector;
+import helma.xmlrpc.*;
+
+public class testHandler implements AuthenticatedXmlRpcHandler {
+
+//authenticated execute
+        public Object execute(String methodName, Vector parameters, 
+                      String username, String password) throws Exception {
+                if (checkPassword(username, password)) {
+                        return execute(methodName, parameters);
+                } else {
+                        throw new Exception("Unauthorized user");
+                }
+        }
+//unauthenticated execute - called by authenticated
+        protected Object execute(String methodName, Vector parameters) 
+                         throws Exception {
+                if (methodName=="nameTester") {
+                        String first=(String) parameters.elementAt(0);
+                        String last=(String) parameters.elementAt(1);
+                        return nameTester(first, last);
+                } else {
+                        throw new Exception("No such method!");
+                }
+        }
+
+        private boolean checkPassword(String username, String password) {
+        //password checking logic should be more sophisticated!
+                if (username.equals(password)) {
+                        return true;
+                } else {
+                        return false;
+                }
+        }
+
+        private String nameTester(String first, String last) {
+                return "Reversed: " + last + ", " + first;
+        }
+}
+

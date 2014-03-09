@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+   <!DOCTYPE FORMA SYSTEM "http://www.dis.eafit.edu.co/cursos/st059/dtd/forma.dtd">
+      <FORMA METODO="POST" ACCION="http://www.dis.eafit.edu.co/php/iniciarElDia.php">
+         <NOMBRE>Iniciar el dia</NOMBRE>
+         <FILAS>
+            <FILA>
+              <CAMPO NOMCAMPO="CAMPO1" LONGITUD="10" TIPO="STRING"/>
+              <CAMPO NOMCAMPO="CAMPO2" LONGITUD="20" TIPO="ENTERO"/>
+              <CAMPO NOMCAMPO="CAMPO3" LONGITUD="6"  TIPO="FLOTANTE"/>
+            </FILA>
+            <FILA>
+              <CAMPO NOMCAMPO="CAMPO4" LONGITUD="1"  TIPO="CARACTER"/>
+            </FILA>
+         </FILAS>
+      </FORMA>

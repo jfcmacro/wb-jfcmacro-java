@@ -1,0 +1,63 @@
+#!/usr/bin/perl --
+# XML-RPC client for the punch-clock application
+
+use strict;
+use Frontier::Client;
+use Time::Local;
+use POSIX;
+
+use constant SAT_MAY_5_2001_9AM => timelocal(0,0,9,5,4,101);
+use constant SAT_MAY_5_2001_5PM => timelocal(0,0,17,5,4,101);
+use constant XMLRPC_SERVER => 
+                 'http://marian.daisypark.net:8080/RPC2';
+
+# create client object
+my $client = Frontier::Client->new( url   => XMLRPC_SERVER,
+                                    debug => 0,
+                                  );
+
+# jjohn starts working on the project
+print 
+  "Punching in 'jjohn': ", 
+  status( $client->call('punch_in', 'jjohn') ),
+  "\n";
+
+# bob stops working on the project
+print
+  "Punching out 'bob': ",
+  status( $client->call('punch_out', 'bob') ),
+  "\n";
+
+# output the total time spent on the project
+printf
+  "Total time spent on this project by everyone: %s:%s:%s\n",
+  @{$client->call('project_total_time')};
+
+# output bob's time on the project
+printf
+  "Time 'bob' has spent on this project: %s:%s:%s\n",
+  @{$client->call('emp_total_time', 'bob')};
+ 
+
+# set up date-time values
+my $iso8601_start = strftime("%Y%m%dT%H:%M:%S", 
+                       localtime(SAT_MAY_5_2001_9AM)); 
+
+my $iso8601_end   = strftime("%Y%m%dT%H:%M:%S", 
+                       localtime(SAT_MAY_5_2001_5PM));
+
+my $encoder = Frontier::RPC2->new;
+
+my $start = $encoder->date_time($iso8601_start);
+my $end   = $encoder->date_time($iso8601_end);
+
+# log overtime hours for bob 
+print 
+  "Log weekend work for 'bob': ",
+  status( $client->call('add_entry', 'bob', $start, $end) ),
+  "\n";
+
+sub status {
+  return $_[0] ? 'succeeded' : 'failed';
+}
+

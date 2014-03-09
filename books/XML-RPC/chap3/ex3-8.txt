@@ -1,0 +1,49 @@
+import java.io.IOException;
+import java.net.*;
+import java.util.Vector;
+import helma.xmlrpc.XmlRpc;
+import helma.xmlrpc.XmlRpcClient;
+import helma.xmlrpc.XmlRpcException;
+
+public class XLogClient {
+
+    public static void main(String args[]) {
+        try {
+            throw new Exception("help");
+        } catch (Exception e) {
+            report (e);
+        }
+    }
+
+    public static void report(Exception eReport) {
+        try {
+            // Create the client, identifying the server
+            XmlRpcClient client =
+                new XmlRpcClient("http://192.168.124.14:8899/");
+
+            //get local hostname and IP address
+            InetAddress address=InetAddress.getLocalHost(  );
+            String ipAddress=address.toString(  );
+
+            // Create the request parameters using user input
+            Vector params = new Vector(  );
+            params.addElement(ipAddress);
+            params.addElement(eReport.getMessage(  ));
+            // Issue a request
+            Object result =
+                client.execute("XLog.XLogReport", params);
+
+            // Report the results - this is just for the example
+            // In production, the 'ack' will be thrown away.
+            // Alternatively, the log system could be more interactive
+            // and the result might have meaning.
+            System.out.println("Reponse was: " + result.toString(  ));
+
+            //If we can't report to server, report locally
+        } catch (IOException e) {
+            System.out.println("IO Exception: " + e.getMessage(  ));
+        } catch (XmlRpcException e) {
+            System.out.println("Exception within XML-RPC: " + e.getMessage(  ));
+        }
+    }
+}

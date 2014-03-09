@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="utf-8"?>
+<!DOCTYPE group SYSTEM "http://www1.eafit.edu.co/fcardona/cursos/st0270/group.dtd">
+<grupo>
+   <nombre>oberonmenoszero</nombre>
+   <url>https://subversion.assembla.com/svn/oberomenoszero/trunk</url>
+   <miembro>
+      <nombre>Juan Francisco Cardona McCormick</nombre>
+      <codigo>198610250010</codigo>
+      <email>fcardona@eafit.edu.co</email>
+   </miembro>
+   <miembro>
+      <nombre>Alejandro Gómez Londoño</nombre>
+      <codigo>201010001010</codigo>
+      <email>alegomez544@eafit.edu.co</email>
+   </miembro>
+   <mainclases>
+     <mainclass classpath="bin/classes" clase="MainoberomenoszeroLexer"/>
+   </mainclases>
+</grupo>

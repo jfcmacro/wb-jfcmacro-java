@@ -1,0 +1,14 @@
+module Coleccion
+{
+  /* Definición de la clase lista */
+  interface Lista {
+    exception NoExiste { string explicacion; };
+
+    boolean Adicionar(in string nombre);
+
+    void Borrar(in string nombre)
+      raises (NoExiste);
+
+    boolean Consultar(in string nombre);
+  };
+};

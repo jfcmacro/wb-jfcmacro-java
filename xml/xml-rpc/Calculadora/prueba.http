@@ -1,0 +1,18 @@
+POST /RPC2 HTTP/1.0
+User-Agent: NoConocida/1.0.0 (Linux)
+Host: dis7.eafit.edu.co
+Content-Type: text/xml
+Content-length: 240
+
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<methodCall>
+<methodName>Servidor1.sumar</methodName>
+<params>
+<param>
+<value><i4>10</i4><value>
+</param>
+<param>
+<value><i4>20</i4><value>
+</param>
+</param>
+</methodCall>

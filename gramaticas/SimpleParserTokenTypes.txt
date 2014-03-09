@@ -1,0 +1,7 @@
+// $ANTLR 2.7.7 (2006-11-01): simple2.g -> SimpleParserTokenTypes.txt$
+SimpleParser    // output token vocab name
+DOB=4
+NAME=5
+AGE=6
+SEMI=7
+WS=8

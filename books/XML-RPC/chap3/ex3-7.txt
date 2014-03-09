@@ -1,0 +1,48 @@
+import java.io.IOException;
+import java.util.Vector;
+import java.util.Hashtable;
+import helma.xmlrpc.XmlRpc;
+import helma.xmlrpc.XmlRpcClient;
+import helma.xmlrpc.XmlRpcException;
+
+public class AreaClient {
+
+    public static void main(String args[]) {
+        if (args.length < 1) {
+            System.out.println(
+                "Usage: java AreaClient [radius]");
+            System.exit(-1);
+        }
+
+        try {
+            // Create the client, identifying the server
+            XmlRpcClient client =
+                new XmlRpcClient("http://localhost:8899/");
+
+            // Create a double from the user argument
+            Double radius=new Double(args[0]);
+
+            // Create a hashtable and add a circle request
+            Hashtable requestHash = new Hashtable(  );
+            requestHash.put("type", "circle");
+            requestHash.put("radius", radius);
+
+            // Create the request parameters using user input
+            Vector params = new Vector(  );
+            params.addElement(requestHash);
+
+            // Issue a request
+            Object result =
+               client.execute("area.anyArea", params);
+
+            // Report the results
+            System.out.println("The area of the circle would be: " + result.toString(  ));
+
+        } catch (IOException e) {
+            System.out.println("IO Exception: " + e.getMessage(  ));
+        } catch (XmlRpcException e) {
+            System.out.println("Exception within XML-RPC: " + e.getMessage(  ));
+        }
+    }
+
+}

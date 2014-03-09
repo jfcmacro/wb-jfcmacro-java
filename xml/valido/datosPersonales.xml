@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+   <!DOCTYPE FORMA SYSTEM "http://www.dis.eafit.edu.co/cursos/st059/dtd/forma.dtd">
+      <FORMA METODO="POST" ACCION="http://www.dis.eafit.edu.co/php/datosPersonales.php">
+         <NOMBRE>Iniciar el dia</NOMBRE>
+         <FILAS>
+            <FILA>
+              <CAMPO NOMCAMPO="NOMBRE" LONGITUD="10" TIPO="STRING"/>
+              <CAMPO NOMCAMPO="CEDULA" LONGITUD="10" TIPO="ENTERO"/>
+              <CAMPO NOMCAMPO="SEXO" LONGITUD="1"  TIPO="CARACTER"/>
+            </FILA>
+            <FILA>
+              <CAMPO NOMCAMPO="NOTA" LONGITUD="5"  TIPO="FLOTANTE"/>
+            </FILA>
+         </FILAS>
+      </FORMA>

@@ -1,0 +1,6 @@
+public class Candidato {
+
+       	     Partido partido;
+       public Candidato(Partido partido, String nombre, int votos) {
+       }
+}

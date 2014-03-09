@@ -1,0 +1,20 @@
+include("xmlrpc.inc");
+
+$thestate=32;
+
+$c=new xmlrpc_client("/RPC2", "betty.userland.com", 80);
+$f=new xmlrpcmsg('examples.getStateName',
+                 array(new xmlrpcval($thestate, "int")));
+$r=$c->send($f);
+$v=$r->value(  );
+
+if (!$r->faultCode(  )) {
+    print "State number ". $thestate . " is " .
+          $v->scalarval(  ) . "<br />";
+          print "<hr />I got this value back<br /><pre>" .
+          htmlentities($r->serialize(  )). "</pre><hr />\n";
+} else {
+    print "Fault: ";
+    print "Code: " . $r->faultCode(  ) . 
+    " Reason '" .$r->faultString(  )."'<br />";
+}

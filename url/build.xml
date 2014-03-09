@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="EstadoImpresora" default="run" basedir=".">
+  <description>
+    Verifica el estado de la impresora
+  </description>
+  <property name="main.class"  value=""/>
+  <property name="src"         location="."/>
+  <property name="build"       location="."/>
+  <path id="project.class.path">
+    <pathelement path="${build}"/>
+  </path>
+  <target name="compile">
+    <javac srcdir="${src}" destdir="${build}">
+      <classpath refid="project.class.path"/>
+    </javac>
+  </target>
+  <target name="run" depends="compile">
+    <java classname="${main.class}" fork="true" failonerror="true">
+    </java>
+  </target>
+</project>

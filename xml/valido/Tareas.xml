@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+      <!DOCTYPE TAREAS SYSTEM "http://www.dis.eafit.edu.co/cursos/st059/dtd/tareas.dtd">
+      <TAREAS>
+         <TAREA>
+             <NOMBRE>Preparar actividades </NOMBRE>
+             <ACTIVIDADES>
+                <SEQUENCIAL>
+                   <ACTIVIDAD>
+                      <NOMBRE>Inicia el dia</NOMBRE>
+                      <URL INTERACTIVA="SI">http://www.dis.eafit.edu.co/cursos/st059/pruebas/iniciarElDia.xml</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Vamos a tomar cafe</NOMBRE>
+                      <EMAIL>usuario1@urania.dis.eafit.edu.co</EMAIL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Miremos el colombiano</NOMBRE>
+                      <URL INTERACTIVA="NO">http://www.elcolombiano.com.co</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Miremos el mundo</NOMBRE>
+                      <URL INTERACTIVA="NO">http://www.elmundo.com.co</URL>
+                   </ACTIVIDAD>
+                </SEQUENCIAL>
+                <PARALELO>
+                   <ACTIVIDAD>
+                      <NOMBRE>Obtener Evolution</NOMBRE>
+                      <URL INTERACTIVA="NO">ftp://ftp.ximian.com/pub/source/evolution/evolution-1.1.1.tar.gz</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Obtener Xdiary</NOMBRE>
+                      <URL INTERACTIVA="NO">ftp://ftp.ac-grenoble.fr/ge/Office/xdiary-1.32.tgz</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Obtener MrProject</NOMBRE>
+                      <URL INTERACTIVA="NO">ftp://ftp.codefactory.se/pub/software/mrproject/source/mrproject-0.7.0.tar.gz</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Obtener datos personales</NOMBRE>
+                      <URL INTERACTIVA="SI">http://www.dis.eafit.edu.co/cursos/st059/pruebas/datosPersonales.xml</URL>
+                   </ACTIVIDAD>
+                </PARALELO>
+                <SEQUENCIAL>
+                   <ACTIVIDAD>
+                      <NOMBRE>Esta no existe</NOMBRE>
+                      <EMAIL>noexisto@en.ninguna.parte</EMAIL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Finalizar el dia</NOMBRE>
+                      <EMAIL>fcardona@dis.eafit.edu.co</EMAIL>
+                   </ACTIVIDAD>
+                </SEQUENCIAL>
+             </ACTIVIDADES>
+          </TAREA>
+         <TAREA>
+             <NOMBRE>Iniciar un mundo nuevo</NOMBRE>
+             <ACTIVIDADES>
+                <SEQUENCIAL>
+                   <ACTIVIDAD>
+                      <NOMBRE>Informando sobre nuestras activiades</NOMBRE>
+                      <URL INTERACTIVA="SI">http://www.dis.eafit.edu.co/cursos/st059/pruebas/QuienIniciaTodo.xml</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Nos estamos preparando</NOMBRE>
+                      <EMAIL>usuario3@urania.dis.eafit.edu.co</EMAIL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Miremos la rebelion</NOMBRE>
+                      <URL INTERACTIVA="NO">http://www.rebelion.org</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Miremos la otra parte</NOMBRE>
+                      <URL INTERACTIVA="NO">http://www.elmundo.com.co</URL>
+                   </ACTIVIDAD>
+                </SEQUENCIAL>
+                <PARALELO>
+                   <ACTIVIDAD>
+                      <NOMBRE>Obtener Octal </NOMBRE>
+                      <URL INTERACTIVA="NO">ftp://alpha.gnu.org/pub/gnu/octal/octal-0.1.1.tar.gz</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Obtener </NOMBRE>
+                      <URL INTERACTIVA="NO">ftp://ftp.cs.umb.edu/pub/tex/eplain/doc</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Inscribamonos en la universidad</NOMBRE>
+                      <URL INTERACTIVA="NO">ftp://dollar.biz.uiowa.edu/pub/fil/Recruit</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Obtener datos no personales</NOMBRE>
+                      <URL INTERACTIVA="SI">http://www.dis.eafit.edu.co/cursos/st059/pruebas/datosNoPersonales.xml</URL>
+                   </ACTIVIDAD>
+                </PARALELO>
+                <SEQUENCIAL>
+                   <ACTIVIDAD>
+                      <NOMBRE>No pasa</NOMBRE>
+                      <URL INTERACTIVA="SI">http://www.noexisto.com.co/nada/es/igual</URL>
+                   </ACTIVIDAD>
+                   <ACTIVIDAD>
+                      <NOMBRE>Finalizar el dia</NOMBRE>
+                      <EMAIL>fcardona@dis.eafit.edu.co</EMAIL>
+                   </ACTIVIDAD>
+                </SEQUENCIAL>
+             </ACTIVIDADES>
+          </TAREA>
+       </TAREAS>

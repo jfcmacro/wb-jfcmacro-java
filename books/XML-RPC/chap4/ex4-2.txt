@@ -1,0 +1,133 @@
+#!/usr/bin/perl --
+# XML-RPC server for the punch-clock application
+
+use strict;
+use Frontier::Daemon;
+use DBI;
+
+# create database handle
+my $Dbh = DBI->connect('dbi:mysql:punch_clock', 'editor', 'editor') ||
+          die "ERROR: Can't connect to the database";
+
+END { $Dbh->disconnect; }
+
+# initialize XML-RPC server
+Frontier::Daemon->new(
+                       methods   => {
+                              punch_in            => \&punch_clock,
+                              punch_out           => \&punch_clock,
+                              project_total_time  => \&total_time,
+                              emp_total_time      => \&total_time,
+                              add_entry           => \&add_entry,,
+                                     },
+                       LocalPort => 8080,
+                     );
+
+# punch_clock API function
+sub punch_clock {
+  my ($user) = @_ or die "ERROR: No user given";
+
+  $Dbh->do("Lock Tables punch_clock WRITE") 
+      or die "ERROR: Couldn't lock tables";
+
+  if( is_punched_in($user) ){
+    my $sth = $Dbh->prepare(<<EOT);
+update punch_clock set end=NOW(  ) where username = ? 
+and (end = "" or end is NULL)
+EOT
+    $sth->execute($user) || die "ERROR: SQL execute failed";
+
+  }else{
+    my $sth = $Dbh->prepare(<<EOT);
+insert into punch_clock (username, begin) values (?, NOW(  ))
+EOT
+    $sth->execute($user) || die "ERROR: SQL execute failed";
+
+  }
+
+  $Dbh->do("Unlock Tables");
+
+  my $encoder = Frontier::RPC2->new;
+  return $encoder->boolean(1);
+}
+
+# total_time API function
+sub total_time {
+  my ($user) = @_;
+
+  my $sth; 
+  if( $user ){
+    $sth = $Dbh->prepare(<<EOT);
+Select SEC_TO_TIME(SUM(UNIX_TIMESTAMP(end) - UNIX_TIMESTAMP(begin))) 
+from punch_clock where username = ?
+EOT
+  $sth->execute($user) || die "ERROR: SQL execute failed";
+
+  }else{
+    $sth = $Dbh->prepare(<<EOT);
+Select SEC_TO_TIME(SUM(UNIX_TIMESTAMP(end) - UNIX_TIMESTAMP(begin))) 
+from punch_clock
+EOT
+    $sth->execute || die "ERROR: SQL execute failed";
+  }
+
+  my $total = $sth->fetchall_arrayref;
+  # return an hour, minute, second list
+  if( $total && $total->[0] ){
+    return [ split ':', $total->[0]->[0], 3 ];
+  }else{ 
+    die "ERROR: Couldn't retrieve any data"
+  } 
+}
+
+# add_entry API function
+sub add_entry {
+  my ($user, $start, $end) = @_;
+
+  if( !($user && $start && $end) ){
+    die "ERROR: Need username and start and end dates";
+  }
+
+  my $sth = $Dbh->prepare(<<EOT);
+insert into punch_clock (username, begin, end) values (?,?,?)
+EOT
+ 
+  unless( $sth->execute($user, 
+                  iso2mysql($start->value), 
+                  iso2mysql($end->value))   ){
+    die "ERROR: SQL execute failed";
+  }
+
+  my $encoder = Frontier::RPC2->new;
+  return $encoder->boolean(1);
+  
+}
+
+# helper functions
+
+sub is_punched_in {
+  my ($user) = @_;
+  
+  my $sth = $Dbh->prepare(<<EOT);
+select begin from punch_clock where username = ? 
+and (end = "" or end is NULL)
+EOT
+
+  $sth->execute($user) || die "ERROR: SQL execute failed";
+  my $result = $sth->fetchall_arrayref;
+  if( $result && $result->[0]){
+    if( $result->[0]->[0] ){
+      return 1;
+    }
+  }
+  return;
+}
+
+sub iso2mysql {
+  my ($iso) = @_;
+  
+  $iso =~ s/T/ /;
+  $iso =~ s/^(.{4})(.{2})(.{2})/$1-$2-$3/;
+  return $iso;
+}
+

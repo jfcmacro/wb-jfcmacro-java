@@ -1,0 +1,13 @@
+public class AreaHandler {
+
+        public Double rectArea(double length, double width) {
+        return new Double(length*width);
+    }
+
+    public Double circleArea(double radius) {
+        double value=(radius*radius*Math.PI);
+        return new Double (value);
+    }
+
+}
+

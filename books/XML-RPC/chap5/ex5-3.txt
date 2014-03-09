@@ -1,0 +1,212 @@
+<?php
+// $Id: ch05.xml,v 1.4 2001/08/09 19:33:33 becki Exp $
+// A program that browses Meerkat's story store and allows
+// users to append spontaneous discussions to the story
+// in question.
+
+include("xmlrpc.inc");
+
+$mydir="/demo";
+
+// bomb(  ) just finishes off the page before quitting
+function bomb() { print "</body></html>"; exit(  ); }
+
+// dispatch(  ) ensures error handling for XML-RPC calls
+function dispatch($client, $method, $args) {
+    $msg=new xmlrpcmsg($method, $args);
+    $resp=$client->send($msg);
+    if (!$resp) { print "<p>IO error: ".$client->errstr ."</p>"; bomb(  ); }
+    if ($resp->faultCode(  )) {
+        print "<p>There was an error: " . $resp->faultCode(  ) . " " .
+            $resp->faultString(  ) . "</p>";
+        bomb(  );
+    } 
+    return xmlrpc_decode($resp->value(  ));    
+}
+
+// create client for discussion server
+$dclient=new xmlrpc_client("${mydir}/discuss.php",
+                     "xmlrpc.usefulinc.com", 80);
+
+// check if we're posting a comment, and send it if so
+$storyid=$HTTP_POST_VARS["storyid"];
+if ($storyid) {
+    // send the comment to the comment server
+    $res=dispatch($dclient, "discuss.addComment", 
+            array(new xmlrpcval($storyid),
+                new xmlrpcval(stripslashes
+                    ($HTTP_POST_VARS["name"])),
+                new xmlrpcval(stripslashes
+                    ($HTTP_POST_VARS["commenttext"]))));
+
+    // send the browser back to the originating page
+    Header("Location: ${mydir}/comment.php?catid=" .
+                 $HTTP_POST_VARS["catid"] . "&chanid=" .
+                 $HTTP_POST_VARS["chanid"] . "&oc=" .
+                 $HTTP_POST_VARS["catid"]);
+    exit(0);
+}
+
+?><html><head><title>meerkat browser</title></head>
+<body bgcolor="#ffffff">
+<h2>Meerkat integration</h2>
+<?php
+// handle incoming parameters
+$catid=$HTTP_GET_VARS["catid"];
+if ($HTTP_GET_VARS["oc"]==$catid)
+    $chanid=$HTTP_GET_VARS["chanid"];
+else 
+    $chanid=0;
+
+// create the Meerkat client
+$client=new xmlrpc_client("/meerkat/xml-rpc/server.php",
+                          "www.oreillynet.com", 80);
+
+if ($HTTP_GET_VARS["comment"]) {
+    // we're making a comment on a story,
+    // so display a comment form.
+    // TODO: retrieve the story headline & abstract
+?>
+<h3>Make a comment on the story</h3>
+<form method="post">
+<p>Your name:<br /><input type="text" size="30" name="name" /></p>
+<p>Your comment:<br /><textarea rows="5" cols="60"
+   name="commenttext"></textarea></p>
+<input type="submit" value="Send comment" />
+<input type="hidden" name="storyid" 
+   value="<?php echo $HTTP_GET_VARS["comment"];?>" />
+<input type="hidden" name="chanid" 
+   value="<?php echo $chanid; ?>" />
+<input type="hidden" name="catid" 
+   value="<?php echo $catid; ?>" />
+
+</form>
+<?php
+} else {
+    // we're exploring the story store
+    // first, get the list of top-level categories
+    $categories=dispatch($client, "meerkat.getCategories", array(  ));
+
+    // if we've chosen a category, get list of
+    // web sites in that category
+    if ($catid)
+        $sources = dispatch($client, "meerkat.getChannelsByCategory", 
+
+     array(new xmlrpcval($catid, "int")));
+
+    // if we've chosen a web site, get list of
+    // most recent 5 stories from that web site
+    if ($chanid) {
+        $stories = dispatch($client, "meerkat.getItems",
+            array(new xmlrpcval(
+                array(
+                    "channel" => new xmlrpcval($chanid, "int"),
+                    "ids" => new xmlrpcval(1, "int"),
+                    "descriptions" => new xmlrpcval(200, "int"),
+                    "num_items" => new xmlrpcval(5, "int"),
+                    "dates" => new xmlrpcval(0, "int")
+                    ), "struct")));
+    }
+    // data is fetched, now render the page
+?>
+<form>
+<p>Subject area:<br />
+<select name="catid">
+<?php
+     // category chooser
+      if (!$catid)
+            print "<option value=\"0\">Choose a category</option>\n";
+      while(list($k,$v) = each($categories)) {
+            print "<option value=\"" . $v['id'] ."\"";
+            if ($v['id']==$catid) print " selected=\"selected\"";
+            print ">". $v['title'] . "</option>\n"; 
+        }
+?>
+</select></p>
+<?php 
+    if ($catid) { 
+?>
+<p>News source:<br />
+<select name="chanid">
+<?php
+     // web site chooser
+     if (!$chanid)
+           print "<option value=\"0\">Choose a source</option>\n";
+     while(list($k,$v) = each($sources)) {
+            print "<option value=\"" . $v['id'] ."\"";
+            if ($v['id']==$chanid) print "\" selected=\"selected\"";
+            print ">". $v['title'] . "</option>\n"; 
+        }
+?>
+</select>
+</p>
+
+<?php 
+    } // end if ($catid)
+?>
+
+<p><input type="submit" value="Update" /></p>
+<input type="hidden" name="oc" value="<?php echo $catid; ?>" />
+</form>
+
+<?php 
+     if ($chanid) { 
+?>
+
+<h2>Stories available</h2>
+<table>
+<?php
+     // story chooser
+     while(list($k,$v) = each($stories)) {
+         print "<tr>";
+         print "<td><b>" . $v['title'] . "</b><br />";
+         print $v['description'] . "<br />";
+         print "<em><a target=\"_blank\" href=\"" . 
+             $v['link'] . "\">Read full story</a> ";
+         print "<a href=\"comment.php?catid=${catid}&chanid=${chanid}&" .
+             "oc=${oc}&comment=" . $v['id'] . "\">Comment on this story</a>";
+         print "</em>";
+         print "</td>";
+         print "</tr>\n";
+         
+         // now look for existing comments that the
+         // comment server knows about.
+         $res=dispatch($dclient, "discuss.getComments", 
+                array(new xmlrpcval($v['id'])));
+
+         if (sizeof($res)>0) {
+             // $res is an array of associative arrays
+             // -- the result of an xmlrpc_decode(  ) call
+
+             print "<tr><td bgcolor=\"#dddddd\"><p><b><i>" .
+                 "Comments on this story:</i></b></p>";
+             for($i=0; $i<sizeof($res); $i++) {
+                 $s=$res[$i];
+                 print "<p><b>From:</b> " . 
+                        htmlentities($s['name']) . "<br />";
+                 print "<b>Comment:</b> " . 
+                        htmlentities($s['comment']) . "</p>";
+             }
+             print "</td></tr>\n";
+         }
+         print "<tr><td><hr /></td></tr>\n";
+     }
+?>
+</table>
+
+<?php 
+        } // end if ($chanid) 
+} // end if ($HTTP_GET_VARS["comment"])
+?>
+
+<!-- page footer -->
+<hr />
+<p>
+<a href="http://meerkat.oreillynet.com"><img align="right" 
+    src="http://meerkat.oreillynet.com/icons/meerkat-powered.jpg"
+    height="31" width="88" alt="Meerkat powered, yeah!"
+    border="0" hspace="8" /></a>
+<em>$Id: ch05.xml,v 1.4 2001/08/09 19:33:33 becki Exp $</em></p>
+</body>
+</html>
+

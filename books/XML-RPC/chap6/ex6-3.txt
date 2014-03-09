@@ -1,0 +1,78 @@
+# xmlrpc_cgi.py
+
+import xmlrpclib
+import os, sys, string
+
+#### HTTP message templates
+
+success_msg = """
+HTTP/1.1 200 OK
+Content-type: text/xml
+Content-length: %d
+
+%s
+""" 
+
+failure_msg = """
+HTTP/1.1 500 Internal Server Error
+
+"""
+
+#### functions that implement XML-RPC API
+
+def do_SetColor(shape_type, shape_id, color_tuple):
+  return "hello from do_SetColor"
+
+def do_Describe(*one_or_more_args):
+  return "hello from do_Describe"
+
+def call(meth_name, arg_tuple):
+    """
+    XML-RPC method dispatcher
+    """
+    myAPI = ("SetColor", "Bounce", "Describe")
+    if meth_name in myAPI:
+        func_obj = eval("do_" + meth_name)
+        return apply(func_obj, arg_tuple)
+    else:
+        raise xmlrpclib.Fault(123, "Unknown method name")
+
+##### main program
+
+if __name__ == "__main_  _":
+
+    try:
+        # get arguments
+        data = sys.stdin.read(  )
+        params, method = xmlrpclib.loads(data)
+
+        # generate response
+        try:
+            response = call(method, params)
+            if type(response) != type((  )):
+                response = (response,)
+
+        except xmlrpclib.Fault, faultobj:
+            # generated response was a Fault
+            response = xmlrpclib.dumps(faultobj)
+
+        except:
+            # report exception back to server
+            response = xmlrpclib.dumps(
+              xmlrpclib.Fault(1,
+              "%s:%s" % (sys.exc_type, sys.exc_value))
+            )
+        else:
+            # no exception occurred:
+            # send method's return value back to server
+            response = xmlrpclib.dumps(
+                response,
+                methodresponse=1
+                )
+    except:
+        # internal error, report as HTTP server error
+        print failure_msg
+    else:
+        # no internal error: send back a "success" response
+        print success_msg % (len(XML_response), XML_response) 
+

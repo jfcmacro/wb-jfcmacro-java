@@ -1,0 +1,21 @@
+import java.util.Vector;
+import helma.xmlrpc.XmlRpcHandler;
+
+public class testHandler implements XmlRpcHandler {
+
+        public Object execute(String methodName, Vector parameters) throws java.lang.
+Exception {
+                if (methodName=="nameTester") {
+                        String first=(String) parameters.elementAt(0);
+                        String last=(String) parameters.elementAt(1);
+                        return nameTester(first, last);
+                } else {
+                        throw new Exception("No such method!");
+                }
+        }
+
+        private String nameTester(String first, String last) {
+                return "Reversed: " + last + ", " + first;
+        }
+
+}

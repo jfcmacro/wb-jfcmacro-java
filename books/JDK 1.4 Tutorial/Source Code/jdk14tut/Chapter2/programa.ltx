@@ -1,0 +1,599 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+\title{Programa de sistemas operativos ST075 2003-1}
+\author{Juan Francisco Cardona Mc'Cormick}
+
+\begin{document}
+
+\maketitle
+\bibliographystyle{amsalpha}
+
+\section*{Objetivo final}
+Presentar los conceptos, las estructuras y los mecanismos de los sistemas 
+operativos actuales a través de una visión aplicada, que nos 
+ayudará a comprender el uso y las potencialidades de los sistemas 
+operativos actuales.
+
+\section*{Objetivos específicos}
+
+\begin{itemize}
+\item Se identificará las diferentes estructuras que son utilizadas
+para la construcción de los sistemas operativos actuales.
+\item El estudiante comprenderá y manejará el objetivo doble de los sistemas
+operativos, cómo máquina virtual extendida y cómo administrador
+de recursos.
+\item Se estudiará como el concepto de programa se redefine
+en los sistemas operativos como procesos o hilos y como estos
+ejecutados, planificados y gestionados.
+\item Se comprenderán las relaciones que existen entre los
+procesos (o hilos) a través de los mecanismos de comunicación entre
+procesos (o hilos), sincronización y concurrencia. Y cómo, estos mecanismos son
+soportados por los sistemas operativos actuales.
+\end{itemize}
+
+\section*{Metodología}
+El curso estará basado en presentaciones magistrales, complementadas 
+con una serie de lecturas sobre cada una de los capítulos y de los
+temas, además tendrá una serie de talleres prácticos sobre 
+las diferentes llamadas al sistema.
+
+\section*{Contenido}
+
+\subsection*{Capítulo 0. Un vistazo al sistema de computador}
+
+\subsubsection*{Objetivo}
+El objetivo de esta sección es introducir la arquitectura básica 
+de los computadores, su organización y la forma básica en que 
+se ejecutan los programas.
+
+\subsubsection*{Temas}
+
+\begin{itemize}
+\item Estructura básica del computador
+\begin{itemize}
+\item Elementos básicos
+\item Procesador, registro
+\end{itemize}
+\item Interrupciones
+\item Ejecución de instrucciones
+\item Jerarquía de memoria
+\begin{itemize}
+\item Memoria virtual
+\item Memoria cache
+\end{itemize}
+\item Técnicas de comunicación
+\item Protección
+\item Arquitectura general de los sistemas
+\end{itemize}
+
+\subsubsection*{Lecturas}
+\begin{itemize}
+\item \cite[páginas 9--51]{sta:so2002}
+\item \cite[páginas 19--43]{sil:siop}
+\item \cite[páginas 1--32]{car:siop}
+\end{itemize}
+
+\subsection*{Capítulo 1. Conceptos básicos de los sistemas operativos}
+
+\subsubsection*{Objetivo}
+Se mostrará las estructuras y los elementos más importantes que hacen parte
+de cualquier sistema operativo.
+
+\subsubsection*{Temas}
+
+\begin{itemize}
+\item Definición de un sistema operativo (Objetivos y funciones)
+\item Historia de los sistemas operativos
+\item Componentes y estructura de un sistema operativo
+\item Procesos
+\item Administración de memoria
+\item Protección y seguridad
+\item Administración de recursos y planificación
+\item Estructura por niveles de los sistemas operativos
+\item Componentes
+\begin{itemize}
+\item Procesos
+\item Archivos
+\item Llamadas al sistema (POSIX, Win32)
+\item Shell (Basados en caracteres y en entornos gráficos)
+\end{itemize}
+\item Características de los sistemas operativos modernos
+\begin{itemize}
+\item Arquitectura microkernel
+\item Multihilos
+\item Procesamiento simétrico
+\item Sistemas operativos distribuidos
+\item Sistemas de tiempo real
+\end{itemize}
+\item Conceptos y ejemplos de algunos sistemas operativos (Windows XP, 
+Unix SVR, Linux, Solaris).
+\end{itemize}
+
+\subsection*{Lecturas}
+
+\begin{itemize}
+\item \cite[páginas 53--102]{sta:so2002}
+\item \cite[páginas 3--22, 49--88, 789--804]{sil:siop}
+\item \cite[páginas 33-76]{car:siop}
+\item \cite[páginas 2--17]{fly:siop}
+\item \cite[páginas 3--30]{mil:siop}
+\item \cite[páginas 1-46]{tan:siopdi1998}
+\item \cite[páginas 1--125]{sol:afawnt}
+\item \cite[páginas 1--?]{bac:duos}
+\item \cite[páginas 69-73]{orf:csgs}
+\end{itemize}
+
+\subsection*{Capítulo 2. Procesos e hilos}
+
+\subsubsection*{Objetivo}
+Entender como los programas se gestionan a través del concepto de procesos
+e hilos y cuál es su ciclo de vida y cómo este puede ser gestionado.
+
+\subsubsection*{Temas}
+
+\begin{itemize}
+\item Concepto de procesos
+\item Multitarea
+\item Información del proceso
+\begin{itemize}
+\item Estado del procesador
+\item Imagen en memoria de un proceso
+\item Bloque de control de un proceso (BCP)
+\item Tablas proceso
+\end{itemize}
+\item Estados del proceso
+\begin{itemize}
+\item Cambio de contexto
+\item Cambio de proceso
+\end{itemize}
+\item{Hilos}
+\item Multiprocesamiento Simétrico
+\item Microkernel
+\item Planificación de la CPU
+\begin{itemize}
+\item Conceptos básicos
+\item Criterios de planificación
+\item Tipos de planificación
+\item Multiprocesadores
+\item Planificación de tiempo real
+\end{itemize}
+\item Ejemplos de planificación en Unix System 7, Linux, Unix SVR4, 
+Windows 2000
+\end{itemize}
+
+\subsubsection*{Lecturas}
+
+\begin{itemize}
+\item \cite[páginas 107--196, 393--470]{sta:so2002}
+\item \cite[páginas 89-154]{sil:siop}
+\item \cite[páginas 77-162]{car:siop}
+\item \cite[páginas 77--98]{fly:siop}
+\item \cite[páginas 31--96]{mil:siop}
+\item \cite[páginas 47-152]{tan:siopdi1998}
+\item \cite[páginas 127--194]{sol:afawnt}
+\item \cite[páginas 1--?]{bac:duos}
+\item \cite[páginas 29-76, 139--165, 167--204, 333--364, 365--400]{rob:upp}
+\item \cite[páginas 1--52,515--598]{ric:wnta}
+\end{itemize}
+
+\subsection*{Capítulo 3. Comunicación, concurrencia y bloqueos}
+
+\subsubsection*{Objetivo}
+
+Entender como los procesos pueden interactuar con otras entidades,
+los problemas que surge con el multiproceso o el tiempo compartido y
+cómo estos pueden ser solucionados. 
+
+\subsubsection*{Temas}
+
+\begin{itemize}
+\item Principios de concurrencia
+\item El problema de la sección critica
+\item Solución por software
+\item Solución por hardware
+\item Semáforos
+\item Secciones criticas
+\item Monitores
+\item Paso de mensajes
+\item Transacciones atómicas
+\item Problemas clásicos de la concurrencia
+  \begin{itemize}
+  \item Productor/Consumidor
+  \item Lectores/Escritores
+  \item El problema de los filósofos comensales.
+  \end{itemize}
+\item Ejemplo de semáforos, monitores, paso de mensajes en Windows y 
+  Unix
+\item Modelo del sistema en bloqueos mutuos
+\item Caracterización de bloqueos mutuos
+\item Métodos para manejar bloqueos mutuos
+\item Prevención de bloqueos mutuos
+\item Evitación de bloqueos mutuos
+\item Detección de bloqueos mutuos
+\item Recuperación de bloqueos mutuos
+\item Recuperación después de un bloqueo mutuo
+\item Estrategia combinada para el manejo de bloqueos mutuos
+\end{itemize}
+
+\subsubsection*{Lecturas}
+
+\begin{itemize}
+\item \cite[páginas 197--298]{sta:so2002}
+\item \cite[páginas 155-236]{sil:siop}
+\item \cite[páginas 223--350]{car:siop}
+\item \cite[páginas 129--148, 103--126]{fly:siop}
+\item \cite[páginas 97--200]{mil:siop}
+\item \cite[páginas 47-152]{tan:siopdi1998}
+\item \cite[páginas 289--332, 365--400]{rob:upp}
+\item \cite[páginas 159--268]{ric:wnta}
+\end{itemize}
+
+\subsection*{Capítulo 4. Gestión de memoria}
+
+\subsubsection*{Objetivo}
+Entender cómo el sistema operativo implementa el concepto de multiprogramación
+permitiendo la existencia de más de un programa en la memoria del computador
+y qué políticas sigue para lograr este requisito.
+
+\subsubsection*{Temas}
+
+\begin{itemize}
+\item Antecedentes
+\item Requerimientos de gestión de memoria
+\item Espacio de direcciones lógico y físico
+\item Intercambio
+\item Asignación continua
+\item Paginación
+\item Segmentación
+\item Segmentación con paginación
+\item Memoria virtual, estructuras de control
+\item Paginación por demanda
+\item Desempeño de la paginación por demanda
+\item Reemplazo de páginas
+\item Algoritmo de reemplazo de páginas
+\item Asignación de marcos
+\item Hiper paginación
+\item Otras consideraciones
+\item Segmentación por demanda
+\item Gestión de la memoria en Linux, Unix y Windows
+\end{itemize}
+
+\subsubsection*{Lecturas}
+
+\begin{itemize}
+\item \cite[páginas 301--390]{sta:so2002}
+\item \cite[páginas 239--336]{sil:siop}
+\item \cite[páginas 163--221]{car:siop}
+\item \cite[páginas 18--76]{fly:siop}
+\item \cite[páginas 203--306]{mil:siop}
+\item \cite[páginas 309--400]{tan:siopdi1998}
+\item \cite[páginas 195--276]{sol:afawnt}
+\item \cite[páginas 53--128]{ric:wnta}
+\item \cite[páginas 91--120]{ker:elpc}
+\end{itemize}
+
+\subsection*{Capítulo 5. Entrada y salida}
+
+\subsubsection*{Objetivo}
+
+Descubrir cómo el sistema operativo gestiona los dispositivos y ofrece 
+una única interfaz para que los programas puedan utilizar diferentes 
+clases de dispositivos.
+
+\subsubsection*{Temas}
+
+\begin{itemize}
+\item Generalidades
+\item Hardware de E/S (conexión, dispositivos, arquitectura del sistema)
+\item Interfaz de E/S
+\item Almacenamiento secundario
+\begin{itemize}
+\item Discos
+\item Planificación
+\item Administración de discos y de espacio de intercambio
+\item RAID
+\item Confiabilidad de los discos
+\end{itemize}
+\item Almacenamiento terciario
+\begin{itemize}
+\item Dispositivos
+\item Estructura
+\item Tareas
+\item Cuestiones de desempeño
+\end{itemize}
+\item El reloj
+\item La terminal
+\item Manejo de E/S en Linux, Unix y Windows
+\end{itemize}
+
+\subsubsection*{Lecturas}
+
+\begin{itemize}
+\item \cite[páginas 473--524]{sta:so2002}
+\item \cite[páginas 397--469]{sil:siop}
+\item \cite[páginas 351--417]{car:siop}
+\item \cite[páginas 150--180]{fly:siop}
+\item \cite[páginas 423--465]{mil:siop}
+\item \cite[páginas 153--308]{tan:siopdi1998}
+\item \cite[páginas 145--160]{ker:elpc}
+\item \cite[páginas 116-122]{rob:upp}
+\item \cite[páginas 295--325]{sol:afawnt}
+\end{itemize}
+
+\subsection*{Capítulo 6. Gestión de archivos y directorios}
+
+\subsubsection*{Objetivo}
+
+Mostrar como el sistema operativo organiza el sistema de almacenamiento 
+secundario y los mecanismos para gestionarlos.
+
+\subsubsection*{Temas}
+
+\begin{itemize}
+\item El concepto de archivo
+\item Métodos de acceso
+\item Estructura de directorios
+\item Protección
+\item Semántica de consistencia
+\item Estructura del sistema de archivos
+\item Métodos de asignación
+\item Administración del espacio libre
+\item Implementación de directorios
+\item Eficiencia y desempeño
+\item Recuperación
+\item Gestión de archivos en Unix, Linux y Windows
+\end{itemize}
+
+\subsubsection*{Lecturas}
+
+\begin{itemize}
+\item \cite[páginas 525--564]{sta:so2002}
+\item \cite[páginas 337--394]{sil:siop}
+\item \cite[páginas 419--493]{car:siop}
+\item \cite[páginas 181-207]{fly:siop}
+\item \cite[páginas 307--368]{mil:siop}
+\item \cite[páginas 401--506]{tan:siopdi1998}
+\item \cite[páginas 77-138]{rob:upp}
+\item \cite[páginas 161-180]{ker:elpc}
+\item \cite[páginas 415--514]{ric:wnta}
+\item \cite[páginas 359--410]{sol:afawnt}
+\end{itemize}
+
+\subsection*{Capítulo 7. Seguridad y protección}
+
+\subsubsection*{Objetivo}
+
+Mostrar los riesgos para la seguridad y la protección de los diferentes
+recursos del sistema operativo.
+
+\subsubsection*{Temas}
+
+\begin{itemize}
+\item Amenazas de seguridad
+\item Protección 
+\item Intrusos
+\item Software Malicioso
+\item Objetivos de la protección
+\item Matriz de acceso
+\item Implementación de la matriz de acceso
+\item Sistemas basados en capacidades
+\item Protección basada en el lenguaje
+\item Diseño de sistemas operativos seguros
+\item Criptografía
+\item Seguridad y protección de sistemas operativos de propósito 
+general
+\item Servicios de protección de seguridad
+\item Clasificadores de seguridad de los computadores
+\end{itemize}
+\subsection*{Lecturas}
+\begin{itemize}
+\item \cite[páginas 647--697]{sta:so2002}
+\item \cite[páginas 597-644]{sil:siop}
+\item \cite[páginas 497--557]{car:siop}
+\item \cite[páginas 258--278]{fly:siop}
+\item \cite[páginas 371--420]{mil:siop}
+\item \cite[páginas 434-453]{tan:siopdi1998}
+\item \cite[páginas 277--294]{sol:afawnt}
+\end{itemize}
+
+\section*{Sesiones}
+
+En este semestre se inciará el proceso de ajuste con el decreto 808, 
+para ello se modificará la relación de horas clase y estudio individual 
+que se encuentra en una relación 96/96 a la relación 78/114 durante el
+semestre 2003-1, de la siguiente forma.
+
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+\textbf{Actividad} & \textbf{Horas} \\ \hline
+\textbf{Clase} & 78 \\ \hline
+Talleres individuales (9) & 18 \\ \hline
+Lecturas capítulos & 36 \\ \hline
+Prácticas (5) & 50 \\ \hline
+Lecturas adicionales (5) & 10 \\ \hline
+\textbf{Total estudio individual} & 114 \\ \hline
+\end{tabular}
+\end{center}
+
+Para el siguiente semestre 2003-2. Los cambios serán los siguientes:
+
+\begin{center}
+\begin{tabular}{|c|c|} \hline
+\textbf{Actividad} & \textbf{Horas} \\ \hline
+\textbf{Clase} & 64 \\ \hline
+Talleres individuales (11) & 22 \\ \hline
+Lecturas capítulos & 42 \\ \hline
+Prácticas (5) & 50 \\ \hline
+Lecturas adicionales (7) & 14 \\ \hline
+\textbf{Total estudio individual} & 126 \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\item Presentación. Capítulo 0.
+  \begin{enumerate}
+  \item Presentación e indicaciones iniciales.
+  \item Estructura básica del computador.
+  \item Interrupciones.
+  \item Ejecución de instrucciones.
+  \item Jerarquía de memoria
+  \end{enumerate}
+\item Continuación Capítulo 0 y Capítulo 1.
+  \begin{enumerate}
+  \item Técnicas de comunicación.
+  \item Protección.
+  \item Arquitectura general de los sistemas.
+  \item Definición de un sistema operativo.
+  \item Historia de los sistemas operativos.
+  \end{enumerate}
+\item Taller 1.Componentes del sistema operativo
+  \begin{enumerate}
+  \item Procesos.
+  \item Archivos.
+  \item Llamadas al sistema.
+  \item Shell.
+  \end{enumerate}
+\item Capítulo 1.
+  \begin{enumerate}
+  \item Componentes y estructuras de los sistemas operativos.
+  \item Protección y seguridad
+  \end{enumerate}
+\item Capítulo 1.
+  \begin{enumerate}
+  \item Administración de recursos y seguridad.
+  \item Estructura de los sistemas operativos.
+  \item Características de los sistemas operativos modernos.
+  \end{enumerate}
+\item Capítulo 1.
+  \begin{enumerate}
+  \item Conceptos y ejemplos de algunos sistemas operativos.
+  \item Unix SVR.
+  \item Linux.
+  \item Solaris.
+  \item Windows.
+  \end{enumerate}
+\item Capítulo 2. Procesos.
+  \begin{enumerate}
+  \item Concepto de procesos.
+  \item Multitarea - multiproceso.
+  \item Información del proceso.
+  \item Estados del proceso.
+  \end{enumerate}
+\item Capitulo 2. Hilos.
+  \begin{enumerate}
+  \item Hilos
+  \item Multiprocesamiento simétrico.
+  \item Microkernel
+  \end{enumerate}
+\item Capitulo 2. Planificadores y ejemplos en los sistemas 
+  operativos Window, Linux y Solaris.
+\item Taller de procesos e hilos. 
+  \begin{enumerate}
+  \item Ciclo de vida de los procesos.
+  \item Ciclos de vida de los hilos.
+  \item Terminar procesos e hilos.
+  \item Obtener su estado.
+  \end{enumerate}
+\item Taller de procesos e hilos en los lenguajes de programación
+  Java y C-Sharp.
+\item Capítulo 3. Concurrencia y principios
+  \begin{enumerate}
+  \item Principios de concurrencia.
+  \item El problema de la sección critica.
+  \item Soluciones por software.
+  \item Soluciones por Hardware.
+  \end{enumerate}
+\item Capítulo 3. Mecanismos de concurrencia.
+  \begin{enumerate}
+  \item Tuberías.
+  \item Semáforos.
+  \item Monitores.
+  \end{enumerate}
+\item Capítulo 3. Mecanismos de concurrencia (II).
+  \begin{enumerate}
+  \item Secciones criticas.
+  \item Paso de mensajes.
+  \item Transacciones atómicas.
+  \end{enumerate}
+\item Capítulo 3. Problemas clásicos de la concurrencia.
+\item Taller de concurrencia (I).
+  \begin{enumerate}
+  \item Mecanismos de IPC en Linux e Unix.
+  \item Mecanismos de IPC en Windows.
+  \end{enumerate}
+\item Taller de concurrencia (II). Monitores en Java y en C-Sharp.
+\item Primer parcial.
+\item Capítulo 3. Bloqueos.
+  \begin{enumerate}
+  \item Modelo del sistema en bloqueos mutuos.
+  \item Caracterización de bloqueos mutuos.
+  \item Métodos para manejar bloqueos mutuos.
+  \item Prevención de los bloqueos mutuos.
+  \end{enumerate}
+\item Capítulo 3. Evitar bloqueos
+\item Capítulo 3. Detectar bloqueos.
+\item Capítulo 3. Recuperarse de bloqueos.
+\item Taller de bloqueos y concurrencia.
+\item Capítulo 4. Gestión de memoria.
+  \begin{enumerate}
+    \item Antecedentes.
+    \item Requerimientos de gestión de memoria
+    \item Espacio de direcciones lógico y físico.
+    \item Intercambio.
+  \end{enumerate}
+\item Capítulo 4. Asignación continua.
+\item Capítulo 4. Paginación.
+\item Capítulo 4. Segmentación.
+\item Capítulo 4. Segmentación con paginación.
+\item Capítulo 4. Memoria virtual y paginación por demanda.
+\item Capítulo 4. Hiper paginación.
+\item Taller. Memoria virtual.
+  \begin{enumerate}
+    \item API para solicitud de memoria dinámica.
+    \item API para solicitud de memoria compartida.
+  \end{enumerate}
+\item Capítulo 5. Entrada y salida. Generalidades y dispositivos
+\item Capítulo 5. Entrada y salida. Interfaz de E/S.
+\item Capítulo 5. Entrada y salida. Almacenamiento secundario y terciario.
+\item Capítulo 5. Entrada y salida. Planificación de discos.
+\item Capítulo 5. Entrada y salida. Operaciones bloqueantes, sincrónicas, asincrónicas, multiplexadas y por interrupciones.
+\item Capítulo 5. Entrada y salida. Otros dispositivos (Reloj, terminales, audio).
+\item Taller. Entrada y salida. Interfaz genérica.
+  \begin{enumerate}
+  \item Identificación de dispositivos.
+  \item API genérica para gestión de dispositivos.
+  \end{enumerate}
+\item Taller. Entrada y salida. Operaciones avanzadas. 
+  \begin{enumerate}
+    \item Bloqueante.
+    \item No bloqueante.
+    \item Sincrónica.
+    \item Asincrónica.
+    \item Multiplexación.
+    \item Por interrupciones.
+  \end{enumerate}
+\item Capítulo 6. Sistema de archivos. Concepto de archivos y métodos de acceso
+\item Capítulo 6. Sistema de archivos. Directorios y sistemas de archivos.
+\item Capítulo 6. Sistema de archivos. Administración del espacio libre.
+  sistemas operativos.
+\item Segundo parcial.
+\item Taller. Sistema de archivos (I).
+  \begin{enumerate}
+  \item Archivos, directorios, inodos, etc.
+  \item API para manipular archivos y directorios.
+  \end{enumerate}
+\item Taller. Sistemas de archivos (II).
+  \begin{enumerate}
+  \item Operaciones bloqueantes.
+  \item No bloqueantes. 
+  \item Asincrónicas.
+  \item Multiplexadas.
+  \item Por interrupciones.
+  \end{enumerate}
+\item Capítulo 7. Seguridad. Amenazas y riesgos de seguridad
+\item Capitulo 7. Seguridad. Matriz de acceso, lista de acceso y capacidades.
+\item Taller. Seguridad y criptografía.
+\end{enumerate}
+\bibliography{bibliografia_total}
+\end{document}

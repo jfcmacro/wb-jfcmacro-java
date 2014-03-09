@@ -1,0 +1,28 @@
+// Este programa invoca un procedimiento que suma tres números
+.constant
+one     1
+letra_a 0x41
+
+.end-constant
+
+// Código principal
+.main
+	LDC_W one 
+	LDC_W one
+	LDC_W letra_a
+	INVOKEVIRTUAL sumar3
+	DUP 
+	OUT
+	HALT
+.end-main
+
+.method sumar3(value1, value2, value3)
+.var
+.end-var
+ 	ILOAD value1
+	ILOAD value2
+	ILOAD value3
+	IADD
+	IADD
+	IRETURN
+.end-method

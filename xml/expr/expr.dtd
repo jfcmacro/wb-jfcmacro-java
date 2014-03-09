@@ -1,0 +1,12 @@
+<!ELEMENT expr   (add 
+                 | sub 
+                 | mul 
+                 | div 
+                 | number 
+                 | id)>
+<!ELEMENT add    (expr,expr)>
+<!ELEMENT sub    (expr,expr)>
+<!ELEMENT mul    (expr,expr)>
+<!ELEMENT div    (expr,expr)>
+<!ELEMENT NUMBER (#PCDATA)>
+<!ELEMENT ID     (#PCDATA)>

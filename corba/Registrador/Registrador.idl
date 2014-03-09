@@ -1,0 +1,14 @@
+module Registrador
+{
+  /* Definición de la clase lista */
+  interface HolaMundo {
+    string decirHola();
+    void shutdown();
+  };
+
+  interface Registrar {
+    HolaMundo obtenerHola(in string nombre);
+    void removeHola(in string nombre);
+    void registrarHola(in string nombre, in HolaMundo hola);
+  };
+};

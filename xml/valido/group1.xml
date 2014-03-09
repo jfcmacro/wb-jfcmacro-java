@@ -1,0 +1,20 @@
+<?xml version="1.1" encoding="utf-8" ?>
+<!DOCTYPE grupo SYSTEM "group.dtd">
+<grupo>
+   <nombre>Principal</nombre>
+   <url>https://subversion.assembla.com/svn/oberomenoszero/trunk</url>
+   <miembro>
+      <nombre>Juan Francisco Cardona McCormick</nombre>
+      <codigo>198610250010</codigo>
+      <email>fcardona@eafit.edu.co</email>
+   </miembro>
+   <miembro>
+      <nombre>Alejandro Gómez Londoño</nombre>
+      <codigo>201010001010</codigo>
+      <email>alegomez544@eafit.edu.co</email>
+   </miembro>
+   <haskellexecs>
+      <cabalfile cabal="oberomenoszero.cabal"/>
+      <haskellexec name="MoberomenoszeroLexer"/>
+   </haskellexecs>
+</grupo>

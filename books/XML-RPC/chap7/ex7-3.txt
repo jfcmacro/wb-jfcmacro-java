@@ -1,0 +1,45 @@
+Function lookup( field, sought )
+' Input: 
+'      Expects two strings:
+'      field:  (string) Fieldname to search in table
+'         sought: (string) Value to look for
+' Output:
+'         An array of records stored in dictionaries 
+'      that match search.
+'      * lastname:  (string) last name of the person 
+'      * firstname: (string) first name of the person
+'         phone:       (string) their phone number
+'         email:       (string) their email address
+'      (* fields make up the primary key)
+
+  Dim rs, query
+  Set rs = Server.CreateObject("ADODB.RecordSet")
+  
+  query = "Select * from directory where " _
+      & field                          _
+      & " like "                          _
+      & "'" & sought & "'"
+
+  rs.Open query, DB_SRC
+    
+  Dim ret(10), cnt
+
+  cnt = 0
+  Do While Not rs.Eof
+     Dim entry, i
+     Set entry = Server.CreateObject("Scripting.Dictionary")
+
+     For Each i In rs.Fields
+         entry.Add i.Name, i.Value    
+     Next    
+
+     ' store this record in the return array
+     Set ret(cnt) = entry 
+     cnt = cnt + 1 
+     rs.MoveNext
+  Loop
+
+  lookup = ret
+
+End Function
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Maquina SYSTEM "Maquina.dtd">
+<Maquina EstadoInicial="E1">
+  <AlfabetoEntrada>
+    <Simbolo>A</Simbolo>
+    <Simbolo>B</Simbolo>
+    <Simbolo>C</Simbolo>
+  </AlfabetoEntrada>
+  <AlfabetoSalida>
+    <Simbolo>A</Simbolo>
+    <Simbolo>B</Simbolo>
+    <Simbolo>C</Simbolo>
+  </AlfabetoSalida>
+  <Estados>
+    <Estado>X</Estado>
+    <Estado>Y</Estado>
+  </Estados>
+  <FuncionesEstado>
+    <FuncionEstado>
+      <Simbolo>A</Simbolo>
+      <Estado>X</Estado>
+      <Estado>X</Estado>
+    </FuncionEstado>
+  </FuncionesEstado>
+  <FuncionesSalida>
+    <FuncionSalida>
+      <Simbolo>A</Simbolo>
+      <Estado>X</Estado>
+      <Simbolo>A</Simbolo>
+    </FuncionSalida>
+  </FuncionesSalida>
+</Maquina>

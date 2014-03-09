@@ -1,0 +1,17 @@
+    public Double anyArea(Hashtable arguments) {
+        Double value;
+        value=new Double(0);
+        String requestType=(String) arguments.get("type");
+        if (requestType.equals("circle")) {
+            Double radius=(Double) (arguments.get("radius"));
+            value=circleArea(radius.doubleValue(  ));
+        }
+        if (requestType.equals("rectangle")) {
+            Double length=(Double) (arguments.get("length"));
+            Double width=(Double) (arguments.get("width"));
+            value=rectArea(length.doubleValue(), width.doubleValue(  ));
+        }
+
+        return value;
+    }
+

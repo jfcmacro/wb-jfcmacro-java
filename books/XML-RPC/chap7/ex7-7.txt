@@ -1,0 +1,139 @@
+<BODY BGCOLOR="#FFFFFF">
+<h1>Testing the Perl Server on Marian</h1>
+
+<!--#include virtual="/jjohn/xmlrpc.asp"-->
+<%
+  ' Globals
+  Dim RPC_URL
+  RPC_URL = "http://marian.daisypark.net/RPC2"
+
+  ' Helper functions
+Sub display_record( entry )
+   Dim l
+   Response.Write "<PRE>"
+   For Each l in entry.Keys 
+    Response.Write l & ": " & entry.Item(l) & "<BR>"
+   Next
+   Response.Write "</PRE>"
+End Sub
+%>
+
+<%
+   ' We may have been asked to do something.
+   Dim rc, args(2), action
+   If     Not "" = Request.Form("action") Then 
+         action = Request.Form("action")
+   Elseif Not "" = Request.QueryString("action") Then
+      action = Request.QueryString("action")
+   Else 
+      action = "no action requested"
+   End If
+
+   Select Case action
+
+    Case "add"
+
+       Response.Write "Attempting 'add'</BR>"
+       Dim E
+       Set E = Server.CreateObject("Scripting.Dictionary")
+
+       E.Add "firstname", Request.Form("firstname")
+       E.Add "lastname",  Request.Form("lastname")
+       E.Add "phone",     Request.Form("phone")
+       E.Add "email",     Request.Form("email")
+
+       Call display_record( E )
+
+       Set args(1) = E
+       rc = xmlRPC(RPC_URL, "add_address", args)
+
+       If rc = 1 Then
+            Response.Write " Succeed<BR>"
+       Else
+              Response.Write " Failed<BR>"
+       End If
+
+    Case "view"
+
+       Response.Write "Attempting 'view'</BR>"
+       args(1) = "lastname"
+       If Not "" = Request.Form("lastname") Then
+        args(2) = Request.Form("lastname")
+       Else
+        args(2) = Request.QueryString("lastname")
+       End If
+
+       rc = xmlRPC(RPC_URL, "lookup", args)
+
+       Dim i
+       For i=0 to UBound(rc) - 1
+        Call display_record( rc(i) )
+       Next
+
+    Case "remove"
+
+       Response.Write "Attempting 'remove'</BR>"
+       args(1) = Request.QueryString("firstname")
+       args(2) = Request.QueryString("lastname")
+       rc = xmlRPC( RPC_URL, "remove_address", args)
+        
+       If 1 = rc Then
+         Response.Write "Remove succeeded<BR>"
+       Else
+         Response.Write "Remove failed<BR>"
+       End If
+
+    Case "no action requested"
+       ' Just fall though
+
+    Case Else
+      Response.Write "<font color=red>Don't know how to '" _
+             & action & "'</font><BR>"
+    
+   End Select
+%>
+
+<P>There are this many records in the address table: 
+<%
+   Dim null_list(0), ret2
+
+   ret2 = xmlRPC(RPC_URL, "dump_address_book", null_list)
+
+   Response.Write Ubound(ret2) & "<BR>"
+
+   ' Make links to delete this records
+   Response.Write "Modify the address book?<BR><UL>"
+   Dim j
+   For j = 0 to Ubound(ret2) - 1 
+    Dim l, f
+    l = ret2(j).Item("lastname")
+        f = ret2(j).Item("firstname")
+    Response.Write "<LI>" & f & " " & l & " " &_
+               "<A HREF='http:client.asp?action=view&lastname=" & l _
+            & "&firstname=" & f & "'>"                           _
+                & "<small>view</small></a> | "                       _
+               & "<A HREF='http:client.asp?action=remove&lastname=" _
+            & l                                                  _
+            & "&firstname=" & f & "'>"                           _
+            & "<small>delete</small></a>"            
+   Next
+
+   Response.Write "</UL>"
+%>
+
+<P>Want to add another Address?
+<HR>
+<P>Add a record:
+<FORM method=Post Action=client.asp>
+<Input Type=Hidden Name=action Value=add>
+<PRE>
+last name:  <input type=text name=lastname>
+first name: <input type=text name=firstname>
+phone:      <input type=text name=phone>
+email:      <input type=text name=email>
+</PRE>
+<P><INPUT TYPE=SUBMIT>
+</FORM>
+</HR>
+</BODY>
+

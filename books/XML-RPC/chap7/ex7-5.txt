@@ -1,0 +1,45 @@
+Function remove_address( firstname, lastname )
+' Input:
+'      Expects two strings:
+'      firstname: (string) First name of the record to delete
+'      lastname:  (string) last name of the record to delete
+' Output:
+'       Returns 1 for success, 0 for failure
+  Dim oconn, cm1, cm2
+
+  ' Setup a DB connection and SQL command object
+  Set oconn = Server.CreateObject("ADODB.Connection")
+  oconn.Open DB_SRC
+
+  Set cm1 = Server.CreateObject("ADODB.Command")
+  cm1.ActiveConnection = oconn
+
+  Set cm2 = Server.CreateObject("ADODB.Command")
+  cm2.ActiveConnection = oconn
+  
+  ' If a record exist with this key, abort
+  Dim rs, SQLstr
+  SQLstr = "select * from directory where lastname = " _
+       & "? and firstname = ?"
+
+  cm1.CommandText = SQLstr       
+  Set rs = cm1.Execute(, Array(lastname, firstname) )
+
+  If Not rs.EOF Then
+     ' Record must exist to delete
+     If rs.Fields("lastname") = "" Then
+        remove_address = 0
+        Exit Function
+     End If
+  End If
+
+  ' Ok to Insert, Setup placeholders
+  cm2.CommandText = "Delete from directory where lastname = " _
+               & "? and firstname = ?"
+
+  Set rs = cm2.Execute(, Array(lastname, firstname) )
+  
+  remove_address = 1 
+
+End Function
+
