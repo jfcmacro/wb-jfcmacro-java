@@ -1,0 +1,14 @@
+5
+Tarea1,F,3
+Tarea2,F,4
+Tarea3,F,5
+Tarea4,F,7
+Tarea5,F,6
+Inicio,Tarea1
+Inicio,Tarea2
+Tarea1,Tarea3
+Tarea2,Tarea3
+Tarea3,Tarea4
+Tarea3,Tarea5
+Tarea4,Fin
+Tarea5,Fin
