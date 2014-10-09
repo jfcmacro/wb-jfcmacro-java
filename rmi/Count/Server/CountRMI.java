@@ -1,9 +1,12 @@
 // CountRMI Interface
 
-public interface CountRMI extends java.rmi.Remote {
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
-   int sum() throws java.rmi.RemoteException;
-   void sum(int _val) throws java.rmi.RemoteException;
-   public int increment() throws java.rmi.RemoteException;
+public interface CountRMI extends Remote {
+
+    int sum() throws RemoteException;
+    void sum(int _val) throws RemoteException;
+    public int increment() throws RemoteException;
 }
 

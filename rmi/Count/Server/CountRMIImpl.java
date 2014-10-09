@@ -1,23 +1,15 @@
 // CountRMIImpl.java, CountRMI implementation
 
-import java.rmi.*;
-import java.rmi.server.UnicastRemoteObject;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.Naming;
 
-public class CountRMIImpl extends UnicastRemoteObject
-       implements CountRMI {
+public class CountRMIImpl
+    implements CountRMI {
 
    private int sum;
 
-   public CountRMIImpl(String name) throws RemoteException {
-      super();
- 
-      try {
-         Naming.rebind(name, this);
-	 System.out.println("El nombre ha sido registrado");
-         sum = 0;
-      } catch (Exception e) {
-         System.out.println("Exception: " + e.getMessage());
-      }
+    public CountRMIImpl() {
    }
 
    public int sum() throws RemoteException {
