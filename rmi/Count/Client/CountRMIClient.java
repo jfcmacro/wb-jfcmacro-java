@@ -9,7 +9,8 @@ public class CountRMIClient
    public static void main(String args[]) {
       // System.setSecurityManager(new RMISecurityManager());
       try {
-         CountRMI myCount = (CountRMI) Naming.lookup("rmi://"+args[0] + "/" + "myCountRMI");
+         CountRMI myCount =
+	     (CountRMI) Naming.lookup("rmi://"+args[0] + "/" + "myCountRMI");
 
          System.out.println("Setting Sum to 0");
          myCount.sum(0);
@@ -29,6 +30,7 @@ public class CountRMIClient
      } catch (Exception e) {
        System.out.println("System exception " + e);
      }
+      
      System.exit(0);
    }
 } 
