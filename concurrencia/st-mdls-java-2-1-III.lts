@@ -1,0 +1,9 @@
+/*
+ * Exercise: 2.1.III
+ */
+
+GAME = (two -> WINS
+       |one -> WINS
+       |three -> LOOSE),
+LOOSE = (loose -> GAME),
+WINS  = (win -> GAME).

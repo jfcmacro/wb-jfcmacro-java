@@ -1,0 +1,5 @@
+
+
+VARIABLE(N=0) = VARIABLE[0],
+VARIABLE[i:0..N] = (read[i] -> VARIABLE[i]
+                   |write[i] -> VARIABLE[i]).

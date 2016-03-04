@@ -1,0 +1,7 @@
+/*
+ * Exercise: 2.1.III
+ */
+
+GAME = (two -> win -> GAME
+       |one -> win -> GAME
+       |three -> loose -> GAME).

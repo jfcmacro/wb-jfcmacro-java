@@ -1,0 +1,5 @@
+/*
+ * Exercise: 2.1.II
+ */
+
+JOB = (arrive -> work -> leave -> JOB).

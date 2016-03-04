@@ -1,0 +1,5 @@
+/*
+ * Excersise 2.1 I.
+ */
+
+MEETING = (hello ->converse -> goodbye -> STOP).

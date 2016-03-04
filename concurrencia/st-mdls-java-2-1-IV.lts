@@ -1,0 +1,10 @@
+/* 
+
+const N = 3
+
+DOUBLE = (in[i:0..N] -> out[i + i] -> DOUBLE).
+*/
+
+DOUBLE = (in_3 -> out_6 -> DOUBLE
+         |in_2 -> out_4 -> DOUBLE
+         |in_1 -> out_2 -> DOUBLE).
