@@ -7,7 +7,7 @@ public class ShortToUnicodeString
 
         System.out.print('"');
     }
-
+s
     @Override
     public void exitInit(ArrayInitParser.InitContext ctx) {
         System.out.print('"');
@@ -15,7 +15,9 @@ public class ShortToUnicodeString
 
     @Override
     public void enterValue(ArrayInitParser.ValueContext ctx) {
-        int value = Integer.valueOf(ctx.INT().getText());
-        System.out.printf("\\u%04x", value);
+	if (ctx.INT() != null) {
+	    int value = Integer.valueOf(ctx.INT().getText());
+	    System.out.printf("\\u%04x", value);
+	}
     }
 }

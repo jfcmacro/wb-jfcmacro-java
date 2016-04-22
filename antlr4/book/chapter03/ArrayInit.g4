@@ -1,4 +1,7 @@
-/**
+/*
+ * Grammar always starts with a grammar header. This grammar is called
+ * ArrayInit and must match the filename. ArrayInit.g4
+ *
  */
 
 grammar ArrayInit;
