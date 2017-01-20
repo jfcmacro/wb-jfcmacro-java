@@ -25,6 +25,22 @@ public class ListTest {
 	List<Integer> lt = lli.get(0);
 	lt.add(1);
 	lt.add(2);
-	
+
+        List<Integer> lit = new Vector<>();
+
+        lit.add(1);
+        lit.add(2);
+
+        Iterator<Integer> it = lit.iterator();
+
+        Integer integerValue = it.next();
+        System.out.println("Integer: " + integerValue);
+        integerValue = it.next();
+        System.out.println("Integer: " + integerValue);
+        integerValue = it.next();
+        System.out.println("Integer: " + integerValue);
+        integerValue = it.next();
+        System.out.println("Integer: " + integerValue);
+        
     }
 }
