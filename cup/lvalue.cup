@@ -1,0 +1,34 @@
+
+terminal LBREAK,RBREAK,ID,DOT,OF,ASSIGN,LPAREN,RPAREN;
+non terminal Symbol expr, restidlbreak, lvaluep, restid, postlvalue;
+
+start with expr;
+
+expr ::= ID restid 
+     |   ID LBREAK expr RBREAK restidlbreak
+     |   ID DOT ID LPAREN expr RPAREN
+     ;
+
+restid ::=
+      |   DOT ID lvaluep
+      |   DOT ID
+      ;
+      
+restidlbreak ::=
+             |   OF expr
+             |   DOT ID lvaluep
+             |   DOT ID 
+             |   LBREAK expr RBREAK lvaluep
+             |   LBREAK expr RBREAK
+             ;
+
+lvaluep ::=  DOT ID postlvalue
+        |    DOT ID lvaluep
+        |    LBREAK expr RBREAK
+        |    LBREAK expr RBREAK lvaluep
+        |    ASSIGN expr
+        ;
+
+postlvalue ::= LPAREN expr RPAREN
+           |
+           ;
