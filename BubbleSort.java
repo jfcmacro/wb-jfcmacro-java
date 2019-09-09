@@ -30,13 +30,17 @@ public class BubbleSort {
 	final int TWO = 2;
 	final int ONE = 1;
 
-	for (int i = 0; i < numbers.length - ONE; i++)
+	boolean swap = true;
+	for (int i = 0; i < numbers.length - ONE && swap; i++) {
+	    swap = false;
 	    for (int j = 0; j < numbers.length - ONE - i; j++)
 		if (numbers[j] > numbers[j + ONE]) {
 		    int temp = numbers[j];
 		    numbers[j] = numbers[j + ONE];
 		    numbers[j + ONE] = temp;
+		    swap = true;
 		}
+	}
     }
 
     public static void printNumbers(int []numbers) {
