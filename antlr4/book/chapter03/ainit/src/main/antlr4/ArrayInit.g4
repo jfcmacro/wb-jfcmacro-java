@@ -1,0 +1,24 @@
+/*
+ * Grammar always starts with a grammar header. This grammar is called
+ * ArrayInit and must match the filename. ArrayInit.g4
+ *
+ */
+grammar ArrayInit;
+
+@header{
+package co.edu.eafit.ainit.parser;
+}
+
+init : '{' value (',' value)* '}'
+     ;
+
+value : init
+      | INT
+      ;
+
+INT : [0-9]+
+    ;
+
+WS  : [ \t\r\n]+ -> skip
+    ;
+
