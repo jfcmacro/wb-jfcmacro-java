@@ -1,4 +1,4 @@
-package com.jfcmc.streams;
+package org.jfcmc.streams;
 
 import java.time.LocalDate;
 import java.time.Month;
