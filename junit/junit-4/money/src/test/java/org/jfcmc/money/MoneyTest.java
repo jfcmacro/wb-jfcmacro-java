@@ -1,3 +1,5 @@
+package org.jfcmc.money;
+
 import junit.framework.TestCase;
 import junit.framework.Assert;
 import junit.framework.Test;
@@ -32,10 +34,10 @@ public class MoneyTest extends TestCase {
 
     public static Test suite() {
 
-	TestSuite suite = new TestSuite();
+    	TestSuite suite = new TestSuite();
 
-	suite.addTest(new MoneyTest("testEquals"));
-	suite.addTest(new MoneyTest("testSimpleAdd"));
-	return suite;
+    	suite.addTest(new MoneyTest("testEquals"));
+    	suite.addTest(new MoneyTest("testSimpleAdd"));
+    	return suite;
     }
 }

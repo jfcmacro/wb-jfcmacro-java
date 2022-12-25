@@ -1,3 +1,4 @@
+package org.jfcmc.money;
 
 public class Money {
 
