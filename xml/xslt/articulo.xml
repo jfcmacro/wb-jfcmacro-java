@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<articulo nombre="1990101_xsl">
+  <titulo>Hojas de estilo XML</titulo>
+  <fecha>Enero de 1999</fecha>
+  <copyright>1999, Benoît Marchal</copyright>
+  <resumen>Las hojas de estilo agregan flexibilidad a la visualización de documentos</resumen>
+  <palabras-claves>XML, XSL, hoja de estilo, publicación, web</palabras-claves>
+  <seccion>
+    <p>Envíe sus comentarios y sugerencias a <url protocolo="mailto">bmarcha1@pineapplesoft.com</url>.</p>
+  </seccion>
+  <seccion>
+    <titulo>Realce</titulo>
+    <p>Las hojas de estilo se heredaron de SGML, un ancestro de XML. Éstas
+    se originaron en las aplicaciones de publicación y de manejo de documentos.
+    XSL es la hoja de estilo estándar de XML, vaya al sitio <url>http://www.w3.org/Style</url>.</p>
+  </seccion>
+  <seccion>
+    <titulo>Cómo funciona XSL</titulo>
+    <p>Un hoja de estilo XSL es un conjunto de normas que especifican cómo dar
+    formato a ciertos elementos de un documento. Para continuar con el ejemplo de
+    la sección anterior, las hojas de estilo tiene normas para el título, los
+    parráfos y las palabras claves</p>
+    <p>Con XSL, tales normas son lo suficientemente potentes no sólo para dar
+    formato al documento, sino también para reorganizarlo, por ejemplo, moviendo
+    el título a la parte frontal de la página u obteniendo la lista de palabras
+    clave. Esto puede dar como resultado aplicaciones asombrosas de XSL que se
+    salen de los esquemas tradicionales de la publicación. Por ejemplo, XSL puede
+    utilizarse para convertir documentos con marcado específico de compañías a
+    documentos de marcado estándar.</p>
+  </seccion>
+  <seccion>
+    <titulo>La flexibilidad agregada de las hojas de estilo</titulo>
+    <p>Las hojas de estilo están separadas de los documentos. Por ello, un documento
+    puede contener más de una hoja de estilo y, por su parte, una hoja de estilo puede
+    ser compartida entre diversos documentos.</p>
+    <p>Esto significa que un documento puede presentarse de forma distinta dependiendo
+    del medio o la audiencia. Por ejemplo, una hoja de estilo "administrativa" podría
+    presentar una vista resumida de un documento que destaque los elementos
+    importantes, pero una hoja de estilo "de oficina" podría mostrar información más
+    detallada.</p>
+  </seccion>
+</articulo>
