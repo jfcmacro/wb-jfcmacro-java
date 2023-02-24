@@ -8,11 +8,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-public class SmileyFace extends Application
-{
+
+public class SmileyFace extends Application {
     @Override
-    public void start(Stage stage)
-    {
+    public void start(Stage stage) {
         // create and configure the main circle for the face
         Circle face = new Circle(125, 125, 80);
         face.setFill(Color.YELLOW);
@@ -45,8 +44,8 @@ public class SmileyFace extends Application
         // show the stage
         stage.show();
     }
-    public static void main(String[] args)
-    {
+    
+    public static void main(String...args) {
         launch(args);
     }
 }

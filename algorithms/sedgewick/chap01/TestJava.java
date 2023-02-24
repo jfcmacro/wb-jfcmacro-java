@@ -1,5 +1,6 @@
 package algorithms.sedgewick.chap01;
-// import edu.princeton.cs.algs4.StdIn;
+
+import edu.princeton.cs.algs4.StdIn;
 
 public class TestJava {
     public static int gcd(int p, int q) {

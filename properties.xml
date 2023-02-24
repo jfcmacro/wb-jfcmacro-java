@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>This is an example</comment>
+<entry key="java.specification.version">19</entry>
+<entry key="sun.cpu.isalist">amd64</entry>
+<entry key="sun.jnu.encoding">Cp1252</entry>
+<entry key="java.class.path">.;</entry>
+<entry key="java.vm.vendor">Oracle Corporation</entry>
+<entry key="sun.arch.data.model">64</entry>
+<entry key="user.variant"></entry>
+<entry key="java.vendor.url">https://java.oracle.com/</entry>
+<entry key="java.vm.specification.version">19</entry>
+<entry key="os.name">Windows 10</entry>
+<entry key="sun.java.launcher">SUN_STANDARD</entry>
+<entry key="user.country">CO</entry>
+<entry key="sun.boot.library.path">C:\Program Files\OpenJDK\jdk-19\bin</entry>
+<entry key="sun.java.command">jdk.jshell.execution.RemoteExecutionControl 59493</entry>
+<entry key="jdk.debug">release</entry>
+<entry key="sun.cpu.endian">little</entry>
+<entry key="user.home">C:\Users\jfcmacro</entry>
+<entry key="user.language">es</entry>
+<entry key="java.specification.vendor">Oracle Corporation</entry>
+<entry key="java.version.date">2022-09-20</entry>
+<entry key="java.home">C:\Program Files\OpenJDK\jdk-19</entry>
+<entry key="file.separator">\</entry>
+<entry key="java.vm.compressedOopsMode">32-bit</entry>
+<entry key="line.separator">
+</entry>
+<entry key="java.vm.specification.vendor">Oracle Corporation</entry>
+<entry key="java.specification.name">Java Platform API Specification</entry>
+<entry key="user.script"></entry>
+<entry key="sun.management.compiler">HotSpot 64-Bit Tiered Compilers</entry>
+<entry key="java.runtime.version">19+36-2238</entry>
+<entry key="user.name">jfcmacro</entry>
+<entry key="stdout.encoding">Cp1252</entry>
+<entry key="path.separator">;</entry>
+<entry key="os.version">10.0</entry>
+<entry key="java.runtime.name">OpenJDK Runtime Environment</entry>
+<entry key="file.encoding">UTF-8</entry>
+<entry key="java.vm.name">OpenJDK 64-Bit Server VM</entry>
+<entry key="java.vendor.url.bug">https://bugreport.java.com/bugreport/</entry>
+<entry key="java.io.tmpdir">C:\Users\jfcmacro\AppData\Local\Temp\</entry>
+<entry key="java.version">19</entry>
+<entry key="user.dir">C:\Users\jfcmacro\Workbench\wb-jfcmacro-java</entry>
+<entry key="os.arch">amd64</entry>
+<entry key="java.vm.specification.name">Java Virtual Machine Specification</entry>
+<entry key="sun.os.patch.level"></entry>
+<entry key="native.encoding">Cp1252</entry>
+<entry key="java.library.path">C:\Program Files\OpenJDK\jdk-19\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\Python310\Scripts\;C:\Python310\;C:\tools\ruby31\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet\;C:\Program Files\OpenSSH-Win64;C:\ProgramData\chocolatey\lib\maven\apache-maven-3.8.6\bin;C:\Program Files\OpenJDK\jdk-19\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Program Files\Java\jre7\bin;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;C:\Program Files (x86)\sbt\bin;C:\Program Files\Meld\;C:\Program Files (x86)\Subversion\bin;C:\Users\jfcmacro\AppData\Local\Microsoft\WindowsApps;C:\Users\jfcmacro\AppData\Roaming\local\bin;C:\tools\Cmder;C:\ProgramData\chocolatey\lib\ghc\tools\ghc-8.10.1\bin;C:\Program Files\Java\jdk1.8.0_251\bin;C:\Users\jfcmacro\.dotnet\tools;C:\Users\jfcmacro\AppData\Roaming\cabal\bin;C:\tools\ghc-9.4.1\bin;C:\tools\msys64;C:\bin\scala-2.11.4\bin;C:\tools\ghc-9.4.2\bin;C:\Users\jfcmacro\go\bin;C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin;C:\Program Files\CMake\bin;;.</entry>
+<entry key="java.vm.info">mixed mode, sharing</entry>
+<entry key="stderr.encoding">Cp1252</entry>
+<entry key="java.vendor">Oracle Corporation</entry>
+<entry key="java.vm.version">19+36-2238</entry>
+<entry key="sun.io.unicode.encoding">UnicodeLittle</entry>
+<entry key="java.class.version">63.0</entry>
+</properties>
