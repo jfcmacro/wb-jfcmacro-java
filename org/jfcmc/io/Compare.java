@@ -3,7 +3,17 @@ package org.jfcmc.io;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Compare a document
+ * @author Juan Cardona
+ * @since 1.0
+ */
 public class Compare {
+    /**
+     * @hidden
+     * @param args A set of arguments it is empty
+     * @exception java.io.IOException A kind of exception
+     */
     public static void main(String []args)
     throws IOException {
         if (args.length != 2) {
