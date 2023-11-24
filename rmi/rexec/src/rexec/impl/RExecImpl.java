@@ -12,13 +12,13 @@ public class RExecImpl implements RExec {
 	try {
 
 	    Process comp = new ProcessBuilder("javac", path + "/" + sourceName).start();
-	    return new Integer(comp.waitFor());
+	    return Integer.valueOf(comp.waitFor());
 	} 
 	catch (IOException e) {
-	    return new Integer(-1);
+	    return Integer.valueOf(-1);
 	}
 	catch (InterruptedException e) {
-	    return new Integer(-1);
+	    return Integer.valueOf(-1);
 	}
     }
 }

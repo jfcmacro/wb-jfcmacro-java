@@ -6,7 +6,7 @@ This project show how to use XSLT Tranformation, but I was intended to be used d
 $ java -jar $SAXON_HOME/Saxon-HE-11.4.jar -xsl:articulo-2-html.xsl -s:articulo.xml -o:articulo.html
 ```
 
-But it wasn't possible becuase `Saxon-HE-11.4.jar` package has a lot of dependencies, particually to xmlresolver.
+But it wasn't possible because `Saxon-HE-11.4.jar` package has a lot of dependencies, particually to xmlresolver.
 I downloaded and trie to use directly on the project, but I got the same error.
 
 ```shell
