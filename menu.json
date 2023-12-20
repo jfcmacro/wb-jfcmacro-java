@@ -1,0 +1,23 @@
+[
+  {
+    "header": "File",
+    "items": [
+      {
+        "id": "Open",
+        "label": "Open"
+      },
+      {
+        "id": "New",
+        "label": "New"
+      },
+      {
+        "id": "Close",
+        "label": "Close"
+      }
+    ]
+  },
+  {
+    "header": "View",
+    "items": []
+  }
+]

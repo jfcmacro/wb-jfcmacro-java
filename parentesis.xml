@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<estructura_estudiante processing="com.epam.rd.student.Processing">
+  <nombre>Juan</nombre>
+  <apellido>Cardona</apellido>
+  <emails>
+    <email>Juan_Cardona@epam.com</email>
+    <email>Juan_Cardona@otro.com</email>
+  </emails>
+  <id>23423</id>
+</estructura_estudiante>
