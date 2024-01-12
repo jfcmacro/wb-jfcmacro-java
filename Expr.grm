@@ -1,0 +1,38 @@
+LL(1)
+
+E := E + T | E - T | T
+T := T * F | T / F | F
+F := ID | NUMBER | ( E )
+
+LR(1)
+
+E  := T E'
+E' := + T E' | - T E' | \epsilon
+T  := F T'
+T' := * F T' | / F T' | \epsilon
+F  := ID | NUMBER | ( E ) 
+
+class Parser {
+
+   Parser(Lexer lexer) {
+   }
+
+   e() {
+      e();
+      Token t = lexer.getToken();
+      t();
+   }
+   t();
+   f();
+}
+
+Front-End     | Middle-End | Back-End
+
+LEX -> TOKENS | AST        | Generar código 
+AS -> Gram OK |            | Evaluar el árbol
+
+
+TOKENS :: NUMBER | ID | ( | ) | + | - | * | /
+
+LEX :: STRING -> [ TOKENS ]
+AS  :: [TOKENS] -> AST
