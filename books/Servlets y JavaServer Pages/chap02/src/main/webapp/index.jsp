@@ -1,5 +1,7 @@
 <html>
-<body>
-<h2>Hello World!</h2>
+  <body>
+    $foreach(model.times)
+    <h2>${model.title}</h2>
+    $foreachend
 </body>
 </html>
