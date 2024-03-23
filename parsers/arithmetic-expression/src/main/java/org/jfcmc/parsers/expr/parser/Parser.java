@@ -1,12 +1,13 @@
 package org.jfcmc.parsers.expr.parser;
 
+import java.io.IOException;
+
+import org.jfcmc.parsers.expr.ast.BinOper;
+import org.jfcmc.parsers.expr.ast.Expr;
+import org.jfcmc.parsers.expr.ast.Id;
+import org.jfcmc.parsers.expr.ast.Number;
 import org.jfcmc.parsers.expr.lexer.Lexer;
 import org.jfcmc.parsers.expr.tokens.Token;
-import org.jfcmc.parsers.expr.ast.Expr;
-import org.jfcmc.parsers.expr.ast.BinOper;
-import org.jfcmc.parsers.expr.ast.Number;
-import org.jfcmc.parsers.expr.ast.Id;
-
 
 public class Parser {
 
@@ -25,7 +26,9 @@ public class Parser {
         this.lexer = lexer;
     }
 
-    public Expr expr() throws Parser.ParserException {
+    public Expr expr()
+        throws Parser.ParserException,
+               Lexer.LexerException, IOException {
         Expr e = e();
         Token tkn = lexer.getNextToken();
         if (tkn != Token.EOF) {
@@ -35,13 +38,17 @@ public class Parser {
         return e;
     }
 
-    public Expr e() throws Parser.ParserException {
+    public Expr e()
+        throws Parser.ParserException,
+               Lexer.LexerException, IOException {
         // E := T E'
         Expr t = t();
         return ep(t);
     }
 
-    public Expr ep(Expr e) throws Parser.ParserException {
+    public Expr ep(Expr e)
+        throws Parser.ParserException,
+               Lexer.LexerException, IOException {
         Expr r = null;
         Token tkn = lexer.getNextToken();
         // + T E' | - T E'
@@ -63,13 +70,17 @@ public class Parser {
         return r;
     }
 
-    public Expr t() throws Parser.ParserException {
+    public Expr t()
+        throws Parser.ParserException,
+               Lexer.LexerException, IOException {
         // T := F T'
         Expr f = f();
         return tp(f);
     }
 
-    public Expr tp(Expr e) throws Parser.ParserException {
+    public Expr tp(Expr e)
+        throws Parser.ParserException,
+               Lexer.LexerException, IOException {
         Token tkn = lexer.getNextToken();
         Expr r = null;
         if (tkn == Token.TIMES || tkn == Token.DIV) {
@@ -93,7 +104,9 @@ public class Parser {
         return r;
     }
 
-    public Expr f() throws Parser.ParserException {
+    public Expr f()
+        throws Parser.ParserException,
+               Lexer.LexerException, IOException {
         Token tkn = lexer.getNextToken();
         if (tkn == Token.NUMBER) { // f := Number
             return new Number(lexer.getCurrentToken());

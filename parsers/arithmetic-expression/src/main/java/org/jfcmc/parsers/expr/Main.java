@@ -1,12 +1,14 @@
 package org.jfcmc.parsers.expr;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+
 import org.jfcmc.parsers.expr.tokens.Token;
 import org.jfcmc.parsers.expr.lexer.Lexer;
 import org.jfcmc.parsers.expr.parser.Parser;
 import org.jfcmc.parsers.expr.ast.Expr;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Consumer;
 
 public class Main {
 
@@ -14,16 +16,15 @@ public class Main {
         Lexer lexer = new Lexer(expr);
 
         System.out.println("Lexer expr: " + expr);
-        for (Token tkn = lexer.getNextToken();
-             tkn != Token.EOF;
-             tkn = lexer.getNextToken()) {
-            System.out.print("Token: " + tkn.name());
-            if (tkn == Token.NUMBER || tkn == Token.ID) {
+        try {
+            for (Token tkn = lexer.getNextToken();
+                 tkn != Token.EOF;
+                 tkn = lexer.getNextToken()) {
+                System.out.print("Token: " + tkn.name());
                 System.out.println(" value: " + lexer.getCurrentToken());
             }
-            else {
-                System.out.println("");
-            }
+        } catch (Lexer.LexerException | IOException e) {
+            System.err.println("Because: " + e);
         }
     }
 
@@ -33,10 +34,13 @@ public class Main {
             Parser parser = new Parser(lexer);
             Expr e = parser.e();
             System.out.printf("The expression %s value is %d%n", expr, e.eval());
-        } catch (Parser.ParserException pe) {
-            System.out.printf("Not valid expression: %s%n", expr);
-            System.out.println("Because: " + pe);
-        }
+        } catch (Parser.ParserException e) {
+            System.err.printf("Not valid expression: %s%n", expr);
+            System.err.println("Because: " + e);
+        } catch (Lexer.LexerException | IOException e) {
+            System.err.printf("Not valid token");
+            System.err.println("Because: " + e);
+        } 
     }
 
     private static String[] exprs = { "1",
