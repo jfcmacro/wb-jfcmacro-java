@@ -46,7 +46,6 @@ public class ShowParameters extends HttpServlet {
                 out.println("</UL>");
                 break;
             }
-
         }
         out.println("</TABLE>\n</BODY></HTML>");
     }

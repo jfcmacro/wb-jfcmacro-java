@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PULBIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+  <HEAD>
+    <TITLE>Free send CV</TITLE>
+    <LINK REL=STYLESHEET
+	  HREF="jobs-styles.css"
+	  TYPE="text/css">
+  </HEAD>
+  <BODY>
+    <H1><CENTER>informationjobs.com</CENTER></H1>
+    <P CLASS="LARGER">
+      For using our <I>free</I> service to send a CV, fill out a brief CV of your skills. Use "Preview view" to check the results, next press "Send". Your CV will appear o the next 24 hours</P>
+    <HR>
+    <FORM ACTION="/chap03/SendCV" METHOD="POST">
+      <DL>
+	<DT><B>Provide basic information:</B>
+	  <DD>Header Font:
+	    <INPUT TYPE="TEXT" NAME="headerFont" VALUE="pred">
+	  <DD>Header Size:
+	    <INPUT TYPE="TEXT" NAME="headerSize" VALUE=32>
+	  <DD>Text Font:
+	    <INPUT TYPE="TEXT" NAME="textFont" VALUE="pred">
+	  <DD>Text Size:
+	    <INPUT TYPE="TEXT" NAME="textSize" VALUE=18>
+	  <DD>Foreground Color:
+	    <INPUT TYPE="TEXT" NAME="fgColor" VALUE="BLACK">
+	  <DD>Background Color:
+	    <INPUT TYPE="TEXT" NAME="bgColor" VALUE="WHITE">
+	</DT>
+	<DT>
+	  <B>Now, provide a little information about your self:</B>
+	  <DD>Name: <INPUT TYPE="TEXT" NAME="name">
+	  <DD>Current position: <INPUT TYPE="TEXT" NAME="title">
+	  <DD>email: <INPUT TYPE="TEXT" NAME="email">
+	  <DD>Programming Languages: <INPUT TYPE="TEXT" NAME="languages">
+	</DT>
+	<DT>
+	  <B>Finally, provide a summary of your skills and experience</B>
+	  <DD><TEXTAREA NAME="skills" ROWS=15 COLS=60 WRAP="SOFT"></TEXTAREA>
+	</DT>
+      </DL>
+      <CENTER>
+	<INPUT TYPE="SUBMIT" NAME="previewViewButton" VALUE="Preview View">
+	<INPUT TYPE="SUBMIT" NAME="sendButton" VALUE="Send">
+      </CENTER>
+    </FORM>
+    <P CLASS="TINY">See our privacity directives
+      <A HREF="spam-email.html">Here</A>
+    </P>
+  </BODY>
+</HTML>

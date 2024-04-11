@@ -24,7 +24,7 @@
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-jsp_2.0_spec</artifactId>
       <version>1.1</version>
-      <scope>test</scope>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
   <build>

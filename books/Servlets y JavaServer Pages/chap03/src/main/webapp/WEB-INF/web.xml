@@ -12,6 +12,18 @@
     <servlet-name>show-parameters</servlet-name>
     <servlet-class>org.jfcmc.servlet.chap03.ShowParameters</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>send-cv</servlet-name>
+    <servlet-class>org.jfcmc.servlet.chap03.SendCV</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>servlet-incorrect</servlet-name>
+    <servlet-class>org.jfcmc.servlet.chap03.ServletIncorrectCoding</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>servlet-correct</servlet-name>
+    <servlet-class>org.jfcmc.servlet.chap03.ServletFilterCode</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>three-parameters</servlet-name>
     <url-pattern>/ThreeParameters</url-pattern>
@@ -19,5 +31,17 @@
   <servlet-mapping>
     <servlet-name>show-parameters</servlet-name>
     <url-pattern>/ShowParameters</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>send-cv</servlet-name>
+    <url-pattern>/SendCV</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>servlet-incorrect</servlet-name>
+    <url-pattern>/ServletIC</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>servlet-correct</servlet-name>
+    <url-pattern>/ServletFilterCode</url-pattern>
   </servlet-mapping>
 </web-app>
