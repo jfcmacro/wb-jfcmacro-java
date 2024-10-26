@@ -12,8 +12,24 @@
       <servlet-name>cipher-page</servlet-name>
     <servlet-class>org.jfcmc.servlet.chap04.CipherPage</servlet-class>
   </servlet>
+  <servlet>
+      <servlet-name>protected-page</servlet-name>
+      <servlet-class>org.jfcmc.servlet.chap04.ProtectedPage</servlet-class>
+      <init-param>
+        <param-name>passwordFile</param-name>
+        <param-value>passwords.properties</param-value>
+      </init-param>
+  </servlet>
   <servlet-mapping>
     <servlet-name>cipher-page</servlet-name>
     <url-pattern>/CipherPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>show-requestheaders</servlet-name>
+    <url-pattern>/ShowRequestHeaders</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>protected-page</servlet-name>
+    <url-pattern>/ProtectedPage</url-pattern>
   </servlet-mapping>
 </web-app>
