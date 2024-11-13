@@ -1,4 +1,8 @@
-<!ELEMENT Maquina (AlfabetoEntrada, AlfabetoSalida, Estados, FuncionesEstado, FuncionesSalida)>
+<!ELEMENT Maquina (AlfabetoEntrada,
+ AlfabetoSalida,
+ Estados,
+ FuncionesEstado,
+ FuncionesSalida)>
 <!ELEMENT AlfabetoEntrada (Simbolo*)>
 <!ELEMENT AlfabetoSalida (Simbolo*)>
 <!ELEMENT Estados (Estado*)>

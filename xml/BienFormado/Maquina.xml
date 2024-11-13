@@ -21,6 +21,21 @@
       <Estado>X</Estado>
       <Estado>X</Estado>
     </FuncionEstado>
+    <FuncionEstado>
+      <Simbolo>B</Simbolo>
+      <Estado>X</Estado>
+      <Estado>Y</Estado>
+    </FuncionEstado>
+    <FuncionEstado>
+      <Simbolo>B</Simbolo>
+      <Estado>Y</Estado>
+      <Estado>Y</Estado>
+    </FuncionEstado>
+    <FuncionEstado>
+      <Simbolo>C</Simbolo>
+      <Estado>Y</Estado>
+      <Estado>X</Estado>
+    </FuncionEstado>
   </FuncionesEstado>
   <FuncionesSalida>
     <FuncionSalida>
