@@ -1,0 +1,24 @@
+package org.jfcmc.concurrency.jcip.chap03;
+
+/**
+ * From book Java Concurrency in Practice Chapter 3. Sharing Data
+ *
+ * This class does not compile. EventSource doesn't exists.
+ */
+public class SafeListener {
+    private final EventListener listener;
+
+    private SafeListener() {
+        listener = new EventListener() {
+                public void onEvent(Event e) {
+                    doSomething(e);
+                }
+            };
+    }
+
+    public static SafeListener newInstance(EventSource source) {
+        SafeListener safe = new SafeListener();
+        source.registerListener(safe.listener);
+        return safe;
+    }
+}
