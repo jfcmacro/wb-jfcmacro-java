@@ -1,9 +1,9 @@
 package algorithms.sedgewick.chap01;
 
 import java.util.Arrays;
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.stdlib.StdIn;
+import edu.princeton.cs.stdlib.StdOut;
+import edu.princeton.cs.stdlib.In;
 
 public class BinarySearch {
     public static int rank(int key, int[] a) {
@@ -19,7 +19,8 @@ public class BinarySearch {
     }
 
     public static void main(String[] args) {
-	int[] whitelist = In.readInts(args[0]);
+	// int[] whitelist = In.readInts(args[0]);
+	int[] whitelist = In.readAllInts(args[0]);
 
 	Arrays.sort(whitelist);
 

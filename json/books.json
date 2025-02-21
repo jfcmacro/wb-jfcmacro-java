@@ -1,0 +1,14 @@
+{
+  "books": [
+      {
+	  "title": "JavaScript Essentials",
+	  "author": "Mark Smith",
+	  "price": 25.50
+      },
+      {
+	  "title": "JavaScript: The Definitive Guide: Master the World's Most-Used Programming Language",
+	  "author": "David Flanagan",
+	  "price": 32.98
+      }
+  ]
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+  <books>
+    <book>
+        <title>Learning XML: Creating Self-Describing Data</title>
+        <author>Erik Ray</author>
+        <price>21.93</price>
+    </book>
+    <book>
+      <title>XML For Dummies</title>
+      <authors>
+        <author>Lucinda Dykes</author>
+	<author>Ed Tittel</author>
+      </authors>
+      <price>21.93</price>
+    </book>
+    <book>
+        <title>XML Basics</title>
+        <author>John Doe</author>
+        <price>19.99</price>
+    </book>
+    <book>
+        <title>XML in a Nutshell: A Desktop Quick Reference</title>
+        <author>Elliote Harold</author>
+        <price>31.68</price>
+    </book>
+  </books>
+</bookstore>

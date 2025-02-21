@@ -6,5 +6,13 @@
     xmlns:xml="http://www.w3.org/XML/1998/namespace"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>Examples Chapter 05</display-name>
+  <servlet>
+    <servlet-name>show-cgi-variables</servlet-name>
+    <servlet-class>org.jfcmc.servlet.chap05.ShowGCIVariables</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>show-cgi-variables</servlet-name>
+    <url-pattern>/ShowCGIVariables</url-pattern>
+  </servlet-mapping>
 </web-app>

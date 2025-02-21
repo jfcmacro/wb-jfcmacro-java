@@ -1,9 +1,6 @@
 package algorithms.sedgewick.chap01;
 
-// import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.stdlib.StdIn;
-
-import edu.princeton.cs.algs4.StdIn;
 
 public class TestJava {
     public static int gcd(int p, int q) {
@@ -11,7 +8,7 @@ public class TestJava {
 	int r = p % q;
 	return gcd(q, r);
     }
-    
+
     public static void main(String []args) {
 	int a = StdIn.readInt();
 	int b = StdIn.readInt();
