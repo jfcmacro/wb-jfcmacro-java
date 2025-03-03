@@ -14,21 +14,21 @@ public class ServletUtilities {
     }
 
     public static String filter(String input) {
-	return input.chars()
-	    .mapToObj(c -> {
-		    switch(c) {
-		    case '<':
-			return "&lgt;";
-		    case '>':
-			return "&lgt;";
-		    case '"':
-			return "&quot;";
-		    case '&':
-			return "&amp;";
-		    default:
-			return "" + (char) c;
-		    }
-		})
-	    .collect(joining());
+        return input.chars()
+            .mapToObj(c -> {
+                    switch(c) {
+                    case '<':
+                        return "&lgt;";
+                    case '>':
+                        return "&lgt;";
+                    case '"':
+                        return "&quot;";
+                    case '&':
+                        return "&amp;";
+                    default:
+                        return "" + (char) c;
+                    }
+                })
+            .collect(joining());
     }
 }
