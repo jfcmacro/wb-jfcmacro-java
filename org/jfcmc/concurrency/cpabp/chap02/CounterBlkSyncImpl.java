@@ -4,7 +4,7 @@ public class CounterBlkSyncImpl implements Counter {
 
     private int counter;
 
-    public int incrementAndGet() {
+    public int incrementAndGet(Object obj) {
         int result = 0;
         synchronized(this) {
             result = ++counter;

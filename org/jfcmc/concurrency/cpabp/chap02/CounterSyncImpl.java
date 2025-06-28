@@ -1,6 +1,6 @@
 package org.jfcmc.concurrency.cpabp.chap02;
 
-public class CounterBlkSyncImpl implements Counter {
+public class CounterSyncImpl implements Counter {
 
     private int counter;
 
