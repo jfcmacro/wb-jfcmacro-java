@@ -15,15 +15,16 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -34,62 +35,62 @@
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>3.4.0</version>
         </plugin>
         <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>3.3.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
+          <version>3.13.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.22.1</version>
+          <version>3.3.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.2</version>
+          <version>3.4.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
+          <version>3.1.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
+          <version>3.1.2</version>
         </plugin>
       </plugins>
     </pluginManagement>
   </build>
 
-  <profiles>
+   <profiles>
     <profile>
       <id>jetty</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <dependencies>
-        <dependency>
-          <groupId>org.apache.geronimo.specs</groupId>
-          <artifactId>geronimo-servlet_2.4_spec</artifactId>
-          <version>1.1.1</version>
-          <scope>provided</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.apache.geronimo.specs</groupId>
-          <artifactId>geronimo-jsp_2.0_spec</artifactId>
-          <version>1.1</version>
-          <scope>provided</scope>
-        </dependency>
+	<dependency>
+	  <groupId>org.apache.geronimo.specs</groupId>
+	  <artifactId>geronimo-servlet_3.0_spec</artifactId>
+	  <version>1.0</version>
+	  <scope>provided</scope>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.geronimo.specs</groupId>
+	  <artifactId>geronimo-jsp_2.2_spec</artifactId>
+	  <version>1.2</version>
+	  <scope>provided</scope>
+	</dependency>
       </dependencies>
       <build>
         <plugins>
           <plugin>
             <groupId>org.mortbay.jetty</groupId>
-            <artifactId>maven-jetty-plugin</artifactId>
+	    <artifactId>jetty-maven-plugin</artifactId>
             <version>7.0.0.pre5</version>
           </plugin>
         </plugins>
@@ -98,26 +99,26 @@
     <profile>
       <id>tomcat</id>
       <dependencies>
-        <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>3.0.1</version>
-          <scope>provided</scope>
-        </dependency>
-        <dependency>
-          <groupId>javax.servlet.jsp</groupId>
-          <artifactId>javax.servlet.jsp-api</artifactId>
-          <version>2.2.1</version>
-          <scope>provided</scope>
-        </dependency>
+	<dependency>
+	  <groupId>javax.servlet</groupId>
+	  <artifactId>javax.servlet-api</artifactId>
+	  <version>3.1.0</version>
+	  <scope>provided</scope>
+	</dependency>
+	<dependency>
+	  <groupId>javax.servlet.jsp</groupId>
+	  <artifactId>javax.servlet.jsp-api</artifactId>
+	  <version>2.3.3</version>
+	  <scope>provided</scope>
+	</dependency>
       </dependencies>
       <build>
         <plugins>
-          <plugin>
-          <groupId>org.apache.tomcat.maven</groupId>
-          <artifactId>tomcat7-maven-plugin</artifactId>
-          <version>2.0</version>
-        </plugin>
+	  <plugin>
+	    <groupId>org.apache.tomcat.maven</groupId>
+	    <artifactId>tomcat7-maven-plugin</artifactId>
+	    <version>2.2</version>
+	  </plugin>
         </plugins>
       </build>
     </profile>
