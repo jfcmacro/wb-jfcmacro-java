@@ -1,10 +1,13 @@
-import javax.xml.bind.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.io.*;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.List;
 
 // Define Java classes corresponding to XML structure
@@ -26,7 +29,7 @@ class Books {
 
 @XmlAccessorType(XmlAccessType.FIELD)
 class Book {
-    @XmlAttribute
+    // @XmlAttribute
     private int id;
     private String title;
     private String author;
@@ -83,11 +86,12 @@ public class JAXBExample {
 
         // Reading XML using JAXB
         Books readBooks = readXML(xmlFile);
-        for (Book book : readBooks.getBooks()) {
-            System.out.println("Book ID: " + book.getId());
-            System.out.println("Title: " + book.getTitle());
-            System.out.println("Author: " + book.getAuthor());
-        }
+	readBooks.getBooks()
+	    .stream()
+	    .forEach(book -> System.out.printf("Book ID: %d%nTitle: %s%nAuthor:%s%n",
+					       book.getId(),
+					       book.getTitle(),
+					       book.getAuthor()));
     }
 
     private static void writeXML(Books books, String fileName) throws Exception {
