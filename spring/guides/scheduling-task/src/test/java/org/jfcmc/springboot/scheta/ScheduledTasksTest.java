@@ -4,7 +4,8 @@ import org.awaitility.Durations;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+// import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import static org.awaitility.Awaitility.await;
 import static org.mockito.Mockito.atLeast;
@@ -13,7 +14,9 @@ import static org.mockito.Mockito.verify;
 @SpringBootTest
 public class ScheduledTasksTest {
 
-    @SpyBean
+    // @SpyBean
+    // ScheduledTasks tasks;
+    @MockitoSpyBean
     ScheduledTasks tasks;
 
     @Test
